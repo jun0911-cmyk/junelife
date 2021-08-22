@@ -58,9 +58,9 @@
 .singup {
     position: absolute;
     width: 30%;
-    height: 70%;
+    height: 80%;
     margin-left: 35%;
-    margin-top: 6%;
+    margin-top: 4%;
     background-color: #fefefe;
     border: 2px solid #eeeeee;
 }
@@ -99,6 +99,20 @@
 .username {
     height: 35px;
     margin-top: 8%;
+    border: 1px solid #cccccc;
+}
+
+.email_label {
+    position: absolute;
+    font-size: 15px;
+    margin-top: 18%;
+    margin-left: -91.5%;
+    font-weight: 900;
+}
+
+.email {
+    height: 35px;
+    margin-top: 9%;
     border: 1px solid #cccccc;
 }
 
@@ -144,6 +158,10 @@
     outline: none;
     background-color: #0076c0;
     color: white;
+}
+
+.singup_btn:disabled {
+    background-color: gray;
 }
 
 .hyperLogin {

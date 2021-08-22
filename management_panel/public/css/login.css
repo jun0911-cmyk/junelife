@@ -125,6 +125,10 @@
     color: white;
 }
 
+.login_btn:disabled {
+    background-color: gray;
+}
+
 .forgetPwdOrId {
     text-align: center;
     font-weight: 900;

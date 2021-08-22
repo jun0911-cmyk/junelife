@@ -21,6 +21,7 @@
     </div>
     <div class="login">
         <h2 class="login_message">로그인</h2>
+        <div id="faild_login" style="color: red; text-align: center;">아이디 또는 비밀번호가 일치하지 않습니다.</div>
         <div class="input_login">
             <div class="input_id_addon" style="position: absolute;">
                 <i class="fas fa-user"></i>
@@ -32,7 +33,7 @@
             <input type="password" placeholder="비밀번호" id="password" class="password" size="35" autofocus="autofocus">
         </div>
         <div class="submit_login">
-            <button class="login_btn">로그인</button>
+            <button class="login_btn" id="login_btn">로그인</button>
         </div>
         <hr>
         <div class="forgetPwdOrId">

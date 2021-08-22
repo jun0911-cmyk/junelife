@@ -11,7 +11,12 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/login', function(req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', '/public/views/login.html'));
+    console.log(req.isAuthenticated(), req.user);
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+    } else {
+        res.sendFile(path.join(__dirname, '..', '..', '/public/views/login.html'));
+    }
 });
 
 router.get('/singup', function(req, res) {
@@ -19,8 +24,7 @@ router.get('/singup', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
-    /*req.logout();
-    req.session.destroy();*/
+    req.logout();
     res.redirect('/');
 });
 
