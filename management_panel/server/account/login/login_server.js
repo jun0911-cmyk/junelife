@@ -45,7 +45,6 @@ module.exports = function(app, passport) {
 
     app.post('/user/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
-            console.log(user);
             if (err) { 
                 // 로그인 에러시 500 에러 발생
                 return res.status(500).json({ error: err }).status(500); 

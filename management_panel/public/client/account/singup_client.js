@@ -61,7 +61,7 @@ $(function() {
                         singup_btn.disabled = true;
                         $('#faild_singup').show();
                         setTimeout(function() {
-                            singup_btn.disabled = flase;
+                            singup_btn.disabled = false;
                             $('#faild_singup').hide();
                         }, 2000);
                     } else {

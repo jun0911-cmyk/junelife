@@ -11,7 +11,6 @@ router.use(function timeLog(req, res, next) {
 });
 
 router.get('/login', function(req, res) {
-    console.log(req.isAuthenticated(), req.user);
     if (req.isAuthenticated()) {
         res.redirect('/');
     } else {
