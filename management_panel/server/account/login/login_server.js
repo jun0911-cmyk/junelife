@@ -1,102 +1,69 @@
-const express = require('express');
-const session = require('express-session');
-const path = require('path');
 const passport = require('passport');
 const LocalStorage = require('passport-local').Strategy;
 const crypto = require('crypto');
-const mongoose = require('mongoose');
-const app = express();
+const models = require('../../database/connect');
 
-module.exports = function() {
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: true }));
-    app.use('/user/login', express.static('../public/css'));
-    app.use('/user/login', express.static('../public/client'));
-    app.use('/user/login', express.static('../public/favicon'));
-
-    app.get('/user/login', function(req, res) {
-        if(req.isAuthenticated()) {
-            res.redirect('/');
-        }
-        else {
-            res.sendFile(path.join(__dirname, '..', '..', '/public/views/login.html'));
-        }
-    });
-
+module.exports = function(app) {
     // 유저 직렬화
     passport.serializeUser((user, done) => {
         done(null, user.id);
-        console.log("Serialize");
     });
 
     // 유저 역직렬화
     passport.deserializeUser((id, done) => {
-        console.log("DeSerialize");
         // 아이디가 일치하는 row 찾음
-        models.User.findByPk(id).then(user => {
-            if (user) {
-                done(null, user);
+        models.User.findById(id).then(userData => {
+            if (userData) {
+                done(null, userData);
             } else {
-                done(user.errors, null);
+                done(userData.errors, null);
             }
         });
     });
 
-    passport.use(new LocalStrategy({
-        usernameField: 'email',
+    passport.use(new LocalStorage({
+        usernameField: 'id',
         passwordField: 'password',
-    }, (username, password, done) => {
+    }, (id, password, done) => {
         // 암호화 해제
-        var hashpwd = crypto.createHash('sha512').update(password).digest('base64');
-        models.User.findOne({ 
-            where: { 
-                email: username,
-                password: hashpwd
-            }
-        }).then(function(user) {
+        var decoding_pwd = crypto.createHash('sha512').update(password).digest('base64');
+        models.User.findOne({
+            user_id: id,
+            password: decoding_pwd 
+        }).then((userData) => {
             // 아이디가 일치하지 않을때
-            if (!user) {
-                return done(null, false, { message : 'Incorrect username.' });
+            if (!userData) {
+                return done(null, false);
             }
             // 비밀번호 일치하지 않을때
-            if(!user.password == password) {
-                return done(null, false, { message : 'Incorrect password.' });
+            if(!userData.password == password) {
+                return done(null, false);
             }
-            return done(null, user);
-        })
-        .catch(err => done(err));
+            // 로그인 성공
+            return done(null, userData);
+        }).catch(err => done(err));
     }));
 
     app.post('/user/login', function(req, res, next) {
-        passport.authenticate('local', function(err, user, info) {
+        passport.authenticate('local', function(err, userData, info) {
             if (err) { 
                 // 로그인 에러시 500 에러 발생
-                return res.status(500).json({ result: err }).status(500); 
+                return res.status(500).json({ error: err }).status(500); 
+            } else if (!userData) {
+                // 아이디 혹은 비밀번호 오류
+                return res.json({ auth: 1 }).status(403);
             }
-            if (!user) {
-                return res.json({ result: 1 }).status(403);
-            }
-            req.logIn(user, function(err) {
-                if (err) { return next(err); 
-            }
+            // 세션 로그인
+            req.logIn(userData, function(err) {
+                if (err) { return next(err); }
                 // 로그인 세션 등록
                 req.session.login = 1;
-                req.session.user = user.email;
+                req.session.user = userData.user_id;
                 req.session.save(function() {
-                    res.json({ result: 0 });
+                    // 로그인 성공
+                    res.json({ auth: 0 }).status(200);
                 });
             });
         })(req, res, next);
-    });
-
-    // 로그아웃시 세션 파괴
-    app.get('/user/logout', function(req, res) {
-        req.logout();
-        req.session.destroy();
-        res.clearCookie('logged_in');
-        res.clearCookie('service_group');
-        res.clearCookie('service_user');
-        res.clearCookie('service_platform');
-        res.redirect('/s-class');
     });
 }

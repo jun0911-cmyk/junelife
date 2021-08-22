@@ -1,0 +1,149 @@
+@font-face {
+    font-family: 'Cafe24Ohsquare';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "IBMPlexSansKR-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+    format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ELAND_Choice_B';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ELAND_Nice_M';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Nice_M.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Y_Spotlight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.home {
+    font-family: 'ELAND_Nice_M';
+    font-size: 25px;
+    margin-left: 30px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.navigator {
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1px solid #d2d7dd;
+}
+
+.login {
+    position: absolute;
+    width: 20%;
+    height: 45%;
+    margin-left: 40%;
+    margin-top: 10%;
+    background-color: #fefefe;
+    border: 2px solid #eeeeee;
+}
+
+.login_message {
+    text-align: center;
+    font-family: 'ELAND_Choice_B';
+    margin-top: 10%;
+}
+
+.input_login {
+    margin-left: 18%;
+    margin-top: 10%;
+}
+
+.input_id_addon {
+    width: 10%;
+    height: 35px;
+    margin-left: -10%;
+    border: 1px solid #cccccc;
+}
+
+.input_pwd_addon {
+    width: 10%;
+    height: 35px;
+    margin-left: -10%;
+    margin-top: 4.3%;
+    border: 1px solid #cccccc;
+}
+
+.fa-lock, .fa-user {
+    font-size: 15px;
+    margin-top: 25%;
+    margin-left: 30%;
+    color: #b3b3b3;
+}
+
+.id {
+    height: 35px;
+    border: 1px solid #cccccc;
+}
+
+.password {
+    height: 35px;
+    margin-top: 5%;
+    border: 1px solid #cccccc;
+}
+
+.submit_login {
+    margin-top: 10%;
+    margin-left: 73%;
+}
+
+.login_btn {
+    font-family: "IBMPlexSansKR-Regular";
+    font-size: 15px;
+    width: 70px;
+    height: 35px;
+    border: none;
+    outline: none;
+    background-color: #0076c0;
+    color: white;
+}
+
+.forgetPwdOrId {
+    text-align: center;
+    font-weight: 900;
+    font-size: 13px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    color: black; 
+    text-decoration: none;
+}
+
+a:hover {
+    color: violet;
+    text-decoration: none;
+}
+
+input:focus { outline: none; }
