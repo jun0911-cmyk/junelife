@@ -20,7 +20,7 @@ $(function() {
                 var status = result.status_code;
                 var singup_message = result.msg;
                 
-                if (status == '01' || status == '10' || status == '11' || status == '00' || status == '-1') {
+                if (status == '1') {
                     faild_message.innerText = singup_message;
                     singup_btn.disabled = true;
                     $('#faild_singup').show();

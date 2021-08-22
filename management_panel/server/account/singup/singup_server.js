@@ -17,25 +17,25 @@ module.exports = function(app) {
 
         // 페스워드 확인
         if (pwd != repwd) {
-            res.json({ status_code: '01', msg: "비밀번호와 재입력한 비밀번호가 일치하지 않습니다." }).status(403);
+            res.json({ status_code: '1', msg: "비밀번호와 재입력한 비밀번호가 일치하지 않습니다." }).status(403);
             return;
         }
 
         // 비어있는 칸 확인
         else if (user_id == '' || username == '' || pwd == '' || repwd == '') {
-            res.json({ status_code: '10', msg: "비어있는 칸이 있습니다." }).status(403);
+            res.json({ status_code: '1', msg: "비어있는 칸이 있습니다." }).status(403);
             return;
         }
 
         // 정규 표현식 확인 (비밀번호)
         else if (regex.test(pwd) == false) {
-            res.json({ status_code: '11', msg: "비밀번호는 특수문자, 숫자, 영문을 포함해야합니다." }).status(403);
+            res.json({ status_code: '1', msg: "비밀번호는 특수문자, 숫자, 영문을 포함해야합니다." }).status(403);
             return;
         }
 
         // 정규 표현식 확인 (이메일)
         else if (exptext.test(email) == false) {
-            res.json({ status_code: '00', msg: "이메일 형식에 맞지 않습니다." }).status(403);
+            res.json({ status_code: '1', msg: "이메일 형식에 맞지 않습니다." }).status(403);
             return;
         }
 
@@ -56,7 +56,7 @@ module.exports = function(app) {
                     newUser.save();
                     res.status(200).json({ status_code: '0' });
                 } else {
-                    res.json({ status_code: '-1', msg: "이미 가입하신 아이디가 있습니다." }).status(403);
+                    res.json({ status_code: '1', msg: "이미 가입하신 아이디가 있습니다." }).status(403);
                 }
             }).catch((err) => {
                 console.log(err);
