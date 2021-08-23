@@ -53,8 +53,11 @@ module.exports = function(app) {
                         password: incoding_pwd,
                         email: email
                     });
-                    newUser.save();
-                    res.status(200).json({ status_code: '0' });
+                    newUser.save().then(() => {
+                        res.status(200).json({ status_code: '0' });
+                    }).catch((err) => {
+                        res.status(500).json({ error: err });
+                    });
                 } else {
                     res.json({ status_code: '1', msg: "이미 가입하신 아이디가 있습니다." }).status(403);
                 }
