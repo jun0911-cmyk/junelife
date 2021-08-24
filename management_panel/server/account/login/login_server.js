@@ -1,6 +1,7 @@
 const LocalStorage = require('passport-local').Strategy;
 const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
+const createToken = require('../../oauth_token/createToken');
+const incodingCookie = require('../../oauth_token/incoding');
 const models = require('../../database/connect');
 
 module.exports = function(app, passport) {
@@ -57,7 +58,12 @@ module.exports = function(app, passport) {
             req.logIn(user, function(err) {
                 if (err) { return next(err); 
             }
+                const AccessToken = createToken.createAccessToken(user.user_id, user.user_name);
+                createToken.createRefreshToken(user.user_id);
+                incodingCookie(res, user.user_id, user.user_name);
                 // 로그인 세션 등록
+                res.cookie('access', AccessToken);
+                req.cookies.access = AccessToken;
                 req.session.login = 1;
                 req.session.user = user.email;
                 req.session.save(function() {

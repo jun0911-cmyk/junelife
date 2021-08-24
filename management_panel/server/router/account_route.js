@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const models = require('../database/connect');
+const verify = require('../oauth_token/verify');
 const router = express.Router();
 
 router.use(express.static('../public/css'));
@@ -22,9 +24,17 @@ router.get('/singup', function(req, res) {
     res.sendFile(path.join(__dirname, '..', '..', '/public/views/singup.html'));
 });
 
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+router.get('/logout', async function(req, res) {
+    if (req.cookies.access == undefined) {
+        res.redirect('/');
+    } else {
+        const accessToken = await verify(req.cookies.access);
+        models.Token.remove({ user_id: accessToken.user_id }).then(() => {
+            req.logout();
+            res.clearCookie('access');
+            res.redirect('/');
+        });
+    }
 });
 
 module.exports = router;
