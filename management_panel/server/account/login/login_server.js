@@ -1,5 +1,6 @@
 const LocalStorage = require('passport-local').Strategy;
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 const models = require('../../database/connect');
 
 module.exports = function(app, passport) {
