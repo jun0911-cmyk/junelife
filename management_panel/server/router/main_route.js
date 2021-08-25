@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const requestIp = require('request-ip');
 const checkToken = require('../oauth_token/checkTokens');
 const router = express.Router();
@@ -17,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', checkToken, function(req, res, next) {
-    res.send(`${req.params.id} profile`);
+    res.sendFile(path.join(__dirname, '..', '..', '/public/views/test.html'));
 });
 
 module.exports = router;

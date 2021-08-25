@@ -1,19 +1,20 @@
 const jwt = require('jsonwebtoken');
 const models = require('../database/connect');
 
-module.exports.createAccessToken = function(user_id, user_name) {
-    return accessToken = jwt.sign({user_id, user_name},
-        process.env.TOKENSECRET, {
+module.exports.createAccessToken = function(user_id) {
+    const payload = {
+        id: user_id,
+    };
+    return accessToken = jwt.sign(payload, process.env.TOKENSECRET, {
         expiresIn: '1h',
-        issuer: 'cotak'        
+        issuer: 'cotak',
     });
 }
 
 module.exports.createRefreshToken = function(user_id) {
-    const refreshToken = jwt.sign({},
-        process.env.TOKENSECRET, {
+    const refreshToken = jwt.sign({}, process.env.TOKENSECRET, {
         expiresIn: '14d',
-        issuer: 'cotak'        
+        issuer: 'cotak',
     });
     // 토큰 모델 생성
     models.Token.findOne({ 
@@ -24,10 +25,7 @@ module.exports.createRefreshToken = function(user_id) {
                 user_id: user_id,
                 refresh_token: refreshToken
             });
-            // 토큰 모델 저장
-            DBrefreshToken.save().then(() => {
-                console.log('save Success');
-            }).catch((err) => {
+            DBrefreshToken.save().catch((err) => {
                 console.log(err);
             });
         } else {
@@ -38,14 +36,11 @@ module.exports.createRefreshToken = function(user_id) {
                     user_id: user_id,
                     refresh_token: refreshToken
                 });
-                // 토큰 모델 저장
-                DBrefreshToken.save().then(() => {
-                    console.log('save Success');
-                }).catch((err) => {
+                DBrefreshToken.save().catch((err) => {
                     console.log(err);
                 });
             }).catch((err) => console.log(err));
         }
     }).catch((err) => console.log(err));
-    return refreshToken;
+    return true
 }

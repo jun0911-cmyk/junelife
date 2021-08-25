@@ -1,7 +1,6 @@
 const LocalStorage = require('passport-local').Strategy;
 const crypto = require('crypto');
 const createToken = require('../../oauth_token/createToken');
-const incodingCookie = require('../../oauth_token/incoding');
 const models = require('../../database/connect');
 
 module.exports = function(app, passport) {
@@ -58,18 +57,23 @@ module.exports = function(app, passport) {
             req.logIn(user, function(err) {
                 if (err) { return next(err); 
             }
-                const AccessToken = createToken.createAccessToken(user.user_id, user.user_name);
-                createToken.createRefreshToken(user.user_id);
-                incodingCookie(res, user.user_id, user.user_name);
-                // 로그인 세션 등록
-                res.cookie('access', AccessToken);
-                req.cookies.access = AccessToken;
-                req.session.login = 1;
-                req.session.user = user.email;
-                req.session.save(function() {
-                    // 로그인 성공
-                    res.json({ auth: 0 }).status(200);
-                });
+                const AccessToken = createToken.createAccessToken(user.user_id);
+                const RefreshToken = createToken.createRefreshToken(user.user_id);
+                if (RefreshToken == true && AccessToken) {
+                    // 로그인 세션 등록
+                    req.session.login = 1;
+                    req.session.user = user.email;
+                    req.session.save(function() {
+                        res.json({ 
+                            auth: 0,
+                            token: {
+                                status: true,
+                                access: AccessToken,
+                                user_id: user.user_id
+                            }
+                        }).status(200);
+                    });
+                }
             });
         })(req, res, next);
     });

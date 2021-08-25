@@ -1,36 +1,45 @@
 const jwt = require('jsonwebtoken');
 const models = require('../database/connect');
-const decoding = require('../oauth_token/decoding');
 const createTokens = require('./createToken');
 const verify = require('./verify');
 
 module.exports = async function(req, res, next) {
-    if (req.cookies.access == undefined) {
-        res.json({ auth_err: "not access token.", status: 1 }).status(403);
-        return;
-    }
-    const accessToken = await verify(req.cookies.access);
-    const tokenDB = await models.Token.findOne({ user_id: req.cookies.user_id });
-    const refreshToken = await verify(tokenDB.refresh_token);
-    if (req.cookies.user_id == undefined || req.cookies.user_name == undefined) {
-        res.json({ auth_err: "not user information", status: 1 }).status(403);
-    } else {
-        if (accessToken == null) {
-            if (refreshToken == undefined) {
-                res.json({ auth_err: "not login.", status: 1 }).status(403);
+    if (req.headers.authorization && req.headers.user) {
+        try {
+            const accessHeader = await req.headers.authorization.split('Bearer ')[1];
+            const accessToken = await verify(accessHeader);
+            const callRedreshToken = await models.Token.findOne({ user_id: req.headers.user });
+            const refreshToken = await verify(callRedreshToken.refresh_token);
+            if (accessToken == null) {
+                if (refreshToken == undefined) {
+                    res.json({
+                        status: false,
+                    }).status(401);
+                } else {
+                    const newAccessToken = createTokens.createAccessToken(req.headers.user);
+                    res.json({
+                        status: true,
+                        newAccessToken: newAccessToken
+                    }).status(200);
+                }
             } else {
-                const newAccessToken = createTokens.createAccessToken(req.cookies.user_id, req.cookies.user_name);
-                res.cookie('access', newAccessToken);
-                req.cookies.access = newAccessToken;
-                next();
+                res.json({
+                    status: true,
+                }).status(200);
             }
-        } else {
-            if (refreshToken == undefined) {
-                createTokens.createRefreshToken(req.cookies.user_id);
-                next();
-            } else {
-                next();
+        } catch (e) {
+            if (e == "TypeError: Cannot read property 'refresh_token' of null") {
+                const newRefreshToken = createTokens.createRefreshToken(req.headers.user);
+                if (newRefreshToken == true) {
+                    res.json({
+                        status: true,
+                    }).status(200);
+                }
+            }
+            if (e == "Error: Can't set headers after they are sent.") {
+                res.status(200);
             }
         }
     }
+    next();
 } 

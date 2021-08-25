@@ -15,9 +15,11 @@ $(function() {
             success: function(result) {
                 var err = result.err;
                 var auth = result.auth;
+                var token = result.token;
                 if (err) {
                     console.log(err);
                 } else if (!err) {
+
                     if (auth == 1) {
                         login_btn.disabled = true;
                         $('#faild_login').show();
@@ -26,6 +28,10 @@ $(function() {
                             $('#faild_login').hide();
                         }, 2000);
                     } else if (auth == 0) {
+                        if (token.status == true) {
+                            localStorage.setItem('accessToken', token.access);
+                            localStorage.setItem('accessUser', token.user_id);
+                        }
                         location.href = '/';
                     }
                 }
@@ -50,6 +56,7 @@ $(function() {
                 success: function(result) {
                     var err = result.err;
                     var auth = result.auth;
+                    var token = result.token;
                     if (err) {
                         console.log(err);
                     } else if (!err) {
@@ -61,6 +68,10 @@ $(function() {
                                 $('#faild_login').hide();
                             }, 2000);
                         } else if (auth == 0) {
+                            if (token.status == true) {
+                                localStorage.setItem('accessToken', token.access);
+                                localStorage.setItem('accessUser', token.user_id);
+                            }
                             location.href = '/';
                         }
                     }
