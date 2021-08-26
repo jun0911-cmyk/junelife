@@ -23,9 +23,18 @@ module.exports = async function(req, res, next) {
                     }).status(200);
                 }
             } else {
-                res.json({
-                    status: true,
-                }).status(200);
+                if (refreshToken == undefined) {
+                    const newRefreshToken = createTokens.createRefreshToken(req.headers.user);
+                    if (newRefreshToken == true) {
+                        res.json({
+                            status: true,
+                        }).status(200);
+                    }
+                } else {
+                    res.json({
+                        status: true,
+                    }).status(200);
+                }
             }
         } catch (e) {
             if (e == "TypeError: Cannot read property 'refresh_token' of null") {
