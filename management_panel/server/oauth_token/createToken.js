@@ -42,5 +42,5 @@ module.exports.createRefreshToken = function(user_id) {
             }).catch((err) => console.log(err));
         }
     }).catch((err) => console.log(err));
-    return true
+    return true;
 }

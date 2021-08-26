@@ -13,12 +13,10 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 
-router.get('/', function(req, res, next) {
-    next();
-});
-
-router.get('/:id', checkToken, function(req, res, next) {
+router.get('/:id', function(req, res, next) {
     res.sendFile(path.join(__dirname, '..', '..', '/public/views/test.html'));
 });
+
+router.post('/:id', checkToken);
 
 module.exports = router;

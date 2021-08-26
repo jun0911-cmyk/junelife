@@ -5,7 +5,7 @@ var accessUser = localStorage.getItem('accessUser');
 
 $(function() {
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '/:id',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Content-type","application/json");
