@@ -36,9 +36,6 @@ module.exports = async function(req, res, next) {
                     }).status(200);
                 }
             }
-            if (e == "Error: Can't set headers after they are sent.") {
-                res.status(200);
-            }
         }
     }
     next();
