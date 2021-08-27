@@ -31,7 +31,7 @@ module.exports = async function(req, res, next) {
                     res.json({
                         status: true,
                         newAccessToken: newAccessToken
-                    }).status(200);
+                    }).status(100);
                 }
             } else {
                 // Access 토큰은 존재하지만 Refresh 토큰은 없을시
@@ -42,7 +42,7 @@ module.exports = async function(req, res, next) {
                     if (newRefreshToken == true) {
                         res.json({
                             status: true,
-                        }).status(200);
+                        }).status(100);
                     } else {
                         // 재생성 실패시 401 response
                         res.json({
@@ -53,26 +53,15 @@ module.exports = async function(req, res, next) {
                     // 모든 토큰이 전부 검증된 토큰이면 200 reponse
                     res.json({
                         status: true,
-                    }).status(200);
+                    }).status(100);
                 }
             }
         } catch (e) {
-            // Tokendb에 해당 rows가 없을때
-            if (e.message == "Cannot read property 'refresh_token' of null") {
-                // RefreshToken 재생성
-                const newRefreshToken = createTokens.createRefreshToken(req.headers.user);
-                if (newRefreshToken == true) {
-                    res.json({
-                        status: true,
-                    }).status(200);
-                } else {
-                    res.json({
-                        status: false,
-                    }).status(401);
-                }
-            }
+            res.json({
+                status: false,
+            }).status(403);
         }
     }
     // 다음 요청 callback
     next();
-} 
+}
