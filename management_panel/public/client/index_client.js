@@ -1,16 +1,13 @@
 $('#isLogin').hide();
 
-var accessToken = localStorage.getItem('accessToken');
-var accessUser = localStorage.getItem('accessUser');
-
 $(function() {
     $.ajax({
         type: 'GET',
         url: '/:id',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Content-type","application/json");
-            xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
-            xhr.setRequestHeader("User", accessUser);
+            xhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem('accessToken'));
+            xhr.setRequestHeader("User", localStorage.getItem('accessUser'));
         },
         datatype: 'json',
         success: function(result) {
