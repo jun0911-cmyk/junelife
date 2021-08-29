@@ -12,9 +12,9 @@ module.exports.access = function(token) {
 }  
 
 module.exports.refresh = async function(user_id) {
-    const getToken = await models.Token.findOne({ user_id: user_id });
     try {
-        return jwt.verify(getToken, process.env.TOKENSECRET);
+        const getToken = await models.Token.findOne({ user_id: user_id });
+        return jwt.verify(getToken.refresh_token, process.env.TOKENSECRET);
     } catch (e) {
         return null;
     }
