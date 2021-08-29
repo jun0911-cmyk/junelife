@@ -41,7 +41,6 @@ $(function() {
                 if (err) {
                     console.log(err);
                 } else if (!err) {
-
                     if (auth == 1) {
                         login_btn.disabled = true;
                         $('#faild_login').show();
