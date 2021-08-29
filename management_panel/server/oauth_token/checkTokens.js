@@ -18,10 +18,14 @@ module.exports = async function(req, res, next) {
     // authorization 해더와 유저 해더가 있을시
     new Promise((resolve, reject) => {
         if (req.headers.authorization && req.headers.user) {
-            var header = {
-                "authorization": req.headers.authorization.split('Bearer ')[1],
-                "user_id": req.headers.user,
-            };
+            if (req.headers.authorization == undefined) {
+                reject(req.headers.authorization);
+            } else {
+                var header = {
+                    "authorization": req.headers.authorization.split('Bearer ')[1],
+                    "user_id": req.headers.user,
+                };
+            }
             resolve(header);
         }
     })
