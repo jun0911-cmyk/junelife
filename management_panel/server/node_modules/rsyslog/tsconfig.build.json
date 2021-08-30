@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "declaration": true,
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
