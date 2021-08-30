@@ -8,18 +8,22 @@ const verify = require('./verify');
 module.exports = async function(req, res, next) {
     // Promise Chaining
     new Promise((resolve, reject) => {
-        // authorization header와 user해더 존재유무 확인
+        // user 해더 안의 데이터가 없을때
         if (req.headers.user == '') {
+            // 401(권한에러) 응답
             res.json({
                 status: false
             }).status(401);
-        } else if (req.headers.authorization && req.headers.user) {
+        }
+        // Authorization 해더와 user 해더의 존재유무 확인 
+        else if (req.headers.authorization && req.headers.user) {
+            // Authorization 해더 결과가 null이거나 user 해더 결과가 null일때 
             if (req.headers.authorization == 'Bearer null' || req.headers.user == 'null') {
                 // 에러 전송
                 res.json({
                     status: false
                 }).status(401);
-                // authorization 해더가 존재하지 않을시 reject
+                // reject
                 reject(req.headers.authorization);
             } else {
                 // header object에 정보 저장
@@ -61,14 +65,18 @@ module.exports = async function(req, res, next) {
                 };
             }
         } else if (header.user_id == null) {
+            // descript 한 결과가 에러발생시 401에러 응답
             res.json({
                 status: false
             }).status(401);
+            // null return
             return null;
         }
     })
     .then((token) => {
+        // token 결과가 null일때
         if (token == null) {
+            // null return
             return null;
         } else {
                 // 검증결과 accessToken, refreshToken이 전부 만료시
@@ -90,7 +98,7 @@ module.exports = async function(req, res, next) {
                 // 처리가 완료되었으며 reponse를 중복되어 호출되면 안되기 때문에 null retrun
                 return null;
             } else {
-                // 전무다 존재할시 token object return
+                // 전부다 존재할시 token object return
                 return token;
             }
         }
@@ -107,6 +115,7 @@ module.exports = async function(req, res, next) {
                 const newRefreshToken = await createTokens.createRefreshToken(token.accessToken.id);
                 // 발급 완료시 status true 응답
                 if (newRefreshToken == true) {
+                    // refreshToken이 생성되었을시 200 reponse 응답
                     res.json({
                         status: true,
                     }).status(200);
@@ -125,6 +134,7 @@ module.exports = async function(req, res, next) {
         }
     })
     .catch((err) => {
+        // err 발생시 err 출력
         console.log(err);
     });
 }
