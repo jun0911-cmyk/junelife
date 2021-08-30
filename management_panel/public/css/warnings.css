@@ -1,0 +1,28 @@
+.fa-exclamation-triangle {
+    color: red;
+    font-size: 150px;
+    text-align: center;
+    margin-left: 45%;
+    margin-top: 10%;
+}
+
+.message {
+    color: black;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 1%;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    color: violet;
+    text-decoration: none;
+}
