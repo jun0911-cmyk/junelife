@@ -1,80 +1,126 @@
 const jwt = require('jsonwebtoken');
 const models = require('../database/connect');
+const crypto_data = require('./crypto_data');
 const createTokens = require('./createToken');
 const verify = require('./verify');
 
+// TokenCheck module
 module.exports = async function(req, res, next) {
+    // Promise Chaining
     new Promise((resolve, reject) => {
-        if (req.headers.authorization && req.headers.user) {
-            if (req.headers.authorization == undefined) {
+        // authorization header와 user해더 존재유무 확인
+        if (req.headers.user == '') {
+            res.json({
+                status: false
+            }).status(401);
+        } else if (req.headers.authorization && req.headers.user) {
+            if (req.headers.authorization == 'Bearer null' || req.headers.user == 'null') {
+                // 에러 전송
+                res.json({
+                    status: false
+                }).status(401);
+                // authorization 해더가 존재하지 않을시 reject
                 reject(req.headers.authorization);
             } else {
+                // header object에 정보 저장
                 var header = {
                     "authorization": req.headers.authorization.split('Bearer ')[1],
-                    "user_id": req.headers.user,
+                    "user_id": crypto_data.decoding(req.headers.user),
                 };
+                // resolve로 header return
                 resolve(header);
             }
         } else {
+            // 존재하지 않을시 다음 funection next
             next();
         }
     })
     .then(async (header) => {
-        const accessToken = await verify.access(header.authorization);
-        if (accessToken == null) {
-            const refreshToken = await verify.refresh(header.user_id);
-            const user_id = await header.user_id;
-            return {
-                accessToken,
-                refreshToken,
-                user_id
-            };
-        } else {
-            const refreshToken = await verify.refresh(accessToken.id);
-            const user_id = await header.user_id;
-            return {
-                accessToken,
-                refreshToken,
-                user_id
-            };
+        if (header.user_id != null) {
+            // accessToken 검증
+            const accessToken = await verify.access(header.authorization);
+            if (accessToken == null) {
+                // 검증 애러시 refreshToken user 해더로 검증
+                const refreshToken = await verify.refresh(header.user_id);
+                const user_id = await header.user_id;
+                // 3가지 인수 return
+                return {
+                    accessToken,
+                    refreshToken,
+                    user_id
+                };
+            } else {
+                // accessToken이 존재할시 디코딩 결과 id로 refreshToken 검증
+                const refreshToken = await verify.refresh(accessToken.id);
+                const user_id = await header.user_id;
+                // 3가지 인수 return
+                return {
+                    accessToken,
+                    refreshToken,
+                    user_id
+                };
+            }
+        } else if (header.user_id == null) {
+            res.json({
+                status: false
+            }).status(401);
+            return null;
         }
     })
     .then((token) => {
-        if (token.accessToken == null && token.refreshToken == null) {
-            res.status(200).json({
-                status: false
-            });
-            return null;
-        } else if (token.accessToken == null && token.refreshToken) {
-            const newAccessToken = createTokens.createAccessToken(token.user_id);
-            res.status(200).json({
-                status: true,
-                newAccessToken: newAccessToken
-            });
+        if (token == null) {
             return null;
         } else {
-            return token;
+                // 검증결과 accessToken, refreshToken이 전부 만료시
+            if (token.accessToken == null && token.refreshToken == null) {
+                // status false response
+                res.json({
+                    status: false
+                }).status(401);
+                // null return
+                return null;
+            } else if (token.accessToken == null && token.refreshToken) {
+                // 검증결과 accessToeen만 만료시 user 해더 데이터로 accessToken 재생성
+                const newAccessToken = createTokens.createAccessToken(token.user_id);
+                // newAccessToken과 true 응답
+                res.json({
+                    status: true,
+                    newAccessToken: newAccessToken
+                }).status(200);
+                // 처리가 완료되었으며 reponse를 중복되어 호출되면 안되기 때문에 null retrun
+                return null;
+            } else {
+                // 전무다 존재할시 token object return
+                return token;
+            }
         }
     })
     .then(async (token) => {
+        // 이미 애러가 나서 reponse 됬거나 새로운 accessToken이 발급되서 reponse가 완료되었을경우
         if (token == null) {
+            // false return
             return false;
-        } else if ((token != null) && token.accessToken) {
+        } else if (token != null && token.accessToken) {
+            // retreshToken만 만료시
             if (token.refreshToken == null) {
+                // accessToken 디코딩된 id로 refreshToken 재생성
                 const newRefreshToken = await createTokens.createRefreshToken(token.accessToken.id);
-                if (newRefreshToken) {
-                    res.status(200).json({
+                // 발급 완료시 status true 응답
+                if (newRefreshToken == true) {
+                    res.json({
                         status: true,
-                    });
+                    }).status(200);
                 } else {
-                    res.status(401).json({
+                    // 발급 애러시 status false 응답
+                    res.json({
                         status: false,
-                    });
+                    }).status(401);
                 }
             } else {
-                res.status(200).json({
+                // accessToken과 refreshToken 모두 유효할시 true 전송
+                res.json({
                     status: true,
-                });
+                }).status(200);
             }
         }
     })

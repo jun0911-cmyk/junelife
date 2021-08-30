@@ -1,6 +1,7 @@
 const LocalStorage = require('passport-local').Strategy;
 const crypto = require('crypto');
 const createToken = require('../../oauth_token/createToken');
+const crypto_data = require('../../oauth_token/crypto_data');
 const models = require('../../database/connect');
 
 module.exports = function(app, passport) {
@@ -69,7 +70,7 @@ module.exports = function(app, passport) {
                             token: {
                                 status: true,
                                 access: AccessToken,
-                                user_id: user.user_id
+                                user_id: crypto_data.encoding(user.user_id)
                             }
                         }).status(200);
                     });

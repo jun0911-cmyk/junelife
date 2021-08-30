@@ -16,6 +16,9 @@ $(function() {
             var accessToken = result.newAccessToken;
             if (status == false || err) {
                 location.href = '/user/login';
+            } else if (status == '-1') {
+                alert('로그아웃 되셨습니다.');
+                location.href = '/user/logout';
             } else if (status == true) {
                 $('#isLogin').show();
                 $('#isNotLogin').hide();

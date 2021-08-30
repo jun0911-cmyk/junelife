@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const models = require('../database/connect');
 const authCheck = require('../oauth_token/authCheck');
+const crypto_data = require('../oauth_token/crypto_data');
 const verify = require('../oauth_token/verify');
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.get('/logout', function(req, res) {
 });
 
 router.post('/logout', function(req, res) {
-    models.Token.remove({ user_id: req.body.user }).then(() => {
+    models.Token.remove({ user_id: crypto_data.decoding(req.body.user) }).then(() => {
         req.logout();
         res.json({ status: true });
     }).catch((e) => {

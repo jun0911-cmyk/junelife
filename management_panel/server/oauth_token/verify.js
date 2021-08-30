@@ -13,9 +13,12 @@ module.exports.access = function(token) {
 
 module.exports.refresh = async function(user_id) {
     try {
+        // user_id 파라미터와 일치하는 row 가져옴
         const getToken = await models.Token.findOne({ user_id: user_id });
+        // 가져온 row의 refresh_token을 검증한 결과를 return함
         return jwt.verify(getToken.refresh_token, process.env.TOKENSECRET);
     } catch (e) {
+        // 에러 발생시 null return
         return null;
     }
 }
