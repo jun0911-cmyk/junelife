@@ -14,6 +14,9 @@ require('./database/connect');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('views', __dirname + '/');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
 require('dotenv').config();
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({
@@ -29,6 +32,9 @@ app.use(session({
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static('../public/css'));
+app.use(express.static('../public/client'));
+app.use(express.static('../public/favicon'));
 app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -43,6 +49,30 @@ app.use('/user', Router.accountRouter);
 // account Server
 require('./account/login/login_server')(app, passport);
 require('./account/singup/singup_server')(app);
+
+// 404 (Not found), 500 (ISE) Error handling
+app.use(function(req, res, next) {
+    var err = new Error('Page Not Found');
+    // Error status setting 404
+    err.status = 404;
+    // next Error callback
+    next(err);
+});
+
+// if express error development
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        // status 404 OR 500 send
+        res.status(err.status || 500);
+        // error.html File render
+        res.render('../public/views/error.html');
+    });
+}
+
+app.use(function(err, req, res, next) {
+    // status 404 OR 500 send
+    res.status(err.status || 500);
+});
 
 // PORT 8000
 app.listen(port, (err) => {
