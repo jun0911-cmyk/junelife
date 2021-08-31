@@ -52,7 +52,8 @@
 .navigator {
     display: flex;
     align-items: center;
-    border-bottom: 0.1px solid #d2d7dd;
+    background-color: #18181b;
+    border-bottom: 0.1px solid #18181b;
 }
 
 .singup {
@@ -61,8 +62,9 @@
     height: 80%;
     margin-left: 35%;
     margin-top: 4%;
-    background-color: #fefefe;
-    border: 2px solid #eeeeee;
+    color: white;
+    background-color: #18181b;
+    border: 2px solid #18181b;
 }
 
 .singup_message {
@@ -85,7 +87,9 @@
 
 .id {
     height: 35px;
-    border: 1px solid #cccccc;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
 }
 
 .name_label {
@@ -99,7 +103,9 @@
 .username {
     height: 35px;
     margin-top: 8%;
-    border: 1px solid #cccccc;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
 }
 
 .email_label {
@@ -113,7 +119,9 @@
 .email {
     height: 35px;
     margin-top: 9%;
-    border: 1px solid #cccccc;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
 }
 
 .pwd_label {
@@ -127,7 +135,9 @@
 .password {
     height: 35px;
     margin-top: 9%;
-    border: 1px solid #cccccc;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
 }
 
 .repwd_label {
@@ -141,7 +151,9 @@
 .re_password {
     height: 35px;
     margin-top: 9%;
-    border: 1px solid #cccccc;
+    background-color: black;
+    color: white;
+    border: 1px solid gray;
 }
 
 .submit_singup {
@@ -172,11 +184,11 @@
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 a:visited {
-    color: black; 
+    color: white; 
     text-decoration: none;
 }
 

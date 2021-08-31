@@ -36,7 +36,7 @@ $(function() {
 
                 Vue.component('bell-component', {
                     template: `
-                        <i class="fas fa-bell" style="font-size: 27px; margin-left: 30px;"></i>
+                        <i class="fas fa-bell" style="font-size: 27px; margin-left: 30px; color: yellow;"></i>
                     `
                 });
 
