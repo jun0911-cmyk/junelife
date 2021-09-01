@@ -9,7 +9,7 @@ module.exports = async function(req, res, next) {
     // Promise Chaining
     new Promise((resolve, reject) => {
         // user 해더 안의 데이터가 없을때
-        if (req.headers.user == '') {
+        if (req.headers.user == '' || req.headers.user == 'null') {
             // 401(권한에러) 응답
             res.json({
                 status: false
@@ -17,23 +17,13 @@ module.exports = async function(req, res, next) {
         }
         // Authorization 해더와 user 해더의 존재유무 확인 
         else if (req.headers.authorization && req.headers.user) {
-            // Authorization 해더 결과가 null이거나 user 해더 결과가 null일때 
-            if (req.headers.authorization == 'Bearer null' || req.headers.user == 'null') {
-                // 에러 전송
-                res.json({
-                    status: false
-                }).status(401);
-                // reject
-                reject(req.headers.authorization);
-            } else {
-                // header object에 정보 저장
-                var header = {
-                    "authorization": req.headers.authorization.split('Bearer ')[1],
-                    "user_id": crypto_data.decoding(req.headers.user),
-                };
-                // resolve로 header return
-                resolve(header);
-            }
+            // header object에 정보 저장
+            var header = {
+                "authorization": req.headers.authorization.split('Bearer ')[1],
+                "user_id": crypto_data.decoding(req.headers.user),
+            };
+            // resolve로 header return
+            resolve(header);
         } else {
             // 존재하지 않을시 다음 funection next
             next();

@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="#">
     <title>EULER - 서드파티 관리패널 처리 시스템</title>
 </head>
-<body style="background-color: #0e0e10;">
+<body>
     <div>
         <div class="navigator">
             <h2 class="euler"><a href="/">EULER 관리패널</a></h2>
@@ -32,7 +32,73 @@
         </div>
     </div>
     <div class="contention">
-        <div class="main_content" id="main_content">
+        <div class="search_result" id="search_recode_result">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="head">
+                        <th scope="cols">영상 아이디</th>
+                        <th scope="cols">위치</th>
+                        <th scope="cols">파일 크기</th>
+                        <th scope="cols">업로드 날짜</th>
+                        <th scope="cols">업로더</th>
+                        <th scope="cols">영상보기</th>
+                    </tr>
+                </thead>
+                <tbody id="recode_col" class="columns">
+                    <tr v-for="(index, recode_video) in recode_video_data">
+                        <td>
+                            <span>{{ index.video_id }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.map }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.file_size }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.upload_date }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.uploader }}</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" id="remove_btn" style="background-color: blue; border: none;">영상보기</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="search_result" id="search_live_result">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="head">
+                        <th scope="cols">라이브 아이디</th>
+                        <th scope="cols">CCTV 위치</th>
+                        <th scope="cols">CCTV 아이디</th>
+                        <th scope="cols">CCTV 담당관리자</th>
+                        <th scope="cols">영상보기</th>
+                    </tr>
+                </thead>
+                <tbody id="live_col" class="columns">
+                    <tr v-for="(index, live_video) in live_video_data">
+                        <td>
+                            <span>{{ index.live_id }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.cctv_map }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.cctv_id }}</span>
+                        </td>
+                        <td>
+                            <span>{{ index.cctv_admin }}</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" id="remove_btn" style="background-color: blue; border: none;">영상보기</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <script src="./index_client.js"></script>
     </div>

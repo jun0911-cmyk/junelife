@@ -1,3 +1,5 @@
+$('#search_recode_result').hide();
+$('#search_live_result').hide();
 $(function() {
     $.ajax({
         type: 'GET',
@@ -49,5 +51,50 @@ $(function() {
             console.log('서버 통신중 오류가 발생하였습니다.');
             console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         },
+    });
+
+    $.ajax({
+        url: '/',
+        datatype: 'json',
+        type: 'POST',
+        data: {},   
+        success: function(result) {
+            var channel = result.channel;
+            var cctv_video = result.live_video;
+            var recode_video = result.recode_video;
+            if (channel == false) {
+                new Vue({
+                    el: '#recode_col',
+                    data() {
+                        return {
+                            recode_video_data: []
+                        }
+                    },
+                    created() {
+                        this.recode_video_data = recode_video;
+                        $('#search_live_result').hide();
+                        $('#search_recode_result').show();
+                    }
+                });
+            } else if (channel == true) {
+                new Vue({
+                    el: '#live_col',
+                    data() {
+                        return {
+                            live_video_data: []
+                        }
+                    },
+                    created() {
+                        this.live_video_data = cctv_video;
+                        $('#search_recode_result').hide();
+                        $('#search_live_result').show();
+                    }
+                });
+            }
+        },
+        error: function(request,status,error) { 
+            console.log('서버 통신중 오류가 발생하였습니다.');
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
     });
 });
