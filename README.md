@@ -1,1 +1,1 @@
-# euler Project
+# JUNELIFE Project

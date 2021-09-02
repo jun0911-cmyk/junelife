@@ -12,18 +12,25 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" type="text/css" href="./scrollbar.css">
     <link rel="shortcut icon" href="#">
-    <title>EULER - 서드파티 관리패널 처리 시스템</title>
+    <title>JUNELIFE - 건강한 비건라이프 생활</title>
 </head>
 <body>
     <div>
         <div class="navigator">
-            <h2 class="euler"><a href="/">EULER 관리패널</a></h2>
-            <div class="container"></div>
-            <div class="search_bar_contention">
-                <input type="search" class="search_bar" id="search_bar" size="40" placeholder="범죄처리 영상 검색" autocapitalize="off" autocorrect="off" />
-            </div>
-            <div class="search_icon">
-                <i class="fas fa-search"></i>
+            <h2 class="junelife"><a href="/">JUNELIFE - 비건생활</a></h2>
+            <div class="container">
+                <div class="title">
+                    <a class="collect" href="#">음식점 찾기</a>
+                </div>
+                <div class="title">
+                    <a class="collect" href="#">레시피 찾기</a>
+                </div>
+                <div class="title">
+                    <a class="collect" href="#">비건생활 단계</a>
+                </div>
+                <div class="title">
+                    <a class="collect" href="#">소개</a>
+                </div>
             </div>
             <div class="account" id="account">
                 <bell-component></bell-component>
@@ -32,78 +39,10 @@
         </div>
     </div>
     <div class="contention">
-        <div class="search_result" id="search_recode_result">
-            <table class="table table-striped">
-                <thead>
-                    <tr class="head">
-                        <th scope="cols">영상 아이디</th>
-                        <th scope="cols">위치</th>
-                        <th scope="cols">파일 크기</th>
-                        <th scope="cols">업로드 날짜</th>
-                        <th scope="cols">업로더</th>
-                        <th scope="cols">영상보기</th>
-                    </tr>
-                </thead>
-                <tbody id="recode_col" class="columns">
-                    <tr v-for="(index, recode_video) in recode_video_data">
-                        <td>
-                            <span>{{ index.video_id }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.map }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.file_size }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.upload_date }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.uploader }}</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" id="remove_btn" style="background-color: blue; border: none;">영상보기</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="search_result" id="search_live_result">
-            <table class="table table-striped">
-                <thead>
-                    <tr class="head">
-                        <th scope="cols">라이브 아이디</th>
-                        <th scope="cols">CCTV 위치</th>
-                        <th scope="cols">CCTV 아이디</th>
-                        <th scope="cols">CCTV 담당관리자</th>
-                        <th scope="cols">영상보기</th>
-                    </tr>
-                </thead>
-                <tbody id="live_col" class="columns">
-                    <tr v-for="(index, live_video) in live_video_data">
-                        <td>
-                            <span>{{ index.live_id }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.cctv_map }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.cctv_id }}</span>
-                        </td>
-                        <td>
-                            <span>{{ index.cctv_admin }}</span>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" id="remove_btn" style="background-color: blue; border: none;">영상보기</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
         <script src="./index_client.js"></script>
     </div>
     <footer class="footer bg-dark">
-        <h6  style="color: white;">EULER Project</h6>
+        <h6  style="color: white;">JUNELIFE Project</h6>
         <small style="color: lightgray;">Copyright © EULER 2021</small>
     </footer>
 </div>

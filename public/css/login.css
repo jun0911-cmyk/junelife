@@ -41,10 +41,6 @@
     font-style: normal;
 }
 
-body {
-    background-color: #0e0e10;
-}
-
 .home {
     font-family: 'ELAND_Nice_M';
     font-size: 25px;
@@ -56,8 +52,7 @@ body {
 .navigator {
     display: flex;
     align-items: center;
-    background-color: #18181b;
-    border-bottom: 0.1px solid #18181b;
+    border-bottom: 0.1px solid #d2d7dd;
 }
 
 .login {
@@ -66,12 +61,11 @@ body {
     height: 45%;
     margin-left: 40%;
     margin-top: 10%;
-    background-color: #18181b;
-    border: 2px solid #18181b;
+    background-color: #fefefe;
+    border: 2px solid #eeeeee;
 }
 
 .login_message {
-    color: white;
     text-align: center;
     font-family: 'ELAND_Choice_B';
     margin-top: 10%;
@@ -86,7 +80,7 @@ body {
     width: 10%;
     height: 35px;
     margin-left: -10%;
-    border: 1px solid gray;
+    border: 1px solid #cccccc;
 }
 
 .input_pwd_addon {
@@ -94,7 +88,7 @@ body {
     height: 35px;
     margin-left: -10%;
     margin-top: 4.3%;
-    border: 1px solid gray;
+    border: 1px solid #cccccc;
 }
 
 .fa-lock, .fa-user {
@@ -106,17 +100,13 @@ body {
 
 .id {
     height: 35px;
-    background-color: black;
-    color: white;
-    border: 1px solid gray;
+    border: 1px solid #cccccc;
 }
 
 .password {
     height: 35px;
     margin-top: 5%;
-    background-color: black;
-    color: white;
-    border: 1px solid gray;
+    border: 1px solid #cccccc;
 }
 
 .submit_login {
@@ -140,7 +130,6 @@ body {
 }
 
 .forgetPwdOrId {
-    color: white;
     text-align: center;
     font-weight: 900;
     font-size: 13px;
@@ -148,12 +137,12 @@ body {
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 a:visited {
-    color: white; 
     text-decoration: none;
+    color: black; 
 }
 
 a:hover {

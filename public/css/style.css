@@ -64,7 +64,7 @@
 
 /* 데스크탑 브라우저 가로 */
 @media only screen and (min-width : 1224px) {
-    .euler {
+    .junelife {
         font-family: 'ELAND_Nice_M';
         font-size: 25px;
         margin-left: 30px;
@@ -76,28 +76,24 @@
 
 /* 큰 모니터 */
 @media only screen and (min-width : 1824px) {
-    .euler {
+    .junelife {
         font-family: 'ELAND_Nice_M';
         font-size: 25px;
         margin-left: 30px;
         margin-top: 10px;
         display: inline-block;
-        margin-right: -1650px;
+        margin-right: -1950px;
     }
-}
-
-body {
-    background-color: #0e0e10;
 }
 
 a {
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 a:visited {
-    color: white; 
     text-decoration: none;
+    color: black;
 }
 
 a:hover {
@@ -122,22 +118,21 @@ div {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #18181b;
+    background-color: #f9f9f9;
     min-width: 125px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: white;
-    font-weight: 900;
+    color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #3e3e474b;}
+.dropdown-content a:hover {background-color: #f1f1f1;}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -153,16 +148,15 @@ div {
 }
 
 .navigator {
-    background-color: #18181b;
     display: flex;
     align-items: center;
-    border-bottom: 0.1px solid #18181b;
+    border-bottom: 0.1px solid #d2d7dd;
 }
   
 .contianer {
     display: flex;
 }
-  
+
 .title {
     float: right;
     padding: 10px;
@@ -172,60 +166,6 @@ div {
     border-bottom: 0.4px solid black;
 }
 
-.search_bar_contention {
-    position: absolute;
-    margin-left: 38.7%;
-}
-
-.search_bar {
-    background-color: #464649;
-    border: 2px solid #464649;
-    outline: none;
-    font-weight: 900;
-    border-radius: 5px 0 0 5px;
-    height: 40px;
-}
-
-.search_bar::placeholder {
-    color: rgb(190, 178, 178);
-}
-
-.search_bar:focus {
-    color: white;
-    animation-name: search_bar;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-.search_icon {
-    position: absolute;
-    background-color: #3a3a3d;
-    margin-left: 58%;
-    width: 45px;
-    height: 40px;
-    border-radius: 0 5px 5px 0;
-}
-
-.fa-search {
-    color: white;
-    font-size: 25px;
-    margin-left: 25%;
-    margin-top: 15%;
-}
-
-.search_icon:hover {
-    background-color: #464649;
-    cursor:not-allowed;
-}
-
-.search_result {
-    margin-top: 5%;
-}
-
-.head, span {
-    color: white;
-}
-
 .footer {
     text-align: center;
     margin: 0 auto;
@@ -233,23 +173,4 @@ div {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 907px;
-}
-
-@keyframes search_bar {
-    30% {
-        background-color: black;
-        border: 2px solid blue;
-    }
-    50% {
-        background-color: black;
-        border: 2px solid blue;
-    }
-    99% {
-        background-color: black;
-        border: 2px solid blue;
-    }
-    100% {
-        background-color: black;
-        border: 2px solid blue;
-    }
 }

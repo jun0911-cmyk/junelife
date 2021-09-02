@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const models = require('./schema');
 var mongodb;
 
-mongoose.connect('mongodb://localhost:27017/control_panels', {
+mongoose.connect('mongodb://localhost:27017/veganlife', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology : true,
@@ -23,6 +23,4 @@ function closedb() {
 // model Schema Save
 module.exports.User = models.User;
 module.exports.Token = models.Token;
-module.exports.Recode = models.Recode;
-module.exports.Live = models.Live;
 module.exports.close = closedb; 
