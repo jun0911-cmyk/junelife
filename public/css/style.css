@@ -48,7 +48,7 @@
 
  /* 스마트폰 가로 */
 @media only screen and (min-width : 321px) {
-    .s-class {
+    .journey {
         font-family: 'ELAND_Nice_M';
         font-size: 25px;
         margin-left: 30px;
@@ -64,7 +64,7 @@
 
 /* 데스크탑 브라우저 가로 */
 @media only screen and (min-width : 1224px) {
-    .junelife {
+    .journey {
         font-family: 'ELAND_Nice_M';
         font-size: 25px;
         margin-left: 30px;
@@ -76,7 +76,7 @@
 
 /* 큰 모니터 */
 @media only screen and (min-width : 1824px) {
-    .junelife {
+    .journey {
         font-family: 'ELAND_Nice_M';
         font-size: 25px;
         margin-left: 30px;
