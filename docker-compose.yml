@@ -1,0 +1,13 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports: 
+      - "49160:8000"
+    container_name: main_server
+    command: 
+      node server.js
+  mongo:
+    image: mongo
+    container_name: mongo

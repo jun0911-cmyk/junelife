@@ -144,6 +144,10 @@
     border: 1px solid #cccccc;
 }
 
+.id, .username, .email, .password, .re_password {
+    text-indent: 3px;
+}
+
 .submit_singup {
     margin-top: 7%;
     margin-left: 83%;

@@ -109,6 +109,10 @@
     border: 1px solid #cccccc;
 }
 
+.id, .password {
+    text-indent: 3px;
+}
+
 .submit_login {
     margin-top: 10%;
     margin-left: 73%;
