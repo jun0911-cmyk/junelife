@@ -3,10 +3,9 @@
 FROM node:14.16.0
 ENV NODE_ENV=production
 WORKDIR /app
-COPY ["package.json", "package-lock.json", "./"]
-RUN npm install --production
-RUN npm install request-ip
-RUN npm install ejs
+COPY ["server/package.json", "server/package-lock.json", "./"]
+RUN server; npm install --production
+RUN server; npm install request-ip
+RUN server; npm install ejs
 COPY . .
-CMD ["node", "server.js"]
-EXPOSE 8000
+CMD ["node", "server/server.js"]

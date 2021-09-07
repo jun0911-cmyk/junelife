@@ -1,0 +1,23 @@
+services:
+  veganlife:
+    build:
+      context: .
+    ports: 
+      - 8000:8000
+    entrypoint: 
+      - PORT=8000
+      - DBCONNECT = mongodb://mongo:27017/veganlife
+    volumes: 
+      - ./:app
+    command: 
+      node server/server.js
+  mongo:
+    image: mongo_database
+    ports: 
+      - 27107:27017
+    volumes: 
+      - mongodb:/data/db
+      - mongodb_config:/data/config
+volumes: 
+  mongodb:
+  mongodb_config:
