@@ -1,192 +1,203 @@
 @font-face {
-    font-family: 'Cafe24Ohsquare';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "IBMPlexSansKR-Regular";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+  font-family: "Cafe24Ohsquare";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Cafe24Ohsquare.woff")
     format("woff");
-    font-weight: normal;
-    font-style: normal;
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'ELAND_Choice_B';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "IBMPlexSansKR-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'ELAND_Nice_M';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Nice_M.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "ELAND_Choice_B";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Choice_B.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'Y_Spotlight';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "ELAND_Nice_M";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/ELAND_Nice_M.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'GmarketSansBold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Y_Spotlight";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/Y_Spotlight.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .home {
-    font-family: 'ELAND_Nice_M';
-    font-size: 25px;
-    margin-left: 30px;
-    margin-top: 10px;
-    display: inline-block;
+  font-family: "ELAND_Nice_M";
+  font-size: 25px;
+  margin-left: 30px;
+  margin-top: 10px;
+  display: inline-block;
 }
 
 .navigator {
-    display: flex;
-    align-items: center;
-    border-bottom: 0.1px solid #d2d7dd;
+  display: flex;
+  align-items: center;
+  border-bottom: 0.1px solid #d2d7dd;
 }
 
 .singup {
-    position: absolute;
-    width: 30%;
-    height: 80%;
-    margin-left: 35%;
-    margin-top: 4%;
-    background-color: #fefefe;
-    border: 2px solid #eeeeee;
+  position: absolute;
+  width: 30%;
+  height: 80%;
+  margin-left: 35%;
+  margin-top: 4%;
+  background-color: #fefefe;
+  border: 2px solid #eeeeee;
 }
 
 .singup_message {
-    text-align: center;
-    font-family: 'ELAND_Choice_B';
-    margin-top: 10%;
+  text-align: center;
+  font-family: "ELAND_Choice_B";
+  margin-top: 10%;
 }
 
 .input_singup {
-    text-align: center;
-    margin-top: 10%;
+  text-align: center;
+  margin-top: 10%;
 }
 
 .id_label {
-    position: absolute;
-    font-size: 15px;
-    margin-top: -5%;
-    font-weight: 900;
+  position: absolute;
+  font-size: 15px;
+  margin-top: -5%;
+  font-weight: 900;
 }
 
 .id {
-    height: 35px;
-    border: 1px solid #cccccc;
+  height: 35px;
+  border: 1px solid #cccccc;
 }
 
 .name_label {
-    position: absolute;
-    font-size: 15px;
-    margin-top: 9%;
-    margin-left: -91.5%;
-    font-weight: 900;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 9%;
+  margin-left: -91.5%;
+  font-weight: 900;
 }
 
 .username {
-    height: 35px;
-    margin-top: 8%;
-    border: 1px solid #cccccc;
+  height: 35px;
+  margin-top: 8%;
+  border: 1px solid #cccccc;
 }
 
 .email_label {
-    position: absolute;
-    font-size: 15px;
-    margin-top: 18%;
-    margin-left: -91.5%;
-    font-weight: 900;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 18%;
+  margin-left: -91.5%;
+  font-weight: 900;
 }
 
 .email {
-    height: 35px;
-    margin-top: 9%;
-    border: 1px solid #cccccc;
+  height: 35px;
+  margin-top: 9%;
+  border: 1px solid #cccccc;
 }
 
 .pwd_label {
-    position: absolute;
-    font-size: 15px;
-    margin-top: 18%;
-    margin-left: -91.5%;
-    font-weight: 900;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 18%;
+  margin-left: -91.5%;
+  font-weight: 900;
 }
 
 .password {
-    height: 35px;
-    margin-top: 9%;
-    border: 1px solid #cccccc;
+  height: 35px;
+  margin-top: 9%;
+  border: 1px solid #cccccc;
 }
 
 .repwd_label {
-    position: absolute;
-    font-size: 15px;
-    margin-top: 19%;
-    margin-left: -91.5%;
-    font-weight: 900;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 19%;
+  margin-left: -91.5%;
+  font-weight: 900;
 }
 
 .re_password {
-    height: 35px;
-    margin-top: 9%;
-    border: 1px solid #cccccc;
+  height: 35px;
+  margin-top: 9%;
+  border: 1px solid #cccccc;
 }
 
-.id, .username, .email, .password, .re_password {
-    text-indent: 3px;
+.id,
+.username,
+.email,
+.password,
+.re_password {
+  text-indent: 3px;
 }
 
 .submit_singup {
-    margin-top: 7%;
-    margin-left: 83%;
+  margin-top: 7%;
+  margin-left: 83%;
 }
 
 .singup_btn {
-    font-family: "IBMPlexSansKR-Regular";
-    font-size: 15px;
-    width: 70px;
-    height: 35px;
-    border: none;
-    outline: none;
-    background-color: #0076c0;
-    color: white;
+  font-family: "IBMPlexSansKR-Regular";
+  font-size: 15px;
+  width: 70px;
+  height: 35px;
+  border: none;
+  outline: none;
+  background-color: #0076c0;
+  color: white;
 }
 
 .singup_btn:disabled {
-    background-color: gray;
+  background-color: gray;
 }
 
 .hyperLogin {
-    text-align: center;
-    font-weight: 900;
-    font-size: 13px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 13px;
 }
 
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
 
 a:visited {
-    text-decoration: none;
-    color: black; 
+  text-decoration: none;
+  color: black;
 }
 
 a:hover {
-    color: violet;
-    text-decoration: none;
+  color: violet;
+  text-decoration: none;
 }
 
-input:focus { outline: none; }
+input:focus {
+  outline: none;
+}
