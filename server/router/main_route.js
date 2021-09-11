@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
 const requestIp = require("request-ip");
-const checkToken = require("../oauth_token/checkTokens");
-const authCheck = require("../oauth_token/authCheck");
+const checkToken = require("../middleware/oauth_token/checkTokens");
+const authCheck = require("../middleware/oauth_token/authCheck");
 const models = require("../database/connect");
 const router = express.Router();
 

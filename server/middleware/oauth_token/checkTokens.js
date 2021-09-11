@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const models = require("../database/connect");
+const models = require("../../database/connect");
 const crypto_data = require("./crypto_data");
 const createTokens = require("./createToken");
 const verify = require("./verify");

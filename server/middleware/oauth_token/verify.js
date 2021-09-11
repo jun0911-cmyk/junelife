@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const models = require("../database/connect");
+const models = require("../../database/connect");
 
 module.exports.access = function (token) {
   try {

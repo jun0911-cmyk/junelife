@@ -30,7 +30,7 @@ $(function () {
                                 <i class="fas fa-user-circle" style="font-size: 27px; margin-top: 10px"></i>
                             </a>
                             <div class="dropdown-content">
-                                <a href="/student/check/class">나의 단계</a>
+                                <a href="/student/check/class">내 비건정보</a>
                                 <a href="#">내 정보</a>
                                 <a href="#">정보 변경</a>
                                 <a href="/user/logout">로그아웃<i class="fas fa-sign-out-alt"></i></a>

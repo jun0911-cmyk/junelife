@@ -50,6 +50,8 @@ app.use(function (req, res, next) {
 // Router
 app.use("/", Router.mainRouter);
 app.use("/user", Router.accountRouter);
+app.use("/recipe", Router.veganRecipeRouter);
+app.use("/rest", Router.veganRestRouter);
 
 // account Server
 require("./account/login/login_server")(app, passport);

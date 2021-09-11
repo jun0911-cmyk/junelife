@@ -1,9 +1,9 @@
 const express = require("express");
 const path = require("path");
 const models = require("../database/connect");
-const authCheck = require("../oauth_token/authCheck");
-const crypto_data = require("../oauth_token/crypto_data");
-const verify = require("../oauth_token/verify");
+const authCheck = require("../middleware/oauth_token/authCheck");
+const crypto_data = require("../middleware/oauth_token/crypto_data");
+const verify = require("../middleware/oauth_token/verify");
 const router = express.Router();
 
 router.use(express.static("../public/css"));

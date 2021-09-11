@@ -1,7 +1,7 @@
 const LocalStorage = require("passport-local").Strategy;
 const crypto = require("crypto");
-const createToken = require("../../oauth_token/createToken");
-const crypto_data = require("../../oauth_token/crypto_data");
+const createToken = require("../../middleware/oauth_token/createToken");
+const crypto_data = require("../../middleware/oauth_token/crypto_data");
 const models = require("../../database/connect");
 
 module.exports = function (app, passport) {
