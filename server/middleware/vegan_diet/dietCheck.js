@@ -35,7 +35,7 @@ module.exports = async function (req, res, next) {
         complete: true,
       });
       if (decoded == null || decoded == undefined) {
-        var status = null;
+        var status = false;
         var user_id = header.user_id;
         return {
           status,
