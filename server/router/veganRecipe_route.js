@@ -38,7 +38,7 @@ router.get("/", function (req, res, next) {
   );
 });
 
-router.get("/suggestion", [checkToken, dietCheck], function (req, res, next) {
+router.get("/suggestion", dietCheck, function (req, res, next) {
   res.sendFile(
     path.join(__dirname, "..", "..", "/public/views/recipe_suggestion.html")
   );

@@ -13,13 +13,7 @@ $(function () {
     datatype: "json",
     success: function (result) {
       if (result.status == false) {
-        location.href = "/user/login";
-      } else {
-        if (result.status == 0) {
-          location.href = "/";
-        } else if (result.status == 1) {
-          location.href = "/test";
-        }
+        location.href = "/test";
       }
     },
     error: function (request, status, error) {

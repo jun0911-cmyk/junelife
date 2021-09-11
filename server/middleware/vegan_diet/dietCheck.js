@@ -20,13 +20,6 @@ function checkDiet(user_id) {
 
 module.exports = async function (req, res, next) {
   new Promise((resolve, reject) => {
-    if (req.headers.user == "" || req.headers.user == "null") {
-      res
-        .json({
-          status: null,
-        })
-        .status(401);
-    }
     if (req.headers.authorization && req.headers.user) {
       var header = {
         authorization: req.headers.authorization.split("Bearer ")[1],
@@ -61,7 +54,7 @@ module.exports = async function (req, res, next) {
       if (decode.status == false && decode.user_id) {
         var diet = checkDiet(decode.user_id);
         return diet;
-      } else if (decode.user_id == undefined || decode.user_id == undefined) {
+      } else if (decode.user_id == undefined || decode.user_id == null) {
         return false;
       } else if (decode.status == true) {
         var diet = checkDiet(decode.decodedToken);
@@ -70,11 +63,9 @@ module.exports = async function (req, res, next) {
     })
     .then((diet) => {
       if (diet == false) {
-        res.json({ status: 1 }).status(403);
-      } else if (diet == null) {
-        res.json({ status: 0 }).status(401);
+        res.json({ status: false }).status(403);
       } else {
-        res.json({ status: 2 }).status(200);
+        res.json({ status: true }).status(200);
       }
     })
     .catch((err) => {
