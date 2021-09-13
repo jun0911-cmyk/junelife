@@ -32,7 +32,7 @@ let recipeName = {
 };
 
 // recipe router
-router.get("/", function (req, res, next) {
+router.get("/", checkToken, function (req, res, next) {
   res.sendFile(
     path.join(__dirname, "..", "..", "/public/views/recipe_list.html")
   );
