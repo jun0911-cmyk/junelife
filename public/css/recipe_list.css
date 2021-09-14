@@ -95,17 +95,17 @@ body {
   background-color: #f8f9fa;
 }
 
-a {
+.navigator a {
   text-decoration: none;
   color: black;
 }
 
-a:visited {
+.navigator a:visited {
   text-decoration: none;
   color: black;
 }
 
-a:hover {
+.navigator a:hover {
   color: violet;
   text-decoration: none;
 }
@@ -186,10 +186,34 @@ div {
   color: gray;
 }
 
+.select_recipe_page {
+  cursor: pointer;
+  display: flex;
+  gap: 0 15px;
+  margin-top: 3%;
+  margin-left: 3%;
+}
+
+.select_recipe_page a {
+  color: black;
+  text-decoration: underline;
+  text-underline-position: under;
+  float: left;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.select_recipe_page a:hover {
+  color: green;
+}
+
+.select_recipe_page a:active {
+  color: green;
+}
+
 .recipe_content {
   margin-left: 3%;
   margin-top: 3%;
-  z-index: 1;
 }
 
 .info {
