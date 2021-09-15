@@ -46,16 +46,35 @@
             />
           </div>
         </div>
+        <div class="write_recipe">
+          <button class="write_button" id="write_button" onclick="write_button()">레시피 쓰기</button>
+        </div>
         <div class="account" id="account">
-          <bell-component></bell-component>
+          <vegan-component></vegan-component>
           <account-component></account-component>
         </div>
       </div>
       <div class="select_recipe_page">
-          <a href="#"><i class="far fa-clock"></i>인기</a>
-          <a href="#">#오늘의 추천</a>
-          <a href="#">#다이어트</a>
-          <a href="#">#모든</a>
+          <a href="#"><i class="fas fa-thermometer-empty"></i>나만의 추천레시피</a>
+          <a href="#"><i class="fas fa-chart-line"></i></i>인기</a>
+          <a href="#"><i class="far fa-calendar-check"></i>오늘의 추천</a>
+          <a href="#"><i class="far fa-clock"></i>최근</a>
+          <a href="#"><i class="far fa-user"></i>모든 레시피</a>
+      </div>
+      <div class="category">
+        <p>레시피 카테고리</p>
+        <div class="price">
+          <span>가격대</span>
+        </div>
+        <div class="age">
+          <span>연령대</span>
+        </div>
+        <div class="diet">
+          <span>간편조리</span>
+        </div>
+        <div class="vegan">
+          <span>재료</span>
+        </div>
       </div>
       <div class="write_content">
             <div class="recipe_content">

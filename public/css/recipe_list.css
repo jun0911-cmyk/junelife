@@ -149,6 +149,18 @@ div {
   display: block;
 }
 
+.vegan_data {
+  position: absolute;
+  margin-left: -13.5%;
+  margin-top: 0.6%;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.fa-circle {
+  color: green;
+}
+
 .navigator {
   display: flex;
   align-items: center;
@@ -186,18 +198,36 @@ div {
   color: gray;
 }
 
+.write_recipe {
+  position: absolute;
+  margin-left: 74%;
+}
+
+.write_recipe button {
+  font-weight: 900;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 30px;
+  background-color: white;
+}
+
+.write_recipe button:hover {
+  animation-name: write_recipe;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
 .select_recipe_page {
   cursor: pointer;
   display: flex;
-  gap: 0 15px;
+  gap: 0 35px;
   margin-top: 3%;
   margin-left: 3%;
 }
 
 .select_recipe_page a {
   color: black;
-  text-decoration: underline;
-  text-underline-position: under;
+  text-decoration: none;
   float: left;
   font-weight: 600;
   font-size: 20px;
@@ -211,8 +241,40 @@ div {
   color: green;
 }
 
-.recipe_content {
+.fa-user,
+.fa-chart-line,
+.fa-clock,
+.fa-calendar-check,
+.fa-thermometer-empty {
+  position: absolute;
+  margin-left: -1.2%;
+  margin-top: 0.3%;
+}
+
+.category {
+  width: 30%;
+  height: 150px;
+  margin-left: 1.6%;
+  margin-top: 1%;
+  border: 2px solid gray;
+  border-radius: 10px;
+}
+
+.category p {
+  font-weight: 900;
+  font-size: 18px;
   margin-left: 3%;
+  margin-top: 1%;
+}
+
+.category span {
+  font-weight: 900;
+  float: left;
+  margin-left: 3%;
+}
+
+.recipe_content {
+  margin-left: 1.6%;
   margin-top: 3%;
 }
 
@@ -254,4 +316,15 @@ div {
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 907px;
+}
+
+@keyframes write_recipe {
+  25%,
+  50%,
+  75%,
+  100% {
+    border: 2px solid green;
+    background-color: green;
+    color: white;
+  }
 }

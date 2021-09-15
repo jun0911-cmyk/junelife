@@ -23,6 +23,7 @@ $(function () {
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
         }
+
         Vue.component("account-component", {
           template: `
                         <div class="dropdown">
@@ -39,9 +40,11 @@ $(function () {
                     `,
         });
 
-        Vue.component("bell-component", {
+        Vue.component("vegan-component", {
           template: `
-                        <i class="fas fa-bell" style="font-size: 27px; margin-left: 30px;"></i>
+                        <div class="vegan_data">
+                          <span>포인트 : 10점 <i class="fas fa-circle"></i> 단계 : 락토베지테리언</span>
+                        </div>
                     `,
         });
 
@@ -65,3 +68,7 @@ $(function () {
     },
   });
 });
+
+function write_button() {
+  location.href = `/recipe/write/${localStorage.getItem("accessUser")}`;
+}

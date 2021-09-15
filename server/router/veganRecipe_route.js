@@ -38,6 +38,19 @@ router.get("/", checkToken, function (req, res, next) {
   );
 });
 
+router.get("/:recipeName", async function (req, res, next) {
+  recipeName.recipe = await req.params.recipeName;
+  res.sendFile(
+    path.join(__dirname, "..", "..", "/public/views/recipe_page.html")
+  );
+});
+
+router.get("/write/:userToken", function (req, res, next) {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "/public/views/recipe_write.html")
+  );
+});
+
 router.get("/suggestion", dietCheck, function (req, res, next) {
   res.sendFile(
     path.join(__dirname, "..", "..", "/public/views/recipe_suggestion.html")
@@ -47,13 +60,6 @@ router.get("/suggestion", dietCheck, function (req, res, next) {
 router.get("/diet", checkToken, function (req, res, next) {
   res.sendFile(
     path.join(__dirname, "..", "..", "/public/views/recipe_diet.html")
-  );
-});
-
-router.get("/:recipeName", async function (req, res, next) {
-  recipeName.recipe = await req.params.recipeName;
-  res.sendFile(
-    path.join(__dirname, "..", "..", "/public/views/recipe_page.html")
   );
 });
 

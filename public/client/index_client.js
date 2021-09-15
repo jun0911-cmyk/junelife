@@ -23,6 +23,7 @@ $(function () {
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
         }
+
         Vue.component("account-component", {
           template: `
                         <div class="dropdown">
