@@ -4,7 +4,7 @@ const accessUser = localStorage.getItem("accessUser");
 $(function () {
   $.ajax({
     type: "GET",
-    url: "/recipe/suggestion",
+    url: "/recipe",
     beforeSend: function (xhr) {
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
@@ -13,7 +13,7 @@ $(function () {
     datatype: "json",
     success: function (result) {
       if (result.status == false) {
-        location.href = "/test";
+        location.href = "/recipe/diet";
       }
     },
     error: function (request, status, error) {
