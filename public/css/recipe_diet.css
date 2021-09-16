@@ -18,5 +18,10 @@
 }
 
 .diet_btn {
-  text-align: left;
+  margin-left: 65%;
+  margin-top: 1%;
+}
+
+.diet_btn button {
+  font-weight: 900;
 }

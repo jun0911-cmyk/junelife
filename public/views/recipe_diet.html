@@ -20,19 +20,25 @@
     <title>JUNELIFE - 식단 입력</title>
   </head>
   <body>
-    <div class="diet_input">
-      <h1>최근에 드셨던 요리명을 입력해주세요</h1>
-      <input
-        type="text"
-        class="diet"
-        placeholder="띄어쓰기로 분류해주세요"
-        size="60"
-      />
+    <div id="diet_input_content">
+      <div class="diet_input" id="diet_input">
+        <h1 id="title">최근에 드셨던 요리명을 입력해주세요</h1>
+        <error-component></error-component>
+        <input
+          type="text"
+          class="diet"
+          id="recipe_name"
+          placeholder="띄어쓰기로 분류해주세요"
+          size="60"
+        />
+      </div>
+      <div class="diet_btn" id="diet_btn">
+        <button type="button" class="btn btn-danger">취소</button>
+        <button type="button" class="btn btn-primary" id="next_btn">
+          다음
+        </button>
+      </div>
     </div>
-    <div class="diet_btn">
-      <button class="clean_btn">취소</button>
-      <button class="next_btn">다음</button>
-    </div>
-    <script src="./vegan/diet/recipe_diet.js"></script>
+    <script src="./vegan/recipe/diet/recipe_diet.js" type="module"></script>
   </body>
 </html>
