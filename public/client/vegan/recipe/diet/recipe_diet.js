@@ -1,11 +1,11 @@
-import { proccing } from "../../diet_module/split_recipe.js";
+import { recipe_extraction } from "../../diet_module/recipe_extraction.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const next_btn = document.getElementById("next_btn");
 
 next_btn.addEventListener("click", (e) => {
-  var recipe_data = proccing(next_btn);
+  var recipe_data = recipe_extraction(next_btn);
   if (recipe_data) {
     // do
   } else if (!recipe_data) {

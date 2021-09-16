@@ -5,7 +5,7 @@ const elHide = () => {
   return true;
 };
 
-export function proccing(target) {
+export function recipe_extraction(target) {
   if ($("#recipe_name").val() == 0) {
     Vue.component("error-component", {
       template: `
