@@ -3,15 +3,16 @@ import { recipe_extraction } from "../../diet_module/recipe_extraction.js";
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const next_btn = document.getElementById("next_btn");
-
-next_btn.addEventListener("click", (e) => {
+const call_recipeName = () => {
   var recipe_data = recipe_extraction(next_btn);
   if (recipe_data) {
-    // do
+    console.log(recipe_data);
   } else if (!recipe_data) {
     // catch
   }
-});
+};
+
+next_btn.addEventListener("click", call_recipeName);
 
 $(function () {
   $.ajax({
