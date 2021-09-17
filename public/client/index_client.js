@@ -40,9 +40,11 @@ $(function () {
                     `,
         });
 
-        Vue.component("bell-component", {
+        Vue.component("vegan-component", {
           template: `
-                        <i class="fas fa-bell" style="font-size: 27px; margin-left: 30px;"></i>
+                        <div class="vegan_info">
+                          <span>포인트 : 10점 <i class="fas fa-circle"></i> 단계 : 락토베지테리언</span>
+                        </div>
                     `,
         });
 

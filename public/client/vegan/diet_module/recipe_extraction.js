@@ -9,7 +9,7 @@ const elHide = () => {
   }
 };
 
-export function recipe_extraction(target) {
+export const recipe_extraction = () => {
   if ($("#recipe_name").val() == 0) {
     Vue.component("error-component", {
       template: `
@@ -28,15 +28,7 @@ export function recipe_extraction(target) {
       var split_name = recipe_name.split(" ");
       return split_name;
     } else if (status == false) {
-      Vue.component("error-component", {
-        template: `
-            <div id="error" style="color: red; font-size: 20px;">요리명을 입력받을수 없습니다. 페이지의 오류가 발생하였습니다.</div>
-          `,
-      });
-
-      return undefined;
-    } else {
       return undefined;
     }
   }
-}
+};

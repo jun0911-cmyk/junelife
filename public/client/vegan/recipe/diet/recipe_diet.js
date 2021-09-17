@@ -1,18 +1,28 @@
 import { recipe_extraction } from "../../diet_module/recipe_extraction.js";
+import { step_settingAlgo } from "../../diet_module/diet_algorithm/recipe_step_algo.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const next_btn = document.getElementById("next_btn");
-const call_recipeName = () => {
+const get_recipeName = (e) => {
   var recipe_data = recipe_extraction(next_btn);
   if (recipe_data) {
-    console.log(recipe_data);
+    step_settingAlgo(recipe_data);
   } else if (!recipe_data) {
-    // catch
+    // setting to error-component
+    Vue.component("error-component", {
+      template: `
+            <div id="error" style="color: red; font-size: 20px;">요리명을 입력받을수 없습니다. 페이지의 오류가 발생하였습니다.</div>
+          `,
+    });
+    // recipe_extraction Error send to vue component
+    new Vue({
+      el: "#diet_input",
+    });
   }
 };
 
-next_btn.addEventListener("click", call_recipeName);
+next_btn.addEventListener("click", get_recipeName);
 
 $(function () {
   $.ajax({

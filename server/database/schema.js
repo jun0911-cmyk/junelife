@@ -22,14 +22,12 @@ const veganLevelSchema = new mongoose.Schema({
 });
 
 const RecipeSchema = new mongoose.Schema({
-  write_name: { type: String },
-  write_title: { type: String },
-  write_summary: { type: String },
-  write_image: { type: String },
-  content: { type: String },
-  writer: { type: String },
-  reputation: { type: Number },
-  created: { type: Date, default: Date.now },
+  recipe_name: { type: String },
+  recipe_image: { type: String },
+  recipe_ingredient: { type: String },
+  recipe_step: { type: String },
+  crawling_url: { type: String },
+  crawling_content: { type: String },
 });
 
 const RestaurantSchema = new mongoose.Schema({

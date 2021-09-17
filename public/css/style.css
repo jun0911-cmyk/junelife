@@ -145,6 +145,18 @@ div {
   display: block;
 }
 
+.vegan_info {
+  position: absolute;
+  margin-left: -13%;
+  margin-top: 0.6%;
+  font-weight: 900;
+  font-size: 15px;
+}
+
+.fa-circle {
+  color: green;
+}
+
 .login {
   font-family: "GmarketSansBold";
 }
