@@ -57,6 +57,9 @@ app.use("/rest", Router.veganRestRouter);
 require("./account/login/login_server")(app, passport);
 require("./account/singup/singup_server")(app);
 
+// vegan Recipe Server
+require("./vegan/recipe/recipe_diet")(app);
+
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
   var err = new Error("Page Not Found");
