@@ -91,6 +91,7 @@ module.exports = async function (req, res, next) {
             .json({
               status: true,
               newAccessToken: newAccessToken,
+              user_id: token.user_id,
             })
             .status(200);
           // 처리가 완료되었으며 reponse를 중복되어 호출되면 안되기 때문에 null retrun
@@ -119,6 +120,7 @@ module.exports = async function (req, res, next) {
             res
               .json({
                 status: true,
+                user_id: token.user_id,
               })
               .status(200);
           } else {
@@ -134,6 +136,7 @@ module.exports = async function (req, res, next) {
           res
             .json({
               status: true,
+              user_id: token.user_id,
             })
             .status(200);
         }
