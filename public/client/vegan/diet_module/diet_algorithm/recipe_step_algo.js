@@ -29,18 +29,15 @@ class recipe_list {
 
 const recipeList = new recipe_list();
 
-console.log(recipeList.getReicpeList());
+function vegan_step_prototype() {}
 
-function vegan_step_prototype(recipe_name) {
-  return recipe_name;
-}
-
-vegan_step_prototype.prototype.test = (x) => {
-  return x + " test success";
+vegan_step_prototype.prototype.settingStep = (step_arr) => {
+  console.log(step_arr);
+  const recipe_object = recipeList.getReicpeList();
+  console.log(recipe_object);
 };
 
-export const step_settingAlgo = (recipe_name) => {
-  document.getElementById("title").innerText = "비건 단계를 설정하는중 ...";
-  let recipe = new vegan_step_prototype(recipe_name);
-  console.log(recipe);
+export const settingStep = (step_arr) => {
+  let recipePrototype = new vegan_step_prototype();
+  recipePrototype.settingStep(step_arr);
 };

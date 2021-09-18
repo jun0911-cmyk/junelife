@@ -27,22 +27,36 @@
   margin-left: 3%;
 }
 
-.diet_input .first input {
+.vm_radio {
+  margin-top: 3%;
+}
+
+.ma_radio,
+.mi_radio,
+.sm_radio,
+.vs_radio,
+.self_radio {
+  margin-top: 1%;
+}
+
+.diet_input input {
   outline: none;
   width: 30px;
   height: 30px;
 }
 
-.diet_input .first label {
+.diet_input label {
   font-weight: 900;
   font-size: 30px;
 }
 
-.diet_btn {
+.diet_btn,
+.check_diet_btn {
   margin-left: 65%;
   margin-top: 1%;
 }
 
-.diet_btn button {
+.diet_btn button,
+.check_diet_btn button {
   font-weight: 900;
 }

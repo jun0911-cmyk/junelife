@@ -22,18 +22,42 @@
   <body>
     <div id="diet_input_content">
       <div class="diet_input" id="diet_input">
-        <div class="first">
-          <h1 id="title"></h1>
-          <error-component></error-component>
-          <div class="radio_input">
-            <div class="yes_radio">
-              <input type="radio" name="group" />
-              <label>네</label>
-            </div>
-            <div class="no_radio">
-              <input type="radio" name="group" />
-              <label>아니요</label>
-            </div>
+        <h1 id="title"></h1>
+        <error-component id="error"></error-component>
+        <div class="radio_input" id="radio_input">
+          <div class="yes_radio">
+            <input type="radio" name="group" id="yes" />
+            <label>네</label>
+          </div>
+          <div class="no_radio">
+            <input type="radio" name="group" id="no" />
+            <label>아니요</label>
+          </div>
+        </div>
+        <div class="reference_input" id="reference_input">
+          <div class="vm_radio">
+            <input type="radio" name="group" id="vm" />
+            <label>1KG 이상</label>
+          </div>
+          <div class="ma_radio">
+            <input type="radio" name="group" id="ma" />
+            <label>500G 이상</label>
+          </div>
+          <div class="mi_radio">
+            <input type="radio" name="group" id="mi" />
+            <label>300G 이상</label>
+          </div>
+          <div class="sm_radio">
+            <input type="radio" name="group" id="sm" />
+            <label>100G 이상</label>
+          </div>
+          <div class="vs_radio">
+            <input type="radio" name="group" id="vs" />
+            <label>100G 이하</label>
+          </div>
+          <div class="self_radio">
+            <input type="radio" name="group" id="self" />
+            <label>직접 입력</label>
           </div>
         </div>
       </div>
@@ -41,6 +65,12 @@
         <button type="button" class="btn btn-danger">취소</button>
         <button type="button" class="btn btn-primary" id="next_btn">
           다음
+        </button>
+      </div>
+      <div class="check_diet_btn" id="check_diet_btn">
+        <button type="button" class="btn btn-danger">취소</button>
+        <button type="button" class="btn btn-primary" id="success_btn">
+          완료
         </button>
       </div>
     </div>
