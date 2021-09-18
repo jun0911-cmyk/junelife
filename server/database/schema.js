@@ -21,15 +21,6 @@ const veganLevelSchema = new mongoose.Schema({
   diet: { type: String },
 });
 
-const RecipeSchema = new mongoose.Schema({
-  recipe_name: { type: String },
-  recipe_image: { type: String },
-  recipe_ingredient: { type: String },
-  recipe_step: { type: String },
-  crawling_url: { type: String },
-  crawling_content: { type: String },
-});
-
 const RestaurantSchema = new mongoose.Schema({
   restaurant_name: { type: String },
   restaurant_id: { type: Number },
@@ -42,5 +33,4 @@ const RestaurantSchema = new mongoose.Schema({
 module.exports.User = mongoose.model("user_db", UserSchema);
 module.exports.Token = mongoose.model("token_db", TokenSchema);
 module.exports.Level = mongoose.model("veganLevel_db", veganLevelSchema);
-module.exports.Recipe = mongoose.model("recipe_db", RecipeSchema);
 module.exports.Restaurant = mongoose.model("restaurant_db", RestaurantSchema);
