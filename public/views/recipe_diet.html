@@ -22,15 +22,20 @@
   <body>
     <div id="diet_input_content">
       <div class="diet_input" id="diet_input">
-        <h1 id="title">최근에 드셨던 요리명을 입력해주세요</h1>
-        <error-component></error-component>
-        <input
-          type="text"
-          class="diet"
-          id="recipe_name"
-          placeholder="띄어쓰기로 분류해주세요"
-          size="60"
-        />
+        <div class="first">
+          <h1 id="title"></h1>
+          <error-component></error-component>
+          <div class="radio_input">
+            <div class="yes_radio">
+              <input type="radio" name="group" />
+              <label>네</label>
+            </div>
+            <div class="no_radio">
+              <input type="radio" name="group" />
+              <label>아니요</label>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="diet_btn" id="diet_btn">
         <button type="button" class="btn btn-danger">취소</button>

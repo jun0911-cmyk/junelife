@@ -17,6 +17,27 @@
   outline: none;
 }
 
+.radio_input {
+  margin-top: 3%;
+  margin-left: 45%;
+  display: flex;
+}
+
+.radio_input .no_radio {
+  margin-left: 3%;
+}
+
+.diet_input .first input {
+  outline: none;
+  width: 30px;
+  height: 30px;
+}
+
+.diet_input .first label {
+  font-weight: 900;
+  font-size: 30px;
+}
+
 .diet_btn {
   margin-left: 65%;
   margin-top: 1%;
