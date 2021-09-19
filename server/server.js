@@ -7,6 +7,8 @@ const cookieParser = require("cookie-parser");
 const Router = require("./router/index/indexRouter");
 const port = process.env.PORT || 8000;
 const app = express();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
 
 // database connect
 require("./database/connect");
@@ -58,7 +60,7 @@ require("./account/login/login_server")(app, passport);
 require("./account/singup/singup_server")(app);
 
 // vegan Recipe Server
-require("./vegan/recipe/recipe_diet")(app);
+require("./vegan/recipe/recipe_socket")(io, server);
 
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
@@ -85,7 +87,7 @@ app.use(function (err, req, res, next) {
 });
 
 // PORT 8000
-app.listen(port, (err) => {
+server.listen(port, (err) => {
   if (err) {
     console.log(err);
   } else {

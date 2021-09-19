@@ -1,6 +1,4 @@
 // diet modules
-import { recipe_extraction } from "../../diet_module/recipe_extraction.js";
-import { settingStep } from "../../diet_module/diet_algorithm/recipe_step_algo.js";
 import {
   investigation_message,
   investigation_error,
@@ -15,8 +13,10 @@ $("#check_diet_btn").hide();
 // assignment variable
 let radio_change_status = false;
 let reference_change_status = 3;
+let user_id = null;
 
 // constant variable
+const socket = window.io();
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const next_btn = document.getElementById("next_btn");
@@ -41,21 +41,13 @@ const reference_data = (number) => {
   }
 };
 
-const call_postAjax = (user_id) => {
-  $.ajax({
-    type: "POST",
-    url: "/recipe/diet",
-    datatype: "json",
-    data: {
-      user_id: user_id,
-    },
-    success: function (result) {
-      let status = result.status;
-      let message = result.message;
-      if (status == true) {
-        location.href = `/recipe/graph/${accessUser}`;
-      }
-    },
+const check_vegan = (user_id) => {
+  socket.emit("check_veganStep", user_id);
+  // socket event
+  socket.on("check_veganStep", (status, rows) => {
+    if (status == true) {
+      location.href = `/recipe/graph/${accessUser}`;
+    }
   });
 };
 
@@ -101,7 +93,7 @@ next_btn.addEventListener("click", (e) => {
 
 success_btn.addEventListener("click", (e) => {
   const data = reference_data();
-  yes_recipe_step(data, settingStep);
+  yes_recipe_step(data, user_id, socket);
 });
 
 // ajax communication
@@ -119,8 +111,11 @@ $(function () {
       if (result.status == false) {
         location.href = "/user/login";
       } else if (result.status == true) {
-        call_postAjax(result.user_id);
-        investigation_message("육류");
+        user_id = result.user_id;
+        // call function
+        check_vegan(result.user_id);
+        investigation_message(result.user_id, socket);
+        // token repush
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
         }
