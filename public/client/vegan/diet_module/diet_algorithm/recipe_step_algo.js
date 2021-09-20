@@ -36,11 +36,12 @@ vegan_step_prototype.prototype.settingStep = (step_arr) => {
 };
 
 vegan_step_prototype.prototype.save = (vegan_step, g_data, user_id, socket) => {
-  try {
+  if (user_id != null) {
     socket.emit("save_step", vegan_step, g_data, user_id);
+    document.getElementById("title").innerText = `단계 저장중...`;
     return true;
-  } catch (e) {
-    return false;
+  } else {
+    return null;
   }
 };
 

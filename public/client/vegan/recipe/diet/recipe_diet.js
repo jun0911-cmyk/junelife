@@ -1,7 +1,6 @@
 // diet modules
 import {
   investigation_message,
-  investigation_error,
   yes_recipe_step,
   no_reicpe_step,
 } from "../../diet_module/recipe_investigation.js";

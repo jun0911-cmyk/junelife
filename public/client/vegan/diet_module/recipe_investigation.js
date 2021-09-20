@@ -76,8 +76,8 @@ const error_message = () => {
 };
 
 const referenceInput_message = (step_arr) => {
-  let reference_hide_status = elHide();
-  let reference_show_status = elShow();
+  const reference_hide_status = elHide();
+  const reference_show_status = elShow();
 
   if (reference_hide_status == true && reference_show_status == true) {
     document.getElementById(
@@ -129,17 +129,4 @@ export const no_reicpe_step = (bool) => {
     checkList.shift();
     investigation_message();
   }
-};
-
-export const investigation_error = () => {
-  // Error message template
-  Vue.component("error-component", {
-    template: `
-      <div style="color: red; font-size: 23px; margin-top: 3%">데이터를 입력받을 수 없습니다. 페이지의 오류가 발생하였습니다.</div>
-    `,
-  });
-  // render to error component template
-  new Vue({
-    el: "#error",
-  });
 };
