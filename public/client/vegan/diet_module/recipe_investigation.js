@@ -42,16 +42,27 @@ const result_message = () => {
   }
 };
 
-const success_message = (status) => {
+const success_message = (veganStep) => {
   document.getElementById(
     "title"
-  ).innerText = `단계 설정이 완료되었습니다. 현재 단계는 ${status}입니다 3초뒤 결과페이지로 이동합니다.`;
+  ).innerText = `단계 설정이 완료되었습니다. 현재 단계는 ${veganStep}입니다 3초뒤 결과페이지로 이동합니다.`;
+  // 3 secound after hyper link
   setTimeout(() => {
-    location.href = `/recipe/graph/${accessUser}`;
+    location.href = `/recipe/graph`;
   }, 3000);
 };
 
-export const error_message = () => {
+const failure_message = () => {
+  document.getElementById(
+    "title"
+  ).innerText = `단계 설정을 실패하였습니다. 다음에 다시 시도해주세요.`;
+  // 3 secound after hyper link
+  setTimeout(() => {
+    location.href = `/`;
+  }, 1000);
+};
+
+const error_message = () => {
   // Error message template
   Vue.component("error-component", {
     template: `
@@ -77,6 +88,20 @@ const referenceInput_message = (step_arr) => {
   }
 };
 
+const checkSocket = (veganStep, socket) => {
+  if (veganStep) {
+    socket.on("save_step", (status) => {
+      if (status == true) {
+        success_message(veganStep);
+      } else if (status == false) {
+        failure_message();
+      }
+    });
+  } else {
+    error_message();
+  }
+};
+
 export const investigation_message = (user_id, socket) => {
   // title setting to message
   const checkList = getVeganList();
@@ -91,16 +116,9 @@ export const investigation_message = (user_id, socket) => {
 
 export const yes_recipe_step = (g_data, user_id, socket) => {
   const checkList = checkVeganList();
-  const status = settingStep(checkList, g_data, user_id, socket);
+  const getStep = settingStep(checkList, g_data, user_id, socket);
   result_message();
-  // check status
-  if (status) {
-    success_message(status);
-  } else if (status == false) {
-    failure_message();
-  } else if (status == null) {
-    investigation_error();
-  }
+  checkSocket(getStep, socket);
 };
 
 export const no_reicpe_step = (bool) => {
@@ -109,7 +127,7 @@ export const no_reicpe_step = (bool) => {
     referenceInput_message(checkList);
   } else if (bool == false) {
     checkList.shift();
-    investigation_message(checkList[0]);
+    investigation_message();
   }
 };
 

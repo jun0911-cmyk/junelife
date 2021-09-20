@@ -36,39 +36,29 @@ vegan_step_prototype.prototype.settingStep = (step_arr) => {
 };
 
 vegan_step_prototype.prototype.save = (vegan_step, g_data, user_id, socket) => {
-  socket.emit("save_step", vegan_step, g_data, user_id);
-  // socket event
-  socket.on("save_step", (status, err) => {
-    if (status == true) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  try {
+    socket.emit("save_step", vegan_step, g_data, user_id);
+    return true;
+  } catch (e) {
+    return false;
+  }
 };
 
 export const settingStep = (step_arr, g_data, user_id, socket) => {
-  new Promise(async (resolve, reject) => {
-    const recipePrototype = await new vegan_step_prototype();
-    const getVeganStep = await recipePrototype.settingStep(step_arr);
-    const save_veganData = await recipePrototype.save(
-      getVeganStep,
-      g_data,
-      user_id,
-      socket
-    );
-    resolve(save_veganData);
-  })
-    .then((save_veganData) => {
-      if (save_veganData == true) {
-        return getVeganStep;
-      } else if (save_veganData == false) {
-        return false;
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const recipePrototype = new vegan_step_prototype();
+  const getVeganStep = recipePrototype.settingStep(step_arr);
+  const save_veganData = recipePrototype.save(
+    getVeganStep,
+    g_data,
+    user_id,
+    socket
+  );
+  // socket event call check
+  if (save_veganData == true) {
+    return getVeganStep;
+  } else if (save_veganData == false) {
+    return null;
+  }
 };
 
 export const getVeganList = () => {
