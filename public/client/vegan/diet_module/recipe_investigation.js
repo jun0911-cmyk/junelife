@@ -8,6 +8,7 @@ const elHide = () => {
     $("#error").hide();
     $("#radio_input").hide();
     $("#diet_btn").hide();
+    $("#self_input").hide();
     return true;
   } catch (e) {
     return false;

@@ -8,17 +8,20 @@ import {
 // hide show options
 $("#reference_input").hide();
 $("#check_diet_btn").hide();
+$("#self_input").hide();
 
 // assignment variable
 let radio_change_status = false;
-let reference_change_status = 3;
+let reference_change_status = 300;
 let user_id = null;
 
 // constant variable
 const socket = window.io();
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
+const input_val = document.getElementById("input_val");
 const next_btn = document.getElementById("next_btn");
+const clean_btn = document.getElementById("clean_btn");
 const success_btn = document.getElementById("check_diet_btn");
 const radio_event = document.getElementById("radio_input");
 const reference_input_event = document.getElementById("reference_input");
@@ -82,7 +85,14 @@ reference_input_event.addEventListener("change", (e) => {
       reference_data(100);
       break;
     case "self":
+      $("#self_input").show();
+      break;
   }
+});
+
+input_val.addEventListener("input", (e) => {
+  const getVal = $("#input_val").val();
+  document.getElementById("view_gData").innerText = `${getVal}G`;
 });
 
 next_btn.addEventListener("click", (e) => {
@@ -92,7 +102,16 @@ next_btn.addEventListener("click", (e) => {
 
 success_btn.addEventListener("click", (e) => {
   const data = reference_data();
-  yes_recipe_step(data, user_id, socket);
+  const selfG = $("#input_val").val();
+  if (selfG == 0) {
+    yes_recipe_step(data, user_id, socket);
+  } else {
+    yes_recipe_step(selfG, user_id, socket);
+  }
+});
+
+clean_btn.addEventListener("click", (e) => {
+  location.href = "/";
 });
 
 // ajax communication

@@ -62,14 +62,28 @@
           </div>
         </div>
       </div>
+      <div class="self_input" id="self_input">
+        <input
+          type="number"
+          class="input_val"
+          id="input_val"
+          placeholder="G 단위로 입력해주세요..."
+          size="50"
+        />
+        <p id="view_gData">0G</p>
+      </div>
       <div class="diet_btn" id="diet_btn">
-        <button type="button" class="btn btn-danger">취소</button>
+        <button type="button" class="btn btn-danger" id="clean_btn">
+          취소
+        </button>
         <button type="button" class="btn btn-primary" id="next_btn">
           다음
         </button>
       </div>
       <div class="check_diet_btn" id="check_diet_btn">
-        <button type="button" class="btn btn-danger">취소</button>
+        <button type="button" class="btn btn-danger" id="clean_btn">
+          취소
+        </button>
         <button type="button" class="btn btn-primary" id="success_btn">
           완료
         </button>

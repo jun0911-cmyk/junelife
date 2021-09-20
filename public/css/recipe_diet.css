@@ -50,6 +50,24 @@
   font-size: 30px;
 }
 
+.self_input {
+  margin-top: 1%;
+  text-align: center;
+}
+
+.self_input input {
+  outline: none;
+  height: 40px;
+  text-indent: 5px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.self_input p {
+  font-weight: bold;
+  font-size: 25px;
+}
+
 .diet_btn,
 .check_diet_btn {
   margin-left: 65%;

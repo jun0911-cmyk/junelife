@@ -14,16 +14,18 @@ $(function () {
     },
     datatype: "json",
     success: function (result) {
-      var err = result.err;
-      var status = result.status;
-      var accessToken = result.newAccessToken;
+      const socket = window.io();
+      const err = result.err;
+      const status = result.status;
+      const user_id = result.user_id;
+      const accessToken = result.newAccessToken;
       if (status == false || err) {
         location.href = "/user/login";
       } else if (status == true) {
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
         }
-
+        // set account component
         Vue.component("account-component", {
           template: `
                         <div class="dropdown">
@@ -39,17 +41,35 @@ $(function () {
                         </div>
                     `,
         });
-
-        Vue.component("vegan-component", {
-          template: `
+        // get VeganLevelDB
+        socket.emit("check_veganStep", user_id);
+        // set VeganData
+        socket.on("check_veganStep", (status, level_rows) => {
+          if (status == true) {
+            Vue.component("vegan-component", {
+              template: `
                         <div class="vegan_info">
-                          <span>포인트 : 10점 <i class="fas fa-circle"></i> 단계 : 락토베지테리언</span>
+                          <span>포인트 : ${level_rows.vegan_point}점 <i class="fas fa-circle"></i> 단계 : ${level_rows.vegan_level}</span>
                         </div>
                     `,
-        });
+            });
 
-        new Vue({
-          el: "#account",
+            new Vue({
+              el: "#account",
+            });
+          } else {
+            Vue.component("vegan-component", {
+              template: `
+                        <div class="vegan_info">
+                          <span>포인트 : 없음 <i class="fas fa-circle"></i> 단계 : 설정되지않음</span>
+                        </div>
+                    `,
+            });
+
+            new Vue({
+              el: "#account",
+            });
+          }
         });
       }
     },
