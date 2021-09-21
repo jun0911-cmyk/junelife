@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const requestIp = require("request-ip");
-const dietCheck = require("../middleware/vegan_diet/dietCheck");
 const checkToken = require("../middleware/oauth_token/checkTokens");
 const models = require("../database/connect");
 const router = express.Router();
@@ -19,7 +18,7 @@ router.use(function timeLog(req, res, next) {
 });
 
 // recipe router
-router.get("/", dietCheck, function (req, res, next) {
+router.get("/", checkToken, function (req, res, next) {
   res.sendFile(path.join(__dirname, "..", "..", "/public/views/recipe.html"));
 });
 

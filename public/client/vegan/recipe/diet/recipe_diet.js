@@ -3,7 +3,7 @@ import {
   investigation_message,
   yes_recipe_step,
   no_reicpe_step,
-} from "../../diet_module/recipe_investigation.js";
+} from "../recipe_module/diet_module/recipe_investigation.js";
 
 // hide show options
 $("#reference_input").hide();
@@ -48,7 +48,7 @@ const check_vegan = (user_id) => {
   // socket event
   socket.on("check_veganStep", (status, rows) => {
     if (status == true) {
-      location.href = `/recipe/graph/${accessUser}`;
+      location.href = `/recipe/graph`;
     }
   });
 };
@@ -97,7 +97,7 @@ input_val.addEventListener("input", (e) => {
 
 next_btn.addEventListener("click", (e) => {
   const status = radio_status();
-  no_reicpe_step(status);
+  no_reicpe_step(status, user_id, socket);
 });
 
 success_btn.addEventListener("click", (e) => {

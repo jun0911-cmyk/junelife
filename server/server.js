@@ -61,6 +61,7 @@ require("./account/singup/singup_server")(app);
 
 // vegan Recipe Server
 require("./vegan/recipe/recipe_socket")(io, server);
+require("./vegan/recipe/recipe_crawler/crawler_recommendation")(app);
 
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {

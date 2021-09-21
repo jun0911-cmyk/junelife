@@ -29,10 +29,10 @@
             <a class="collect" href="#">음식점 찾기</a>
           </div>
           <div class="title">
-            <a class="collect" href="#">식단 입력</a>
+            <a class="collect" href="#">비건통계 확인하기</a>
           </div>
           <div class="title">
-            <a class="collect" href="#">레시피 추천</a>
+            <a class="collect" href="/">메인페이지로</a>
           </div>
         </div>
         <div class="content">
@@ -47,35 +47,18 @@
             />
           </div>
         </div>
-        <div class="write_recipe">
-          <button class="write_button" id="write_button" onclick="write_button()">레시피 쓰기</button>
-        </div>
         <div class="account" id="account">
           <vegan-component></vegan-component>
           <account-component></account-component>
         </div>
       </div>
       <div class="select_recipe_page">
-          <a href="#"><i class="fas fa-thermometer-empty"></i>나만의 추천레시피</a>
-          <a href="#"><i class="fas fa-chart-line"></i></i>인기</a>
-          <a href="#"><i class="far fa-calendar-check"></i>오늘의 추천</a>
           <a href="#"><i class="far fa-clock"></i>최근</a>
-          <a href="#"><i class="far fa-user"></i>모든 레시피</a>
+          <a href="#"><i class="far fa-user"></i>모든 추천 레시피</a>
       </div>
-      <div class="category">
-        <p>레시피 카테고리</p>
-        <div class="price">
-          <span>가격대</span>
-        </div>
-        <div class="age">
-          <span>연령대</span>
-        </div>
-        <div class="diet">
-          <span>간편조리</span>
-        </div>
-        <div class="vegan">
-          <span>재료</span>
-        </div>
+      <div class="sub_chart" id="sub_chart">
+        <p>내 비건통계</p>
+        <vegan-information-component></vegan-information-component>
       </div>
       <div class="write_content">
             <div class="recipe_content">
@@ -98,7 +81,7 @@
             </div>
         </div>
       <div class="contention">
-        <script src="./vegan/recipe/recipe.js"></script>
+        <script src="./vegan/recipe/suggestion/recipe_suggestion.js" type="module"></script>
       </div>
       <footer class="footer bg-dark">
         <h6 style="color: white">JUNELIFE Project</h6>
