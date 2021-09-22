@@ -1,8 +1,9 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
+import { Reicpe_views } from "../recipe_module/suggestion_module/crawling_recipe.js";
 
+const socket = window.io();
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
-const socket = window.io();
 
 $(function () {
   $.ajax({
@@ -17,28 +18,17 @@ $(function () {
     success: function (result) {
       const status = result.status;
       const user_id = result.user_id;
-      // call function
-      checkStep(user_id, socket);
+      const accessToken = result.newAccessToken;
       // check vegan step
       if (status == false) {
         location.href = "/user/login";
-      } else {
-        // set account component
-        Vue.component("account-component", {
-          template: `
-                        <div class="dropdown">
-                            <a href="javascript:void(0)" class="singup">
-                                <i class="fas fa-user-circle" style="font-size: 27px; margin-top: 10px"></i>
-                            </a>
-                            <div class="dropdown-content">
-                                <a href="/student/check/class">내 비건정보</a>
-                                <a href="#">내 정보</a>
-                                <a href="#">정보 변경</a>
-                                <a href="/user/logout">로그아웃<i class="fas fa-sign-out-alt"></i></a>
-                            </div>
-                        </div>
-                    `,
-        });
+      } else if (status == true) {
+        if (accessToken) {
+          localStorage.setItem("accessToken", accessToken);
+        }
+        // call function setting component
+        checkStep(user_id, socket);
+        Reicpe_views();
       }
     },
     error: function (request, status, error) {

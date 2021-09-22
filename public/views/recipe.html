@@ -29,7 +29,7 @@
             <a class="collect" href="#">음식점 찾기</a>
           </div>
           <div class="title">
-            <a class="collect" href="#">비건통계 확인하기</a>
+            <a class="collect" href="/recipe/graph">비건통계 확인하기</a>
           </div>
           <div class="title">
             <a class="collect" href="/">메인페이지로</a>
@@ -52,36 +52,24 @@
           <account-component></account-component>
         </div>
       </div>
-      <div class="select_recipe_page">
+      <div id="content">
+        <div class="select_recipe_page">
           <a href="#"><i class="far fa-clock"></i>최근</a>
           <a href="#"><i class="far fa-user"></i>모든 추천 레시피</a>
-      </div>
-      <div class="sub_chart" id="sub_chart">
-        <p>내 비건통계</p>
-        <vegan-information-component></vegan-information-component>
-      </div>
-      <div class="write_content">
-            <div class="recipe_content">
-                <div class="image">
-                <img
-                    src="./test.png"
-                    width="300px"
-                    style="border-radius: 10px 10px 0 0"
-                />
-                </div>
-                <div class="info">
-                <h4 class="info_head">나만의 포트폴리오 제작기</h4>
-                <p class="info_sum">
-                    안녕하세요 테스트를 맡은 000이라고 합니다 앞으로 잘 부탁드리며
-                    저는 아직 실력이 많이 부족하니 여러분들이 저를 잘
-                    도와주세요!!!!
-                </p>
-                </div>
-            </div>
-            </div>
         </div>
-      <div class="contention">
-        <script src="./vegan/recipe/suggestion/recipe_suggestion.js" type="module"></script>
+        <div class="sub_chart" id="sub_chart">
+          <p>내 비건통계</p>
+          <vegan-information-component></vegan-information-component>
+        </div>
+        <div class="write_content" id="write_content">
+          <recipe-list></recipe-list>
+        </div>
+        <div class="contention">
+          <script
+            src="./vegan/recipe/suggestion/recipe_suggestion.js"
+            type="module"
+          ></script>
+        </div>
       </div>
       <footer class="footer bg-dark">
         <h6 style="color: white">JUNELIFE Project</h6>

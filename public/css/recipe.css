@@ -92,6 +92,10 @@
 }
 
 body {
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
   background-color: #f8f9fa;
 }
 
@@ -122,7 +126,7 @@ div {
 
 .vegan_info {
   position: absolute;
-  margin-left: -13.8%;
+  margin-left: -32.8%;
   margin-top: 0.6%;
   font-weight: 900;
   font-size: 15px;
@@ -260,15 +264,47 @@ div {
   margin-top: 1%;
 }
 
+.sub_chart a {
+  text-decoration: none;
+  color: black;
+}
+
+.sub_chart a:hover {
+  color: blue;
+}
+
+.sub_chart .content {
+  margin-top: -0.5%;
+  margin-left: -37%;
+}
+
+.sub_chart .sub_content {
+  position: absolute;
+  margin-left: 15%;
+  margin-top: -0.5%;
+}
+
+.vegan_information p {
+  position: absolute;
+  font-weight: bold;
+  font-size: 15px;
+  margin-top: 3.5%;
+  margin-left: 1%;
+}
+
 .sub_chart span {
-  font-weight: 900;
-  float: left;
-  margin-left: 3%;
+  font-weight: bold;
+  display: flex;
 }
 
 .recipe_content {
   margin-left: 1.6%;
   margin-top: 3%;
+}
+
+.recipe_content a {
+  text-decoration: none;
+  color: black;
 }
 
 .info {
@@ -277,7 +313,7 @@ div {
   padding-bottom: 3%;
   padding-left: 1%;
   padding-right: 1%;
-  width: 16.2%;
+  width: 16%;
   background-color: white;
 }
 

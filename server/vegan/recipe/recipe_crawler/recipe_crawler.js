@@ -22,13 +22,12 @@ crawler.prototype.getData = async (url) => {
 };
 
 crawler.prototype.crawling = (HTMLdata) => {
-  let recipeList = [];
-
+  const reicpeList = [];
   const $ = cheerio.load(HTMLdata.data);
   const $bodyList = $("ul.common_sp_list_ul").children("li.common_sp_list_li");
 
   $bodyList.each(function (i, elem) {
-    recipeList[i] = {
+    reicpeList[i] = {
       title: $(this)
         .find("div.common_sp_caption .common_sp_caption_tit")
         .text(),
@@ -41,7 +40,7 @@ crawler.prototype.crawling = (HTMLdata) => {
     };
   });
 
-  return recipeList.filter((n) => n.title);
+  return reicpeList.filter((n) => n.title);
 };
 
 crawler.prototype.log = () => {

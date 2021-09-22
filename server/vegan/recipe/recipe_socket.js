@@ -25,6 +25,7 @@ module.exports = (io, Server) => {
               vegan_level: vegan_step,
               vegan_point: 0,
               diet: g_data,
+              visite_recipe: 0,
             });
             try {
               setLevelRow.save();
