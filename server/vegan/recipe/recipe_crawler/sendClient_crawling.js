@@ -1,15 +1,14 @@
-const RecipeCrawler = require("./recipe_crawler");
+const crawlingManagement = require("./crawlingManagement");
 
 module.exports = (app) => {
   app.post("/recipe", async (req, res) => {
     const getUrl = req.body.url;
-    const urlData = await RecipeCrawler.getData(getUrl);
-    if (urlData) {
-      const crawlingData = RecipeCrawler.crawling(urlData);
-      if (crawlingData.length != 0) {
+    if (getUrl) {
+      const recipeData = await crawlingManagement(getUrl);
+      if (recipeData) {
         res
           .json({
-            recipeData: crawlingData,
+            recipeData: recipeData,
             status: true,
           })
           .status(200);

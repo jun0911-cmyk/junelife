@@ -1,11 +1,13 @@
 const urlList = () => {
-  return ["https://www.10000recipe.com/recipe/list.html"];
+  return [
+    "https://www.cj.co.kr/kr/k-food-life/cj-the-kitchen/recipe",
+    "https://haemukja.com/recipes?utf8=%E2%9C%93",
+    "https://www.10000recipe.com/recipe/list.html",
+  ];
 };
 
 const getReicpe = async () => {
-  for (let i = 0; i < urlList().length; i++) {
-    return await $.post("/recipe", { url: urlList()[i] });
-  }
+  return await $.post("/recipe", { url: urlList() });
 };
 
 const getError = () => {
@@ -16,40 +18,47 @@ export const Reicpe_views = () => {
   getReicpe().then((recipe_res) => {
     const status = recipe_res.status;
     const recipeList = recipe_res.recipeData;
+    const recipe10000 = recipeList.Recipe10000;
+    const haemukja = recipeList.Haemukja;
+    const cjTheKitChen = recipeList.CjTheKitChen;
+    const view_recipeArr = recipe10000.concat(haemukja, cjTheKitChen);
     // Get Reicpe Data
     if (status == true) {
-      Vue.component("recipe-list", {
-        template: `
-                <div class="recipe_content">
+      for (let i = 0; i < view_recipeArr.length; i++) {
+        $("#write_content").append(`
+        <div class="recipe_content">
                     <div class="image">
-                      <a href="https://www.10000recipe.com${recipeList[4].url}">
+                      <a href="https://${
+                        view_recipeArr[i].crawling + view_recipeArr[i].url
+                      }">
                         <img
-                            src="${recipeList[4].image_src}"
+                            src="${view_recipeArr[i].image_src}"
                             width="300px"
                             style="border-radius: 10px 10px 0 0"
                         />
                       </a>
                     </div>
                     <div class="info">
-                        <a href="https://www.10000recipe.com${recipeList[4].url}">
-                            <h4 class="info_head">${recipeList[4].title}</h4>
+                        <a href="https://${
+                          view_recipeArr[i].crawling + view_recipeArr[i].url
+                        }">
+                            <h4 class="info_head">${
+                              view_recipeArr[i].title
+                            }</h4>
                             <p class="info_sum">
-                                레시피 사이트 : https://www.10000recipe.com${recipeList[4].url}</br>
-                                ${recipeList[4].views}</br>
+                                레시피 사이트 : ${view_recipeArr[i].url}</br>
+                                ${view_recipeArr[i].views}</br>
                                 추천단계 : 락토오보베지테리언</br>
                                 포인트 : 30점</br>
                                 주요재료 : 고기</br>
+                                출처 : ${view_recipeArr[i].crawling}
                             </p>
                         </a>
                     </div>
                   </div>
                 </div>
-              `,
-      });
-      // Recipe Data setting
-      new Vue({
-        el: "#write_content",
-      });
+        `);
+      }
     } else {
       getError();
     }
