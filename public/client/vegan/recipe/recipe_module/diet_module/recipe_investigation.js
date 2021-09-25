@@ -89,32 +89,26 @@ const referenceInput_message = (step_arr) => {
   }
 };
 
-const checkSocket = (veganStep, socket) => {
+const checkSave = async (veganStep) => {
   if (veganStep) {
-    socket.on("save_step", (status) => {
-      if (status == true) {
-        success_message(veganStep);
-      } else if (status == false) {
-        failure_message();
-      }
-    });
-  } else {
-    error_message();
+    success_message(await veganStep);
+  } else if (veganStep == null) {
+    console.log(2);
   }
 };
 
-export const yes_recipe_step = (g_data, user_id, socket) => {
+export const yes_recipe_step = (g_data, user_id) => {
   const checkList = checkVeganList();
-  const getStep = settingStep(checkList, g_data, user_id, socket);
+  const getStep = settingStep(checkList, g_data, user_id);
   result_message();
-  checkSocket(getStep, socket);
+  checkSave(getStep);
 };
 
-export const investigation_message = (user_id, socket) => {
+export const investigation_message = (user_id) => {
   // title setting to message
   const checkList = getVeganList();
   if (checkList.length == 0) {
-    yes_recipe_step(300, user_id, socket);
+    yes_recipe_step(300, user_id);
   } else {
     document.getElementById(
       "title"
@@ -122,12 +116,12 @@ export const investigation_message = (user_id, socket) => {
   }
 };
 
-export const no_reicpe_step = (bool, user_id, socket) => {
+export const no_reicpe_step = (bool, user_id) => {
   const checkList = checkVeganList();
   if (bool == true) {
     referenceInput_message(checkList);
   } else if (bool == false) {
     checkList.shift();
-    investigation_message(user_id, socket);
+    investigation_message(user_id);
   }
 };

@@ -37,8 +37,14 @@ const setPageUrlData = async (url) => {
 };
 
 const pageCrawlingManagement = async (url) => {
-  const recipePageData = setPageUrlData(url);
-  return recipePageData;
+  const pageArr = [];
+  for (let i = 0; i < url.length; i++) {
+    const pageData = await setPageUrlData(url[i]);
+    pageArr.push(pageData);
+    if (pageArr.length == url.length) {
+      return pageArr;
+    }
+  }
 };
 
 const crawlingManagement = async (urlArray) => {

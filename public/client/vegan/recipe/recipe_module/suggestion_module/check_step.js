@@ -1,18 +1,17 @@
-export const checkStep = (user_id, socket) => {
-  socket.emit("check_veganStep", user_id);
-  socket.on("check_veganStep", (status, rows) => {
-    if (status == true) {
-      localStorage.setItem("veganData", rows.vegan_level);
-      Vue.component("vegan-component", {
-        template: `
+export const checkStep = async (user_id) => {
+  const step = await $.post("/recipe/step/check", { user_id: user_id });
+  if (step.status == true) {
+    localStorage.setItem("veganData", step.rows.vegan_level);
+    Vue.component("vegan-component", {
+      template: `
                         <div class="vegan_info">
-                          <span>포인트 : ${rows.vegan_point}점 <i class="fas fa-circle"></i> 단계 : ${rows.vegan_level}</span>
+                          <span>포인트 : ${step.rows.vegan_point}점 <i class="fas fa-circle"></i> 단계 : ${step.rows.vegan_level}</span>
                         </div>
                     `,
-      });
+    });
 
-      Vue.component("account-component", {
-        template: `
+    Vue.component("account-component", {
+      template: `
                         <div class="dropdown">
                             <a href="javascript:void(0)" class="singup">
                                 <i class="fas fa-user-circle" style="font-size: 27px; margin-top: 10px"></i>
@@ -25,19 +24,19 @@ export const checkStep = (user_id, socket) => {
                             </div>
                         </div>
                     `,
-      });
+    });
 
-      new Vue({
-        el: "#account",
-      });
+    new Vue({
+      el: "#account",
+    });
 
-      Vue.component("vegan-information-component", {
-        template: `
+    Vue.component("vegan-information-component", {
+      template: `
             <div class="vegan_information">
               <div class="content">
-                <span>나의 비건포인트 : ${rows.vegan_point}점</span>
-                <span>나의 비건레벨 : ${rows.vegan_level}</span>
-                <span>추천레시피 방문횟수 : ${rows.visite_recipe}회</span>
+                <span>나의 비건포인트 : ${step.rows.vegan_point}점</span>
+                <span>나의 비건레벨 : ${step.rows.vegan_level}</span>
+                <span>추천레시피 방문횟수 : ${step.rows.visite_recipe}회</span>
               </div>
               <div class="sub_content">
                 <span>레시피추천횟수 : 40회</span>
@@ -46,13 +45,12 @@ export const checkStep = (user_id, socket) => {
               <p>더 많은 통계를 보실려면 <a href="/recipe/graph">여기</a>를 클릭해주세요.</p>
             </div>
           `,
-      });
+    });
 
-      new Vue({
-        el: "#sub_chart",
-      });
-    } else {
-      location.href = "/recipe/diet";
-    }
-  });
+    new Vue({
+      el: "#sub_chart",
+    });
+  } else {
+    location.href = "/recipe/diet";
+  }
 };

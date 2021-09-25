@@ -29,6 +29,7 @@ PageCrawler.prototype.crawling10000RecipePage = (HTMLdata) => {
       title: $(this).find("div.view2_summary h3").text(),
       ingredients: re1ingredientsData,
       crawling: `${HTMLdata.request.socket.servername}`,
+      path: `${HTMLdata.request.path}`,
     };
   });
 
@@ -53,6 +54,7 @@ PageCrawler.prototype.crawlingHaemukjaPage = (HTMLdata) => {
       title: $(this).find("div.top h1 strong").text(),
       ingredients: HaeingredientsData,
       crawling: `${HTMLdata.request.socket.servername}`,
+      path: `${HTMLdata.request.path}`,
     };
   });
 
@@ -80,6 +82,7 @@ PageCrawler.prototype.crawlingCjTheKitchenPage = (HTMLdata) => {
         .replace(regax, ""),
       ingredients: CjingredientsData[0],
       crawling: `${HTMLdata.request.socket.servername}`,
+      path: `${HTMLdata.request.path}`,
     };
   });
 

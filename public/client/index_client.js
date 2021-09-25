@@ -14,7 +14,6 @@ $(function () {
     },
     datatype: "json",
     success: function (result) {
-      const socket = window.io();
       const err = result.err;
       const status = result.status;
       const user_id = result.user_id;
@@ -42,35 +41,41 @@ $(function () {
                     `,
         });
         // get VeganLevelDB
-        socket.emit("check_veganStep", user_id);
-        // set VeganData
-        socket.on("check_veganStep", (status, level_rows) => {
-          if (status == true) {
-            Vue.component("vegan-component", {
-              template: `
+        const checkStep = $.post("/recipe/step/check", {
+          user_id: user_id,
+        });
+
+        checkStep
+          .then((data) => {
+            if (data.status == true) {
+              Vue.component("vegan-component", {
+                template: `
                         <div class="vegan_info">
-                          <span>포인트 : ${level_rows.vegan_point}점 <i class="fas fa-circle"></i> 단계 : ${level_rows.vegan_level}</span>
+                          <span>포인트 : ${data.rows.vegan_point}점 <i class="fas fa-circle"></i> 단계 : ${data.rows.vegan_level}</span>
                         </div>
                     `,
-            });
+              });
 
-            new Vue({
-              el: "#account",
-            });
-          } else {
-            Vue.component("vegan-component", {
-              template: `
+              new Vue({
+                el: "#account",
+              });
+            } else {
+              Vue.component("vegan-component", {
+                template: `
                         <div class="vegan_info">
                           <span>포인트 : 없음 <i class="fas fa-circle"></i> 단계 : 설정되지않음</span>
                         </div>
                     `,
-            });
+              });
 
-            new Vue({
-              el: "#account",
-            });
-          }
-        });
+              new Vue({
+                el: "#account",
+              });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     error: function (request, status, error) {

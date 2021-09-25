@@ -60,7 +60,8 @@ require("./account/login/login_server")(app, passport);
 require("./account/singup/singup_server")(app);
 
 // vegan Recipe Server
-require("./vegan/recipe/recipe_socket")(io, server);
+require("./vegan/recipe/recipe_step/check_step")(app);
+require("./vegan/recipe/recipe_step/save_step")(app);
 require("./vegan/recipe/recipe_crawler/sendClient_crawling")(app);
 
 // 404 (Not found), 500 (ISE) Error handling

@@ -1,7 +1,6 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
 import { Reicpe_views } from "../recipe_module/suggestion_module/crawling_recipe.js";
 
-const socket = window.io();
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 
@@ -27,7 +26,7 @@ $(function () {
           localStorage.setItem("accessToken", accessToken);
         }
         // call function setting component
-        checkStep(user_id, socket);
+        checkStep(user_id);
         Reicpe_views();
       }
     },

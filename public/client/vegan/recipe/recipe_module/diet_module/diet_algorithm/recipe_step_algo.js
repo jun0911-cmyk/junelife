@@ -9,11 +9,17 @@ class recipe_list {
       "플렉시테리언",
     ];
     this.recipeIngredient_object = {
-      flexitarian: ["육류", "가금류", "생선", "우유", "계란"],
-      semivegetarian: ["가금류", "생선", "우유", "계란"],
-      pescovegetarian: ["생선", "우유", "계란"],
-      lactoovovegetarian: ["우유", "계란"],
-      lactovegetarian: ["계란"],
+      flexitarian: [
+        "육류",
+        "가금류(닭고기, 오리고기,등)",
+        "생선(해산물)",
+        "우유(가공식품류)",
+        "계란(유제품)",
+      ],
+      semivegetarian: ["가금류(닭고기, 오리고기,등)", "생선", "우유", "계란"],
+      pescovegetarian: ["생선(해산물)", "우유", "계란"],
+      lactoovovegetarian: ["우유(가공식품류)", "계란"],
+      lactovegetarian: ["계란(유제품)"],
     };
   }
   getReicpeList() {
@@ -35,24 +41,27 @@ vegan_step_prototype.prototype.settingStep = (step_arr) => {
   return get_veganStep;
 };
 
-vegan_step_prototype.prototype.save = (vegan_step, g_data, user_id, socket) => {
+vegan_step_prototype.prototype.save = async (vegan_step, g_data, user_id) => {
   if (user_id != null) {
-    socket.emit("save_step", vegan_step, g_data, user_id);
     document.getElementById("title").innerText = `단계 저장중...`;
-    return true;
+    const save = await $.post("/recipe/step/save", {
+      user_id: user_id,
+      vegan_step: vegan_step,
+      g_data: g_data,
+    });
+    return save.status;
   } else {
     return null;
   }
 };
 
-export const settingStep = (step_arr, g_data, user_id, socket) => {
+export const settingStep = async (step_arr, g_data, user_id) => {
   const recipePrototype = new vegan_step_prototype();
   const getVeganStep = recipePrototype.settingStep(step_arr);
-  const save_veganData = recipePrototype.save(
+  const save_veganData = await recipePrototype.save(
     getVeganStep,
     g_data,
-    user_id,
-    socket
+    user_id
   );
   // socket event call check
   if (save_veganData == true) {

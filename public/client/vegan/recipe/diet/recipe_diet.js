@@ -16,7 +16,6 @@ let reference_change_status = 300;
 let user_id = null;
 
 // constant variable
-const socket = window.io();
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const input_val = document.getElementById("input_val");
@@ -43,14 +42,13 @@ const reference_data = (number) => {
   }
 };
 
-const check_vegan = (user_id) => {
-  socket.emit("check_veganStep", user_id);
-  // socket event
-  socket.on("check_veganStep", (status, rows) => {
-    if (status == true) {
-      location.href = `/recipe/graph`;
-    }
+const check_vegan = async (user_id) => {
+  const checkStep = await $.post("/recipe/step/check", {
+    user_id: user_id,
   });
+  if (checkStep.status == true) {
+    location.href = `/recipe/graph`;
+  }
 };
 
 // setting event
@@ -97,16 +95,16 @@ input_val.addEventListener("input", (e) => {
 
 next_btn.addEventListener("click", (e) => {
   const status = radio_status();
-  no_reicpe_step(status, user_id, socket);
+  no_reicpe_step(status, user_id);
 });
 
 success_btn.addEventListener("click", (e) => {
   const data = reference_data();
   const selfG = $("#input_val").val();
   if (selfG == 0) {
-    yes_recipe_step(data, user_id, socket);
+    yes_recipe_step(data, user_id);
   } else {
-    yes_recipe_step(selfG, user_id, socket);
+    yes_recipe_step(selfG, user_id);
   }
 });
 
@@ -132,7 +130,7 @@ $(function () {
         user_id = result.user_id;
         // call function
         check_vegan(result.user_id);
-        investigation_message(result.user_id, socket);
+        investigation_message(result.user_id);
         // token repush
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);

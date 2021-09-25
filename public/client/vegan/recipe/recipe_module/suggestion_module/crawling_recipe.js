@@ -1,4 +1,5 @@
 import { getReicpePage } from "./recipe_parse/crawling_page.js";
+import { getIngredents } from "./recipe_parse/parse_page.js";
 
 const urlList = () => {
   return [
@@ -9,7 +10,7 @@ const urlList = () => {
 };
 
 const getReicpe = async () => {
-  return await $.post("/recipe", { url: urlList() });
+  return await $.post("/recipe/crawling/list", { url: urlList() });
 };
 
 const getError = () => {
@@ -18,7 +19,7 @@ const getError = () => {
 
 const appendRecipeCom = (view_recipeArr, i) => {
   $("#write_content").append(`
-    <div class="recipe_content">
+    <div class="recipe_content" id="${view_recipeArr[i].url}">
         <div class="image">
           <a href="https://${
             view_recipeArr[i].crawling + view_recipeArr[i].url
@@ -50,6 +51,14 @@ const appendRecipeCom = (view_recipeArr, i) => {
   `);
 };
 
+const requestPage = async (url, saveArr) => {
+  saveArr.push(url);
+  if (saveArr.length >= 60) {
+    const getPage = await getReicpePage(saveArr);
+    getIngredents(getPage);
+  }
+};
+
 export const Reicpe_views = () => {
   getReicpe().then((recipe_res) => {
     const status = recipe_res.status;
@@ -57,12 +66,16 @@ export const Reicpe_views = () => {
     const recipe10000 = recipeList.Recipe10000;
     const haemukja = recipeList.Haemukja;
     const cjTheKitChen = recipeList.CjTheKitChen;
+    const requestPageUrl = [];
     const view_recipeArr = recipe10000.concat(haemukja, cjTheKitChen);
     // Get Reicpe Data
     if (status == true) {
       for (let i = 0; i < view_recipeArr.length; i++) {
-        getReicpePage(view_recipeArr[i].crawling + view_recipeArr[i].url);
         appendRecipeCom(view_recipeArr, i);
+        requestPage(
+          `https://${view_recipeArr[i].crawling + view_recipeArr[i].url}`,
+          requestPageUrl
+        );
       }
     } else {
       getError();
