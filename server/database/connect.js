@@ -27,5 +27,7 @@ function closedb() {
 module.exports.User = models.User;
 module.exports.Token = models.Token;
 module.exports.Level = models.Level;
+module.exports.RecipeList = models.RecipeList;
+module.exports.RecipePage = models.ReicpePage;
 module.exports.Restaurant = models.Restaurant;
 module.exports.close = closedb;

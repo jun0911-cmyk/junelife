@@ -39,7 +39,7 @@ export const checkStep = async (user_id) => {
                 <span>추천레시피 방문횟수 : ${step.rows.visite_recipe}회</span>
               </div>
               <div class="sub_content">
-                <span>레시피추천횟수 : 40회</span>
+                <span id="cnt_recipe">레시피추천횟수 : 불러오는중</span>
                 <span>내 온도 : 표시불가</span>
               </div>
               <p>더 많은 통계를 보실려면 <a href="/recipe/graph">여기</a>를 클릭해주세요.</p>

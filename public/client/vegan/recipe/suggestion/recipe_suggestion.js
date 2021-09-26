@@ -1,5 +1,5 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
-import { Reicpe_views } from "../recipe_module/suggestion_module/crawling_recipe.js";
+import { Reicpe_views } from "../recipe_module/suggestion_module/get_recipe.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");

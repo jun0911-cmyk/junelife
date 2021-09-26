@@ -22,6 +22,16 @@ const veganLevelSchema = new mongoose.Schema({
   visite_recipe: { type: Number },
 });
 
+const recipeListSchema = new mongoose.Schema({
+  recipe_url: { type: String },
+  content: { type: String },
+});
+
+const recipePageSchema = new mongoose.Schema({
+  page_url: { type: String },
+  content: { type: String },
+});
+
 const RestaurantSchema = new mongoose.Schema({
   restaurant_name: { type: String },
   restaurant_id: { type: Number },
@@ -34,4 +44,6 @@ const RestaurantSchema = new mongoose.Schema({
 module.exports.User = mongoose.model("user_db", UserSchema);
 module.exports.Token = mongoose.model("token_db", TokenSchema);
 module.exports.Level = mongoose.model("veganLevel_db", veganLevelSchema);
+module.exports.RecipeList = mongoose.model("reicpeList_db", recipeListSchema);
+module.exports.ReicpePage = mongoose.model("recipePage_db", recipePageSchema);
 module.exports.Restaurant = mongoose.model("restaurant_db", RestaurantSchema);
