@@ -1,7 +1,6 @@
-import { getReicpePage } from "./recipe_parse/get_recipePage.js";
+import getReicpePage from "./recipe_parse/parse_recipePage.js";
 
 const getReicpe = async () => {
-  getReicpePage();
   return await $.post("/recipe/crawling/list");
 };
 
@@ -11,7 +10,7 @@ const getError = () => {
 
 const appendRecipeCom = (view_recipeArr) => {
   $("#write_content").append(`
-    <div class="recipe_content" id="${view_recipeArr.url}">
+    <div class="recipe_content">
         <div class="image">
           <a href="https://${view_recipeArr.crawling + view_recipeArr.url}">
             <img
@@ -27,9 +26,9 @@ const appendRecipeCom = (view_recipeArr) => {
             <p class="info_sum">
               레시피 사이트 : ${view_recipeArr.url}</br>
               ${view_recipeArr.views}</br>
-              추천단계 : 락토오보베지테리언</br>
-              포인트 : 30점</br>
-              주요재료 : 고기</br>
+              <span id="${view_recipeArr.url}">추천단계 : 확인하는중</span></br>
+              포인트 : 확인하는중</br>
+              주요재료 : 확인하는중</br>
               출처 : ${view_recipeArr.crawling}
             </p>
           </a>
@@ -49,6 +48,7 @@ export const Reicpe_views = () => {
       document.getElementById(
         "cnt_recipe"
       ).innerText = `레시피추천횟수 : ${rows.length}회`;
+      getReicpePage();
       // append component
       for (let i = 0; i < rows.length; i++) {
         appendRecipeCom(JSON.parse(rows[i].content));
