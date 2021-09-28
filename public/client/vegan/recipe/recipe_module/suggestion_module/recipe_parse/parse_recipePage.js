@@ -4,6 +4,7 @@ const keywordSetArray = ["meat", "poultry", "fish", "milk", "egg"];
 const pageArray = [];
 const checkStringArray = [];
 const recipeObjectArray = [];
+const StepArray = [];
 const stepObject = {
   meat: "플렉시테리언",
   poultry: "세미베지테리언",
@@ -19,9 +20,13 @@ const getError = () => {
 const checkStep = (recipe_object) => {
   for (let i = 0; i < recipe_object.length; i++) {
     const getStep = stepObject[recipe_object[i].keyword];
-    document.getElementById(
-      `${recipe_object[i].recipe.path}`
-    ).innerText = `추천단계 : ${getStep}`;
+    StepArray.push({
+      recipe_id: recipe_object[i].recipe.path,
+      step: getStep,
+    });
+    if (StepArray.length >= recipe_object.length) {
+      return StepArray;
+    }
   }
 };
 
@@ -67,6 +72,7 @@ const getReicpePage = async () => {
     const recipePage = await $.post("/recipe/crawling/page");
     if (recipePage.status == true) {
       getIngredients(recipePage.data);
+      return StepArray;
     } else {
       getError();
     }

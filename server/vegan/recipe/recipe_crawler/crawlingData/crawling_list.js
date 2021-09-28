@@ -4,9 +4,8 @@ const Crawler = require("../crawling_manager/crawlingManagement");
 
 const getUrlList = () => {
   return [
-    "https://www.cj.co.kr/kr/k-food-life/cj-the-kitchen/recipe",
-    "https://haemukja.com/recipes?utf8=%E2%9C%93",
-    "https://www.10000recipe.com/recipe/list.html",
+    "https://haemukja.com/recipes?utf8=%E2%9C%93?page=2",
+    "https://www.10000recipe.com/recipe/list.html?order=reco&page=2",
   ];
 };
 

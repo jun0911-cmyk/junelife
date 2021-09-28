@@ -27,7 +27,7 @@ $(function () {
         }
         // call function setting component
         checkStep(user_id);
-        Reicpe_views();
+        Reicpe_views(user_id);
       }
     },
     error: function (request, status, error) {
