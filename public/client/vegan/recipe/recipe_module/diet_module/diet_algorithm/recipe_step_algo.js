@@ -1,43 +1,30 @@
-class RecipeList {
-  constructor() {
-    this.veganStep_list = [
-      "비건",
-      "락토베지테리언",
-      "락토오보베지테리언",
-      "페스코베지테리언",
-      "세미베지테리언",
-      "플렉시테리언",
-    ];
-    this.recipeIngredient_object = {
-      flexitarian: [
-        "육류",
-        "가금류(닭고기, 오리고기,등)",
-        "생선(해산물)",
-        "우유(가공식품류)",
-        "계란(유제품)",
-      ],
-      semivegetarian: ["가금류(닭고기, 오리고기,등)", "생선", "우유", "계란"],
-      pescovegetarian: ["생선(해산물)", "우유", "계란"],
-      lactoovovegetarian: ["우유(가공식품류)", "계란"],
-      lactovegetarian: ["계란(유제품)"],
-    };
-  }
-  getReicpeList() {
-    let recipe_object = {
-      veganStep: this.veganStep_list,
-      recipeIngredient: this.recipeIngredient_object,
-    };
-    return recipe_object;
-  }
-}
+const veganStep = [
+  "비건",
+  "락토베지테리언",
+  "락토오보베지테리언",
+  "페스코베지테리언",
+  "세미베지테리언",
+  "플렉시테리언",
+];
 
-const recipeList = new RecipeList();
+const recipeIngredient = {
+  flexitarian: [
+    "육류",
+    "가금류(닭고기, 오리고기,등)",
+    "생선(해산물)",
+    "우유(가공식품류)",
+    "계란(유제품)",
+  ],
+  semivegetarian: ["가금류(닭고기, 오리고기,등)", "생선", "우유", "계란"],
+  pescovegetarian: ["생선(해산물)", "우유", "계란"],
+  lactoovovegetarian: ["우유(가공식품류)", "계란"],
+  lactovegetarian: ["계란(유제품)"],
+};
 
 function vegan_step_prototype() {}
 
 vegan_step_prototype.prototype.settingStep = (step_arr) => {
-  const recipe_object = recipeList.getReicpeList();
-  const get_veganStep = recipe_object.veganStep[step_arr.length];
+  const get_veganStep = veganStep[step_arr.length];
   return get_veganStep;
 };
 
@@ -72,6 +59,5 @@ export const settingStep = async (step_arr, g_data, user_id) => {
 };
 
 export const getVeganList = () => {
-  const getList = recipeList.getReicpeList();
-  return getList.recipeIngredient["flexitarian"];
+  return recipeIngredient["flexitarian"];
 };

@@ -22,6 +22,7 @@ const checkStep = (recipe_object) => {
     const getStep = stepObject[recipe_object[i].keyword];
     StepArray.push({
       recipe_id: recipe_object[i].recipe.path,
+      keywords: recipe_object[i].keyword,
       step: getStep,
     });
     if (StepArray.length >= recipe_object.length) {
