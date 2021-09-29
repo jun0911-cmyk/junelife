@@ -1,4 +1,4 @@
-class recipe_list {
+class RecipeList {
   constructor() {
     this.veganStep_list = [
       "비건",
@@ -31,7 +31,7 @@ class recipe_list {
   }
 }
 
-const recipeList = new recipe_list();
+const recipeList = new RecipeList();
 
 function vegan_step_prototype() {}
 
