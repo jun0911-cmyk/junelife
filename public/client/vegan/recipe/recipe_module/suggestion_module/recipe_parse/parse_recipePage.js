@@ -31,20 +31,25 @@ const checkStep = (recipe_object) => {
   }
 };
 
-const checkString = (ingredients, recipe) => {
-  for (let j = 0; j < keywordSetArray.length; j++) {
-    for (let k = 0; k < keywords[keywordSetArray[j]].length; k++) {
-      const getData = ingredients.indexOf(keywords[keywordSetArray[j]][k]);
-      const findCheckString = checkStringArray.find((el) => el == recipe.title);
-      if (getData != -1 && !findCheckString) {
-        checkStringArray.push(recipe.title);
-        recipeObjectArray.push({
-          recipe: recipe,
-          keyword: keywordSetArray[j],
-        });
-        if (recipeObjectArray.length >= 58) {
-          checkStep(recipeObjectArray);
-        }
+const checkIngredients = (checkKeyword, recipe, ingredients) => {
+  if (keywords[keywordSetArray[checkKeyword]] != undefined) {
+    for (let h = 0; h < keywords[keywordSetArray[checkKeyword]].length; h++) {
+      const getData = ingredients.indexOf(
+        keywords[keywordSetArray[checkKeyword]][h]
+      );
+      if (getData != -1) {
+        let status = true;
+        let getStep = keywordSetArray[checkKeyword];
+        return {
+          status,
+          recipe,
+          getStep,
+        };
+      } else if (
+        h + 1 >= keywords[keywordSetArray[checkKeyword]].length &&
+        getData == -1
+      ) {
+        checkIngredients(checkKeyword + 1, recipe, ingredients);
       }
     }
   }
@@ -53,7 +58,13 @@ const checkString = (ingredients, recipe) => {
 const getIngredientsList = (data) => {
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data[i].ingredients.length; j++) {
-      checkString(data[i].ingredients[j], data[i]);
+      const result = checkIngredients(0, data[i], data[i].ingredients[j]);
+      if (result) {
+        if (result.status == true) {
+          console.log(result.recipe, result.getStep);
+          break;
+        }
+      }
     }
   }
 };
