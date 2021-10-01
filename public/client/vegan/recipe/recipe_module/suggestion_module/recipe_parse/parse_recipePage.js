@@ -2,8 +2,7 @@ import keywords from "./keyword/keywords.js";
 
 const keywordSetArray = ["meat", "poultry", "fish", "milk", "egg"];
 const pageArray = [];
-const checkStringArray = [];
-const recipeObjectArray = [];
+const keywordsArray = [];
 const StepArray = [];
 const stepObject = {
   meat: "플렉시테리언",
@@ -31,26 +30,12 @@ const checkStep = (recipe_object) => {
   }
 };
 
-const checkIngredients = (checkKeyword, recipe, ingredients) => {
-  if (keywords[keywordSetArray[checkKeyword]] != undefined) {
-    for (let h = 0; h < keywords[keywordSetArray[checkKeyword]].length; h++) {
-      const getData = ingredients.indexOf(
-        keywords[keywordSetArray[checkKeyword]][h]
-      );
-      if (getData != -1) {
-        let status = true;
-        let getStep = keywordSetArray[checkKeyword];
-        return {
-          status,
-          recipe,
-          getStep,
-        };
-      } else if (
-        h + 1 >= keywords[keywordSetArray[checkKeyword]].length &&
-        getData == -1
-      ) {
-        checkIngredients(checkKeyword + 1, recipe, ingredients);
-      }
+const getKeywordData = () => {
+  const getKeys = Object.keys(keywords);
+  for (let i = 0; i < getKeys.length; i++) {
+    for (let j = 0; j < keywords[getKeys[i]].length; j++) {
+      keywordsArray[getKeys[i]] = keywords[getKeys[i]][j];
+      console.log(keywordsArray);
     }
   }
 };
@@ -58,13 +43,7 @@ const checkIngredients = (checkKeyword, recipe, ingredients) => {
 const getIngredientsList = (data) => {
   for (let i = 0; i < data.length; i++) {
     for (let j = 0; j < data[i].ingredients.length; j++) {
-      const result = checkIngredients(0, data[i], data[i].ingredients[j]);
-      if (result) {
-        if (result.status == true) {
-          console.log(result.recipe, result.getStep);
-          break;
-        }
-      }
+      const keywordData = getKeywordData();
     }
   }
 };
