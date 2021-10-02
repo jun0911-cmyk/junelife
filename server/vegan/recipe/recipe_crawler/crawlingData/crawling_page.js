@@ -1,5 +1,6 @@
 const models = require("../../../../database/connect");
 const Crawler = require("../crawling_manager/crawlingManagement");
+const SettingStep = require("../../recipe_parse/parse_recipePage");
 const pageUrl = [];
 
 const saveRecipePage = (recipe) => {
@@ -17,8 +18,8 @@ const saveRecipePage = (recipe) => {
           } catch (e) {
             throw Error("fail save reicpe Error");
           }
-        } else if (!rows) {
-          console.log("recipe data save Error");
+        } else if (rows) {
+          SettingStep(rows);
         }
       })
       .catch((err) => {

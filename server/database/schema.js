@@ -24,6 +24,9 @@ const veganLevelSchema = new mongoose.Schema({
 
 const recipeListSchema = new mongoose.Schema({
   recipe_url: { type: String },
+  step: { type: String },
+  rank: { type: Number },
+  favorite_people: { type: Number },
   content: { type: String },
 });
 

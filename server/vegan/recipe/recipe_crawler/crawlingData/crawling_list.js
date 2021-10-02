@@ -4,8 +4,9 @@ const Crawler = require("../crawling_manager/crawlingManagement");
 
 const getUrlList = () => {
   return [
-    "https://haemukja.com/recipes?utf8=%E2%9C%93?page=2",
-    "https://www.10000recipe.com/recipe/list.html?order=reco&page=2",
+    "https://www.cj.co.kr/kr/k-food-life/cj-the-kitchen/recipe",
+    "https://haemukja.com/recipes",
+    "https://www.10000recipe.com/recipe/list.html",
   ];
 };
 
@@ -20,13 +21,17 @@ const saveRecipe = (recipe) => {
             recipePage(`https://${data.crawling + data.url}`);
             new models.RecipeList({
               recipe_url: data.url,
+              step: "",
+              rank: 0,
+              main_ingredients: "",
+              favorite_people: 0,
               content: JSON.stringify(data),
             }).save();
           } catch (e) {
             throw Error("fail save reicpe Error");
           }
-        } else if (!rows) {
-          console.log("recipe data save Error");
+        } else if (rows) {
+          recipePage(`https://${data.crawling + data.url}`);
         }
       })
       .catch((err) => {

@@ -1,5 +1,3 @@
-import getReicpePage from "../recipe_parse/parse_recipePage.js";
-
 const ParseRecipe = [];
 const recipeStepArray = [];
 const veganStep_list = [
@@ -12,11 +10,11 @@ const veganStep_list = [
 ];
 
 const ingredientsParse = {
-  meat: "육류",
-  poultry: "가금류",
-  fish: "해산물류",
-  milk: "가공식품류",
-  egg: "유제품류",
+  0: "육류",
+  1: "가금류",
+  2: "해산물류",
+  3: "가공식품류",
+  4: "유제품류",
 };
 
 const settingStep = (veganData) => {
@@ -49,8 +47,8 @@ const appendRecipeCom = (view_recipeArr) => {
           <a href="https://${view_recipeArr.crawling + view_recipeArr.url}">
             <h4 class="info_head">${view_recipeArr.title}</h4>
             <p class="info_sum">
-              레시피 사이트 : ${view_recipeArr.url}</br>
-              ${view_recipeArr.views}</br>
+              <span>레시피 사이트 : ${view_recipeArr.url}</span></br>
+              <span>${view_recipeArr.views}</span></br>
               <span id="${
                 view_recipeArr.url
               }#step">추천단계 : 확인하는중</span></br>
@@ -59,8 +57,8 @@ const appendRecipeCom = (view_recipeArr) => {
               }#point">포인트 : 확인하는중</span></br>
               <span id="${
                 view_recipeArr.url
-              }#ingredients">주요재료 : 확인하는중</span></br>
-              출처 : ${view_recipeArr.crawling}
+              }#ingredients">분류 : 확인하는중</span></br>
+              <span>출처 : ${view_recipeArr.crawling}</span>
             </p>
           </a>
         </div>
@@ -73,22 +71,24 @@ const recipeViewData = (recipeStep, mystep, upStep) => {
   if (recipeStep.step == mystep) {
     // setting point
     document.getElementById(
-      `${recipeStep.recipe_id}#point`
+      `${recipeStep.recipe_url}#point`
     ).innerText = `포인트: 5점`;
   } else if (recipeStep.step == upStep) {
     // setting point
     document.getElementById(
-      `${recipeStep.recipe_id}#point`
+      `${recipeStep.recipe_url}#point`
     ).innerText = `포인트: 15점`;
   }
   // suggestion step
   document.getElementById(
-    `${recipeStep.recipe_id}#step`
+    `${recipeStep.recipe_url}#step`
   ).innerText = `추천단계 : ${recipeStep.step}`;
   // importent ingredients
   document.getElementById(
-    `${recipeStep.recipe_id}#ingredients`
-  ).innerText = `주요재료 : ${ingredientsParse[recipeStep.keywords]}`;
+    `${recipeStep.recipe_url}#ingredients`
+  ).innerText = `분류 : ${
+    ingredientsParse[veganStep_list.indexOf(recipeStep.step)]
+  }`;
 };
 
 const settingCom = (recipeStep, mystep, upStep) => {
@@ -102,14 +102,13 @@ const settingCom = (recipeStep, mystep, upStep) => {
 };
 
 const getRecipe = async (recipe_list, mystep, upStep) => {
-  const getStep = await getReicpePage();
-  for (let i = 0; i < getStep.length; i++) {
-    if (getStep[i].step == mystep || getStep[i].step == upStep) {
-      const findStepRecipe = recipe_list.find(
-        (el) => el.url == getStep[i].recipe_id
-      );
-      appendRecipeCom(findStepRecipe);
-      settingCom(getStep[i], mystep, upStep);
+  for (let i = 0; i < recipe_list.length; i++) {
+    if (
+      recipe_list[i].data.step == mystep ||
+      recipe_list[i].data.step == upStep
+    ) {
+      appendRecipeCom(recipe_list[i].recipe);
+      settingCom(recipe_list[i].data, mystep, upStep);
     }
   }
 };
@@ -120,7 +119,10 @@ const getVeganStep = async (user_id, recipeList) => {
     const setStep = settingStep(veganData.rows);
     if (setStep) {
       for (let i = 0; i < recipeList.length; i++) {
-        ParseRecipe.push(JSON.parse(recipeList[i].content));
+        ParseRecipe.push({
+          recipe: JSON.parse(recipeList[i].content),
+          data: recipeList[i],
+        });
         if (ParseRecipe.length >= recipeList.length) {
           getRecipe(ParseRecipe, setStep.mystep, setStep.upStep);
         }
