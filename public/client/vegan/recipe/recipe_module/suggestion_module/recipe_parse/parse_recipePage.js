@@ -3,6 +3,7 @@ import keywords from "./keyword/keywords.js";
 const pageArray = [];
 const keywordsArray = [];
 const StepArray = [];
+const ingArray = [];
 const stepObject = {
   meat: "플렉시테리언",
   poultry: "세미베지테리언",
@@ -12,7 +13,6 @@ const stepObject = {
 };
 
 let arrayCnt = 0;
-let checkCnt = 0;
 
 const getError = () => {
   alert("데이터를 가져오는중 에러가 발생하였습니다.");
@@ -32,16 +32,18 @@ const checkStep = (recipe_object) => {
   }
 };
 
-const getKeywordData = () => {
+const getKeywordData = (data) => {
   for (let key in keywords) {
     for (let i = 0; i < keywords[key].length; i++) {
-      if (arrayCnt <= 182) {
-        keywordsArray[arrayCnt++] = { key: key, value: keywords[key][i] };
-      } else {
-        return {
-          status: true,
-          array: keywordsArray,
-        };
+      for (let ingredients in data.ingredients) {
+        const getIng = data.ingredients[ingredients].indexOf(keywords[key][i]);
+        if (getIng != -1) {
+          return {
+            status: true,
+            keyword: key,
+            recipe: data,
+          };
+        }
       }
     }
   }
@@ -49,12 +51,9 @@ const getKeywordData = () => {
 
 const getIngredientsList = (data) => {
   for (let recipeIdx in data) {
-    for (let ingIdx in data[recipeIdx].ingredients) {
-      const result = getKeywordData();
-      if (result && result.status == true && checkCnt <= 182) {
-        const keywordsData = result.array[checkCnt++];
-        console.log(keywordsData);
-      }
+    const result = getKeywordData(data[recipeIdx]);
+    if (result) {
+      console.log(result.keyword, result.recipe);
     }
   }
 };
