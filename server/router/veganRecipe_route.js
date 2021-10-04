@@ -28,4 +28,10 @@ router.get("/diet", checkToken, function (req, res, next) {
   );
 });
 
+router.get("/enrollment", checkToken, function (req, res, next) {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "/public/views/enrollment.html")
+  );
+});
+
 module.exports = router;

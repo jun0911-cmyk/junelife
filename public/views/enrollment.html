@@ -15,10 +15,10 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="./recipe.css" />
+    <link rel="stylesheet" type="text/css" href="./enrollment.css" />
     <link rel="stylesheet" type="text/css" href="./scrollbar.css" />
     <link rel="shortcut icon" href="#" />
-    <title>JOURNEY - 비건 레시피 추천 받기</title>
+    <title>JOURNEY - 비건 레시피 등록하기</title>
   </head>
   <body>
     <div>
@@ -29,7 +29,7 @@
             <a class="collect" href="#">음식점 찾기</a>
           </div>
           <div class="title">
-            <a class="collect" href="/recipe/enrollment">레시피 등록하기</a>
+            <a class="collect" href="/recipe">레시피 보기</a>
           </div>
           <div class="title">
             <a class="collect" href="/recipe/graph">비건통계 확인하기</a>
@@ -38,42 +38,29 @@
             <a class="collect" href="/">메인페이지로</a>
           </div>
         </div>
-        <div class="content">
-          <div class="search">
-            <i class="fas fa-search"></i>
-            <input
-              type="search"
-              class="search_bar"
-              id="recipe_search"
-              size="40"
-              placeholder="여기에 원하는 레시피를 검색해주세요..."
-            />
-          </div>
-        </div>
         <div class="account" id="account">
           <vegan-component></vegan-component>
           <account-component></account-component>
         </div>
       </div>
-      <div id="content">
-        <div class="select_recipe_page">
-          <a href="#"><i class="far fa-clock"></i>최근</a>
-          <a href="#"><i class="far fa-user"></i>모든 추천 레시피</a>
+      <div class="recipe_list">
+            <div class="recipe_text">
+            <h2 class="recipe_title">오늘 확인한 레시피 목록</h2>
+            <hr />
+            </div>
+            <div class="content" id="content">
+            </div>
+            <hr />
+            <div class="btn">
+                <button type="button" class="btn btn-success" id="enrollment">레시피 등록하기</button>
+            </div>
         </div>
-        <div class="sub_chart" id="sub_chart">
-          <p>내 비건통계</p>
-          <vegan-information-component></vegan-information-component>
-        </div>
-        <main class="main_content">
-          <div class="write_content" id="write_content"></div>
-        </main>
-        <div class="contention">
-          <script
-            src="./vegan/recipe/suggestion/recipe_suggestion.js"
-            type="module"
-          ></script>
-          <script src="./vegan/recipe/recipe_module/suggestion_module/visited_recipe.js"></script>
-        </div>
+      </div>
+      <div class="contention">
+        <script
+          src="./vegan/recipe/enrollment/recipe_enrollment.js"
+          type="module"
+        ></script>
       </div>
     </div>
   </body>

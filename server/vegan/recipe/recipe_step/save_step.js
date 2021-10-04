@@ -13,6 +13,7 @@ module.exports = (app) => {
             vegan_point: 0,
             diet: req.body.g_data,
             visite_recipe: 0,
+            today_visite: "",
           });
           try {
             setLevelRow.save();

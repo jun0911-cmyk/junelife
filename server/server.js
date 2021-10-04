@@ -63,7 +63,8 @@ require("./account/singup/singup_server")(app);
 require("./vegan/recipe/recipe_step/check_step")(app);
 require("./vegan/recipe/recipe_step/save_step")(app);
 require("./vegan/recipe/recipe_crawler/send_crawlingData")(app);
-require("./vegan/recipe/visit_recipe")(app);
+require("./vegan/recipe/visited/visit_recipe")(app);
+require("./vegan/recipe/visited/get_visite_recipe")(app);
 
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
