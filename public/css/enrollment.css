@@ -243,6 +243,10 @@ div {
   padding-left: 2%;
 }
 
+#timer {
+  color: red;
+}
+
 .footer {
   text-align: center;
   margin: 0 auto;

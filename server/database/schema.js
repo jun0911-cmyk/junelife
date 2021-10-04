@@ -21,6 +21,7 @@ const veganLevelSchema = new mongoose.Schema({
   diet: { type: String },
   visite_recipe: { type: Number },
   today_visite: { type: String },
+  register_today: { type: Number },
 });
 
 const recipeListSchema = new mongoose.Schema({

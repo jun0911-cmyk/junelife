@@ -14,6 +14,7 @@ module.exports = (app) => {
             diet: req.body.g_data,
             visite_recipe: 0,
             today_visite: "",
+            register_today: 0,
           });
           try {
             setLevelRow.save();

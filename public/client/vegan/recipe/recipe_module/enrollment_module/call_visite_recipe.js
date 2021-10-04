@@ -30,7 +30,12 @@ const callRecipe = async (user_id) => {
     user_id: user_id,
   });
   if (getRecipe.status == true) {
-    parseRecipe(getRecipe.content);
+    if (getRecipe.content[0] == null) {
+      alert("오늘 확인하신 레시피가 없습니다.");
+      location.href = "/";
+    } else {
+      parseRecipe(getRecipe.content);
+    }
   }
 };
 
