@@ -34,7 +34,16 @@ const callRecipe = async (user_id) => {
       alert("오늘 확인하신 레시피가 없습니다.");
       location.href = "/";
     } else {
-      parseRecipe(getRecipe.content);
+      // filter overlep recipe
+      const recipe = getRecipe.content.filter((item, index) => {
+        return (
+          getRecipe.content.findIndex(
+            (re) => re.recipe_url == item.recipe_url
+          ) === index
+        );
+      });
+      // remove to overlep recipe
+      parseRecipe(recipe);
     }
   }
 };
