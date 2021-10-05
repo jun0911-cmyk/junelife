@@ -12,7 +12,7 @@ const recipeComponent = (recipe) => {
             <h4 class="info_head">${recipe.title}</h4>
             <p class="info_sub">
                 레시피 등록하기 : <input type="checkbox" class="check_btn" id="checked-1" name="chkList"></br>
-                레시피 평점남기기 : <button type="button" class="btn btn-primary btn-sm">평점남기기</button>
+                레시피 평점남기기 : <button type="button" class="btn btn-primary btn-sm" id="rank">평점남기기</button>
             </p>
         </div>
     </div>`);

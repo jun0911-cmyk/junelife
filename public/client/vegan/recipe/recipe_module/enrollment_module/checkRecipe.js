@@ -19,15 +19,27 @@ const getPoint = (recipeStep, step, user) => {
   // add vegan point
   if (pointList.length >= 3) {
     const veganPoint = pointList[0] + pointList[1] + pointList[2];
-    alert(`축하합니다! ${veganPoint}점이 추가로 지급되었습니다!`);
-    $.post("/user/point", {
-      accessToken: localStorage.getItem("accessToken"),
-      nowPoint: user.vegan_point,
-      newPoint: veganPoint,
-    });
-    $.post("/user/today/append", {
-      accessToken: localStorage.getItem("accessToken"),
-    });
+    const updateVeganPoint = user.vegan_point + veganPoint;
+    if (updateVeganPoint >= 500) {
+      alert(`축하합니다! ${step.upStep}단계로 올라가셨습니다!`);
+      $.post("/recipe/step/update", {
+        user_id: user.user_id,
+        step: step.upStep,
+      });
+      $.post("/user/today/append", {
+        accessToken: localStorage.getItem("accessToken"),
+      });
+    } else if (updateVeganPoint < 500) {
+      alert(`축하합니다! ${veganPoint}점이 추가로 지급되었습니다!`);
+      $.post("/user/point", {
+        user_id: user.user_id,
+        nowPoint: user.vegan_point,
+        newPoint: veganPoint,
+      });
+      $.post("/user/today/append", {
+        accessToken: localStorage.getItem("accessToken"),
+      });
+    }
     location.reload();
   }
 };

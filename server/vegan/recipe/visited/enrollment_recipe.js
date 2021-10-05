@@ -84,7 +84,7 @@ module.exports = (app) => {
   });
 
   app.post("/user/point", (req, res) => {
-    const user_id = decodingToken(req.body.accessToken);
+    const user_id = req.body.user_id;
     models.Level.updateOne(
       { user_id: user_id },
       {
