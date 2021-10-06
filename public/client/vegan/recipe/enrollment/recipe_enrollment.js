@@ -33,9 +33,9 @@ const checkBtn = async () => {
 enrollment.addEventListener("click", (e) => {
   const recipe_len = $("input:checkbox[name=chkList]:checked").length;
   if (recipe_len < 3) {
-    alert("등록하실 레시피 3개를 선택해주세요.");
+    Swal.fire("등록하실 레시피는 3개를 선택해주셔야 합니다.", "", "error");
   } else if (recipe_len > 3) {
-    alert("레시피는 최대 3개까지만 등록할수 있습니다.");
+    Swal.fire("레시피는 최대 3개까지만 등록할수 있습니다.", "", "error");
   } else if (recipe_len == 3) {
     check_recipe($("input:checkbox[name=chkList]:checked"), user_id);
   }

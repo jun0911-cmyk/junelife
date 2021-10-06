@@ -1,3 +1,5 @@
+import rankBtnEvent from "./writeRanking.js";
+
 const recipeComponent = (recipe) => {
   $("#content").append(`
     <div class="recipe_content" id="recipe_content">
@@ -12,7 +14,7 @@ const recipeComponent = (recipe) => {
             <h4 class="info_head">${recipe.title}</h4>
             <p class="info_sub">
                 레시피 등록하기 : <input type="checkbox" class="check_btn" id="checked-1" name="chkList"></br>
-                레시피 평점남기기 : <button type="button" class="btn btn-primary btn-sm" id="rank">평점남기기</button>
+                레시피 평점남기기 : <button type="button" class="btn btn-primary btn-sm" id="${recipe.url}">평점남기기</button>
             </p>
         </div>
     </div>`);
@@ -22,6 +24,7 @@ const parseRecipe = (recipeList) => {
   recipeList.forEach((recipe) => {
     const parse = JSON.parse(recipe.content);
     recipeComponent(parse);
+    rankBtnEvent(parse);
   });
 };
 
@@ -31,7 +34,7 @@ const callRecipe = async (user_id) => {
   });
   if (getRecipe.status == true) {
     if (getRecipe.content[0] == null) {
-      alert("오늘 확인하신 레시피가 없습니다.");
+      Swal.fire("오늘 확인하신 레시피가 없습니다.", "", "error");
       location.href = "/";
     } else {
       // filter overlep recipe
