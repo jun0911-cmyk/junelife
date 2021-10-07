@@ -202,7 +202,19 @@ div {
   padding-top: 1%;
 }
 
+.today_recipe_text .today_recipe_title {
+  font-weight: bold;
+  padding-left: 2%;
+  padding-top: 1%;
+}
+
 .content {
+  overflow: scroll;
+  display: flex;
+  margin: 2rem;
+}
+
+.today_content {
   overflow: scroll;
   display: flex;
   margin: 2rem;

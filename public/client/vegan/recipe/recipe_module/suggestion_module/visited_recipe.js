@@ -1,3 +1,20 @@
+const veganStep_list = [
+  "플렉시테리언",
+  "세미베지테리언",
+  "페스코베지테리언",
+  "락토오보베지테리언",
+  "락토베지테리언",
+  "비건",
+];
+
+const ingredientsParse = {
+  0: "육류",
+  1: "가금류",
+  2: "해산물류",
+  3: "가공식품류",
+  4: "유제품류",
+};
+
 const recipepageComponent = (user, recipe, point) => {
   const parseRecipe = JSON.parse(recipe.content);
   Vue.component("page-component", {
@@ -11,7 +28,9 @@ const recipepageComponent = (user, recipe, point) => {
           <div class="now_page">
             <p>현재 포인트 : ${user.vegan_point}점 + ${point}</p>
             <p>연결사이트 : ${parseRecipe.url}</p>
-            <p>주요재료 : ${0} / ${600}g</p>
+            <p>주요재료 : ${
+              ingredientsParse[veganStep_list.indexOf(recipe.step)]
+            } / ${600}g</p>
             <p>레시피 단계 : ${recipe.step}</p>
             <p>레시피 방문횟수 : ${user.visite_recipe}회 + 1</p>
           </div>
@@ -39,13 +58,17 @@ const getRecipeData = (recipeUrl) => {
   });
 };
 // recipe clean btn
-const btnEvent = (recipe) => {
+const btnEvent = (recipe, reqUrl) => {
   document.getElementById("recipe_rander").addEventListener("click", (e) => {
     $.post("/recipe/visited/update", {
       user_id: localStorage.getItem("accessToken"),
-      choose_url: recipe.url,
+      choose_url: reqUrl,
+    }).then((res) => {
+      const status = res.status;
+      if (status == true) {
+        location.href = `https://${recipe.crawling + recipe.url}`;
+      }
     });
-    location.href = `https://${recipe.crawling + recipe.url}`;
   });
 
   document.getElementById("recipe_clean").addEventListener("click", (e) => {
@@ -72,7 +95,7 @@ $(document).on("click", "#recipe_content", async function () {
       getPoints.split(":")[1]
     );
     if (status == true) {
-      btnEvent(JSON.parse(recipeData.recipe.content));
+      btnEvent(JSON.parse(recipeData.recipe.content), splitURl[1]);
     }
   }
 });

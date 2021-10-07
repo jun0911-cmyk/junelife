@@ -9,11 +9,12 @@ const decodingToken = (accessToken) => {
 module.exports = (app) => {
   app.post("/user/cleaned", (req, res) => {
     const user_id = decodingToken(req.body.accessToken);
-    models.Level.updateOne(
+    models.Level.updateMany(
       { user_id: user_id },
       {
         $set: {
           today_visite: "",
+          register_recipe: "",
         },
       }
     )
@@ -25,31 +26,13 @@ module.exports = (app) => {
       });
   });
 
-  app.post("/user/today/append", (req, res) => {
+  app.post("/user/today", (req, res) => {
     const user_id = decodingToken(req.body.accessToken);
     models.Level.updateOne(
       { user_id: user_id },
       {
         $set: {
-          register_today: 1,
-        },
-      }
-    )
-      .then((result) => {
-        res.status(200);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
-
-  app.post("/user/today/clean", (req, res) => {
-    const user_id = decodingToken(req.body.accessToken);
-    models.Level.updateOne(
-      { user_id: user_id },
-      {
-        $set: {
-          register_today: 0,
+          register_today: req.body.status,
         },
       }
     )
@@ -85,11 +68,12 @@ module.exports = (app) => {
 
   app.post("/user/point", (req, res) => {
     const user_id = req.body.user_id;
-    models.Level.updateOne(
+    models.Level.updateMany(
       { user_id: user_id },
       {
         $set: {
-          vegan_point: Number(req.body.nowPoint) + Number(req.body.newPoint),
+          vegan_point: req.body.point,
+          register_recipe: req.body.recipe,
         },
       }
     )

@@ -1,5 +1,6 @@
 const models = require("../../../database/connect");
 let recipeList = [];
+let todayRecipe = [];
 
 module.exports = (app) => {
   app.post("/recipe/visited/get", (req, res) => {
@@ -25,6 +26,29 @@ module.exports = (app) => {
           });
         });
       }
+    });
+  });
+
+  app.post("/recipe/visited/today/get", (req, res) => {
+    models.Level.findOne({
+      user_id: req.body.user_id,
+    }).then((user) => {
+      const splitTodayUrls = user.register_recipe.split(", ");
+      splitTodayUrls.forEach((register) => {
+        models.RecipeList.findOne({
+          recipe_url: register,
+        }).then((recipe) => {
+          todayRecipe.push(recipe);
+          if (todayRecipe.length == splitTodayUrls.length) {
+            res.json({
+              status: true,
+              content: todayRecipe,
+              user: user,
+            });
+            todayRecipe = [];
+          }
+        });
+      });
     });
   });
 };

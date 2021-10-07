@@ -20,8 +20,9 @@ const torrDate = () => {
       $.post("/user/cleaned", {
         accessToken: localStorage.getItem("accessToken"),
       });
-      $.post("/user/today/clean", {
+      $.post("/user/today", {
         accessToken: localStorage.getItem("accessToken"),
+        status: 0,
       });
       return;
     }

@@ -38,6 +38,7 @@ module.exports = (app) => {
         $set: {
           vegan_level: step,
           vegan_point: 0,
+          register_recipe: req.body.recipe,
         },
       }
     )

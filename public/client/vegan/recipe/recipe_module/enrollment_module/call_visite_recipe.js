@@ -1,4 +1,5 @@
 import rankBtnEvent from "./writeRanking.js";
+import step from "../suggestion_module/step.js";
 
 const recipeComponent = (recipe) => {
   $("#content").append(`
@@ -20,6 +21,27 @@ const recipeComponent = (recipe) => {
     </div>`);
 };
 
+const TodayRecipeComponent = (recipe, recipeData, userStep) => {
+  $("#today_content").append(`
+    <div class="recipe_content" id="today_recipe_content">
+        <div class="image">
+            <img
+            src="${recipe.image_src}"
+            width="250px"
+            style="border-radius: 10px 10px 0 0"
+            />
+        </div>
+        <div class="info">
+            <h4 class="info_head">${recipe.title}</h4>
+            <p class="info_sub">
+              지급받은 포인트 : ${step.getPoint(recipeData, userStep)}점</br>
+              레시피 단계 : ${recipeData.step}</br>
+              출처 : ${recipe.url}
+            </p>
+        </div>
+    </div>`);
+};
+
 const parseRecipe = (recipeList) => {
   recipeList.forEach((recipe) => {
     const parse = JSON.parse(recipe.content);
@@ -28,11 +50,22 @@ const parseRecipe = (recipeList) => {
   });
 };
 
+const todayRecipe = (recipe, user) => {
+  recipe.forEach((recipeData) => {
+    const parse = JSON.parse(recipeData.content);
+    const userStep = step.getStep(user);
+    TodayRecipeComponent(parse, recipeData, userStep);
+  });
+};
+
 const callRecipe = async (user_id) => {
   const getRecipe = await $.post("/recipe/visited/get", {
     user_id: user_id,
   });
-  if (getRecipe.status == true) {
+  const getTodayRecipe = await $.post("/recipe/visited/today/get", {
+    user_id: user_id,
+  });
+  if (getRecipe.status == true && getTodayRecipe.status == true) {
     if (getRecipe.content[0] == null) {
       Swal.fire("오늘 확인하신 레시피가 없습니다.", "", "error");
       location.href = "/";
@@ -46,6 +79,7 @@ const callRecipe = async (user_id) => {
         );
       });
       // remove to overlep recipe
+      todayRecipe(getTodayRecipe.content, getTodayRecipe.user);
       parseRecipe(recipe);
     }
   }

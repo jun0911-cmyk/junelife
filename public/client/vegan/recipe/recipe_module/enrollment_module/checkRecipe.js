@@ -1,6 +1,6 @@
 const selectRecipe = [];
 const parseRecipeList = [];
-const pointList = [];
+const urlList = [];
 const veganStep_list = [
   "플렉시테리언",
   "세미베지테리언",
@@ -10,34 +10,42 @@ const veganStep_list = [
   "비건",
 ];
 
-const getPoint = (recipeStep, step, user) => {
-  if (recipeStep.step == step.mystep) {
-    pointList.push(5);
-  } else if (recipeStep.step == step.upStep) {
-    pointList.push(15);
+let point = 0;
+let cnt = 0;
+
+const getPoint = (recipe, step, user, len) => {
+  urlList.push(recipe.recipe_url);
+  if (recipe.step == step.mystep) {
+    point = point + 5;
+    cnt++;
+  } else if (recipe.step == step.upStep) {
+    point = point + 15;
+    cnt++;
   }
   // add vegan point
-  if (pointList.length >= 3) {
-    const veganPoint = pointList[0] + pointList[1] + pointList[2];
-    const updateVeganPoint = user.vegan_point + veganPoint;
-    if (updateVeganPoint >= 500) {
+  if (cnt >= len && urlList.length >= len) {
+    const setVeganPoint = user.vegan_point + point;
+    if (setVeganPoint >= 500) {
       alert(`축하합니다! ${step.upStep}단계로 올라가셨습니다!`);
       $.post("/recipe/step/update", {
         user_id: user.user_id,
         step: step.upStep,
+        recipe: urlList.join(", "),
       });
-      $.post("/user/today/append", {
+      $.post("/user/today", {
         accessToken: localStorage.getItem("accessToken"),
+        status: 1,
       });
-    } else if (updateVeganPoint < 500) {
-      alert(`축하합니다! ${veganPoint}점이 추가로 지급되었습니다!`);
+    } else if (setVeganPoint < 500) {
+      alert(`축하합니다! ${point}점이 추가로 지급되었습니다!`);
       $.post("/user/point", {
         user_id: user.user_id,
-        nowPoint: user.vegan_point,
-        newPoint: veganPoint,
+        point: setVeganPoint,
+        recipe: urlList.join(", "),
       });
-      $.post("/user/today/append", {
+      $.post("/user/today", {
         accessToken: localStorage.getItem("accessToken"),
+        status: 1,
       });
     }
     location.reload();
@@ -58,15 +66,15 @@ const getStep = (user) => {
   }
 };
 
-const checkRecipe = async (el, user_id) => {
-  for (let i = 0; i < 3; i++) {
+const checkRecipe = async (el, user_id, len) => {
+  for (let i = 0; i < len; i++) {
     const getEl = el.eq(i);
     const elParent = getEl.parent();
     const changeInfo = elParent.parent();
     const infoChild = changeInfo.children();
     const getTitle = infoChild.eq(0).text();
     selectRecipe.push(getTitle);
-    if (selectRecipe.length >= 3) {
+    if (selectRecipe.length >= len) {
       const getRecipe = await $.post("/recipe/visited/get", {
         user_id: user_id,
       });
@@ -84,7 +92,12 @@ const checkRecipe = async (el, user_id) => {
                 (re) => re.title == selectRecipe[j]
               );
               if (findRecipe != -1) {
-                getPoint(getRecipe.content[findRecipe], stepList, getUser.rows);
+                getPoint(
+                  getRecipe.content[findRecipe],
+                  stepList,
+                  getUser.rows,
+                  len
+                );
               }
             }
           }
