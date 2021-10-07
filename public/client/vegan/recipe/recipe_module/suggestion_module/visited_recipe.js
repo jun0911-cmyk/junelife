@@ -1,19 +1,78 @@
-$(document).on("click", "#recipe_content", function () {
+const recipepageComponent = (user, recipe, point) => {
+  const parseRecipe = JSON.parse(recipe.content);
+  Vue.component("page-component", {
+    template: `
+      <div class="sub_page">
+        <span>"${parseRecipe.title}" 레시피 상세정보</span></br>
+        <img src="${
+          parseRecipe.image_src
+        }" style="margin-top: 2%; border-radius: 5px;" />
+        <div class="page_content">
+          <div class="now_page">
+            <p>현재 포인트 : ${user.vegan_point}점 + ${point}</p>
+            <p>연결사이트 : ${parseRecipe.url}</p>
+            <p>주요재료 : ${0} / ${600}g</p>
+            <p>레시피 단계 : ${recipe.step}</p>
+            <p>레시피 방문횟수 : ${user.visite_recipe}회 + 1</p>
+          </div>
+          <div class="btn">
+            <button type="button" class="btn btn-primary btn-sm" id="recipe_rander">이동하기</button>
+            <button type="button" class="btn btn-primary btn-sm" id="rank">평점남기기</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="recipe_clean">취소하기</button>
+          </div>
+        </div>
+      </div>
+    `,
+  });
+
+  new Vue({
+    el: "#sub_page",
+  });
+
+  return true;
+};
+
+const getRecipeData = (recipeUrl) => {
+  return $.post("/recipe/get", {
+    req_url: recipeUrl,
+    user_id: localStorage.getItem("accessToken"),
+  });
+};
+// recipe clean btn
+const btnEvent = (recipe) => {
+  document.getElementById("recipe_rander").addEventListener("click", (e) => {
+    $.post("/recipe/visited/update", {
+      user_id: localStorage.getItem("accessToken"),
+      choose_url: recipe.url,
+    });
+    location.href = `https://${recipe.crawling + recipe.url}`;
+  });
+
+  document.getElementById("recipe_clean").addEventListener("click", (e) => {
+    location.reload();
+  });
+};
+
+$(document).on("click", "#recipe_content", async function () {
   const getElement = $(this);
   const getChildren = getElement.children();
   const information = getChildren.eq(1);
   const infoChildren = information.children();
   const changeAteg = infoChildren.children();
-  const getRecipeTitle = changeAteg.eq(0).text();
   const recipeTitleChild = changeAteg.eq(1).children();
+  const getPoints = recipeTitleChild.eq(6).text();
   const getRecipeUrl = recipeTitleChild.eq(0).text();
   const splitURl = getRecipeUrl.split(":");
   // check mesasge (test)
-  alert(
-    `확인하시려는 레시피는 "${getRecipeTitle}" 레시피입니다. 정말로 해당 레시피를 확인하시겠습니까?`
-  );
-  $.post("/recipe/visited/update", {
-    user_id: localStorage.getItem("accessToken"),
-    choose_url: splitURl[1],
-  });
+  const recipeData = await getRecipeData(splitURl[1]);
+  if (recipeData) {
+    const status = recipepageComponent(
+      recipeData.user,
+      recipeData.recipe,
+      getPoints.split(":")[1]
+    );
+    if (status == true) {
+      btnEvent(JSON.parse(recipeData.recipe.content));
+    }
+  }
 });
