@@ -1,4 +1,10 @@
 const models = require("../../../database/connect");
+const jwt = require("jsonwebtoken");
+
+const decodingToken = (accessToken) => {
+  const decodingToken = jwt.decode(accessToken, { complete: true });
+  return decodingToken.payload.id;
+};
 
 module.exports = (app) => {
   app.post("/recipe/step/check", (req, res) => {
@@ -37,6 +43,32 @@ module.exports = (app) => {
     )
       .then((result) => {
         res.status(200);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  app.post("/recipe/get", (req, res) => {
+    const user_id = decodingToken(req.body.user_id);
+    models.Level.findOne({
+      user_id: user_id,
+    })
+      .then((user) => {
+        models.RecipeList.findOne({
+          recipe_url: req.body.req_url.trim(),
+        })
+          .then((recipe) => {
+            res
+              .json({
+                user: user,
+                recipe: recipe,
+              })
+              .status(200);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
