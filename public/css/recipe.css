@@ -229,7 +229,9 @@ div {
   margin-left: 3%;
 }
 
-.select_recipe_page a {
+.select_recipe_page button {
+  border: none;
+  background-color: #f8f9fa;
   color: black;
   text-decoration: none;
   float: left;
@@ -237,11 +239,11 @@ div {
   font-size: 20px;
 }
 
-.select_recipe_page a:hover {
+.select_recipe_page button:hover {
   color: green;
 }
 
-.select_recipe_page a:active {
+.select_recipe_page button:active {
   color: green;
 }
 

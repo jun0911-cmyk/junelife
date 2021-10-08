@@ -1,4 +1,4 @@
-const models = require("../../../database/connect");
+const models = require("../../../../database/connect");
 const jwt = require("jsonwebtoken");
 
 const decodingToken = (accessToken) => {

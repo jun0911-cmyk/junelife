@@ -1,16 +1,24 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
-import recipeChannel from "../recipe_module/suggestion_module/recipe_channel/all_recipe.js";
+import recipeChannel from "../recipe_module/suggestion_module/recipe_channel/management/channel_manage.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 
-const sendRecipe = async (user_id) => {
-  const recipeList = await $.post("/recipe/crawling/data");
-  if (recipeList.status == true) {
-    recipeChannel(user_id, recipeList.data);
-  } else {
-    alert("데이터를 가져올수 없습니다");
-  }
+const sendRecipe = (user_id) => {
+  document.getElementById("now").addEventListener("click", (e) => {
+    document.getElementById("all").disabled = false;
+    document.getElementById("now").disabled = true;
+    recipeChannel.resentRecipe(user_id);
+  });
+
+  document.getElementById("all").addEventListener("click", async (e) => {
+    const recipeList = await $.post("/recipe/crawling/data");
+    if (recipeList.status == true) {
+      document.getElementById("all").disabled = true;
+      document.getElementById("now").disabled = false;
+      recipeChannel.allRecipe(user_id, recipeList.data);
+    }
+  });
 };
 
 $(function () {

@@ -57,65 +57,19 @@
       </div>
       <div id="content">
         <div class="select_recipe_page">
-          <a href="#"><i class="far fa-clock"></i>최근</a>
-          <a href="#"><i class="fas fa-chart-line"></i>추천 레시피</a>
-          <a href="#"><i class="far fa-user"></i>모든 레시피</a>
+          <button href="#" id="now"><i class="far fa-clock"></i>최근</button>
+          <button href="#"><i class="fas fa-chart-line"></i>추천 레시피</button>
+          <button href="#" id="all">
+            <i class="far fa-user"></i>모든 레시피
+          </button>
         </div>
         <div class="sub_chart" id="sub_chart">
           <p>내 비건통계</p>
           <vegan-information-component></vegan-information-component>
         </div>
         <page-component id="sub_page"></page-component>
-        <div class="main_recipe">
-          <div class="flex">
-            <div class="recipe_text">
-              <h2 class="recipe_title">플렉시테리언 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="flex_content"></div>
-            <hr />
-          </div>
-          <div class="sami">
-            <div class="recipe_text">
-              <h2 class="recipe_title">세미베지테리언 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="sami_content"></div>
-            <hr />
-          </div>
-          <div class="pasco">
-            <div class="recipe_text">
-              <h2 class="recipe_title">페스코베지테리언 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="pasco_content"></div>
-            <hr />
-          </div>
-          <div class="loctoovo">
-            <div class="recipe_text">
-              <h2 class="recipe_title">락토오보베지테리언 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="loctoovo_content"></div>
-            <hr />
-          </div>
-          <div class="locto">
-            <div class="recipe_text">
-              <h2 class="recipe_title">락토베지테리언 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="locto_content"></div>
-            <hr />
-          </div>
-          <div class="vegan">
-            <div class="recipe_text">
-              <h2 class="recipe_title">비건 레시피 목록</h2>
-              <hr />
-            </div>
-            <div class="recipe_container" id="vegan_content"></div>
-            <hr />
-          </div>
-        </div>
+        <recipe-all-component id="all_recipe"></recipe-all-component>
+        <recipe-all-component id="now_recipe"></recipe-all-component>
         <div class="contention">
           <script
             src="./vegan/recipe/suggestion/recipe_suggestion.js"

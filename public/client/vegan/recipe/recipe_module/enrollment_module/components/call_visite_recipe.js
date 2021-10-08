@@ -1,5 +1,5 @@
-import rankBtnEvent from "./writeRanking.js";
-import step from "../suggestion_module/step.js";
+import rankBtnEvent from "../writeRanking.js";
+import step from "../../defult_modules/step.js";
 
 const recipeComponent = (recipe) => {
   $("#content").append(`

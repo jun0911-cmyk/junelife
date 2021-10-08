@@ -7,20 +7,6 @@ const veganStep_list = [
   "비건",
 ];
 
-const getStep = (user) => {
-  const mystep = user.vegan_level;
-  const upCheckStep = veganStep_list.indexOf(mystep);
-  if (upCheckStep != -1) {
-    const upStep = veganStep_list[upCheckStep + 1];
-    if (upStep) {
-      return {
-        mystep,
-        upStep,
-      };
-    }
-  }
-};
-
 const recipePoint = (step, myStep) => {
   if (step > myStep) {
     step = step + 1;
@@ -40,4 +26,4 @@ const findIndex = (user, recipe) => {
   }
 };
 
-export default { findIndex, getStep };
+export default { findIndex };

@@ -31,6 +31,7 @@ const recipeListSchema = new mongoose.Schema({
   rank: { type: String },
   favorite_people: { type: Number },
   content: { type: String },
+  created: { type: Date, default: Date.now },
 });
 
 const recipePageSchema = new mongoose.Schema({
