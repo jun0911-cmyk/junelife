@@ -15,6 +15,7 @@ module.exports = (app) => {
             visite_recipe: 0,
             today_visite: "",
             register_today: 0,
+            register_recipe: "",
           });
           try {
             setLevelRow.save();

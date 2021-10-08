@@ -33,22 +33,34 @@ module.exports = (app) => {
     models.Level.findOne({
       user_id: req.body.user_id,
     }).then((user) => {
-      const splitTodayUrls = user.register_recipe.split(", ");
-      splitTodayUrls.forEach((register) => {
-        models.RecipeList.findOne({
-          recipe_url: register,
-        }).then((recipe) => {
-          todayRecipe.push(recipe);
-          if (todayRecipe.length == splitTodayUrls.length) {
-            res.json({
-              status: true,
-              content: todayRecipe,
-              user: user,
-            });
-            todayRecipe = [];
-          }
+      if (user.register_recipe == "") {
+        res
+          .json({
+            status: false,
+            content: null,
+            user: user,
+          })
+          .status(200);
+      } else {
+        const splitTodayUrls = user.register_recipe.split(", ");
+        splitTodayUrls.forEach((register) => {
+          models.RecipeList.findOne({
+            recipe_url: register,
+          }).then((recipe) => {
+            todayRecipe.push(recipe);
+            if (todayRecipe.length == splitTodayUrls.length) {
+              res
+                .json({
+                  status: true,
+                  content: todayRecipe,
+                  user: user,
+                })
+                .status(200);
+              todayRecipe = [];
+            }
+          });
         });
-      });
+      }
     });
   });
 };
