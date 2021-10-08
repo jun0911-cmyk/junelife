@@ -304,13 +304,15 @@ div {
   display: flex;
 }
 
-.main_content {
-  flex: 1 1 0%;
+.recipe_text .recipe_title {
+  font-weight: bold;
+  padding-left: 2%;
+  padding-top: 1%;
 }
 
-.write_content {
+.recipe_container {
+  overflow: scroll;
   display: flex;
-  flex-wrap: wrap; /* 매우 중요!! */
   margin: 2rem;
 }
 

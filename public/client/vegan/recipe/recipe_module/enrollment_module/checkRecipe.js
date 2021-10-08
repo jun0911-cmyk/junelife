@@ -13,13 +13,31 @@ const veganStep_list = [
 let point = 0;
 let cnt = 0;
 
-const getPoint = (recipe, step, user, len) => {
-  urlList.push(recipe.recipe_url);
-  if (recipe.step == step.mystep) {
-    point = point + 5;
-    cnt++;
-  } else if (recipe.step == step.upStep) {
-    point = point + 15;
+const recipePoint = (step, myStep) => {
+  if (step > myStep) {
+    step = step + 1;
+    const getMathPoint = step - myStep;
+    const getPoint = getMathPoint * 5;
+    return getPoint;
+  } else if (step <= myStep) {
+    return 5;
+  }
+};
+
+const findIndex = (user, recipe) => {
+  const stepIndex = veganStep_list.indexOf(user.vegan_level);
+  const indexStep = veganStep_list.indexOf(recipe.step);
+  if (stepIndex != -1 && indexStep != -1) {
+    return recipePoint(indexStep, stepIndex);
+  }
+};
+
+const getPoint = (recipe, user, len) => {
+  const pointData = findIndex(user, recipe);
+  if (pointData) {
+    urlList.push(recipe.recipe_url);
+    console.log(pointData);
+    point = point + pointData;
     cnt++;
   }
   // add vegan point
@@ -52,20 +70,6 @@ const getPoint = (recipe, step, user, len) => {
   }
 };
 
-const getStep = (user) => {
-  const mystep = user.vegan_level;
-  const upCheckStep = veganStep_list.indexOf(mystep);
-  if (upCheckStep != -1) {
-    const upStep = veganStep_list[upCheckStep + 1];
-    if (upStep) {
-      return {
-        mystep,
-        upStep,
-      };
-    }
-  }
-};
-
 const checkRecipe = async (el, user_id, len) => {
   for (let i = 0; i < len; i++) {
     const getEl = el.eq(i);
@@ -82,7 +86,6 @@ const checkRecipe = async (el, user_id, len) => {
         user_id: user_id,
       });
       if (getRecipe.status == true && getUser.status == true) {
-        const stepList = getStep(getUser.rows);
         for (let i = 0; i < getRecipe.content.length; i++) {
           const parseRecipe = JSON.parse(getRecipe.content[i].content);
           parseRecipeList.push(parseRecipe);
@@ -92,12 +95,7 @@ const checkRecipe = async (el, user_id, len) => {
                 (re) => re.title == selectRecipe[j]
               );
               if (findRecipe != -1) {
-                getPoint(
-                  getRecipe.content[findRecipe],
-                  stepList,
-                  getUser.rows,
-                  len
-                );
+                getPoint(getRecipe.content[findRecipe], getUser.rows, len);
               }
             }
           }

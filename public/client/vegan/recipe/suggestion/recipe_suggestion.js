@@ -1,5 +1,4 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
-import RecipeViews from "../recipe_module/suggestion_module/suggestion_algorithm/suggestion_algo.js";
 import recipeChannel from "../recipe_module/suggestion_module/recipe_channel/all_recipe.js";
 
 const accessToken = localStorage.getItem("accessToken");

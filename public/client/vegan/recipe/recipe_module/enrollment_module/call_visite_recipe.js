@@ -34,7 +34,7 @@ const TodayRecipeComponent = (recipe, recipeData, userStep) => {
         <div class="info">
             <h4 class="info_head">${recipe.title}</h4>
             <p class="info_sub">
-              지급받은 포인트 : ${step.getPoint(recipeData, userStep)}점</br>
+              지급받은 포인트 : ${step.findIndex(userStep, recipeData)}점</br>
               레시피 단계 : ${recipeData.step}</br>
               출처 : ${recipe.url}
             </p>
@@ -53,8 +53,7 @@ const parseRecipe = (recipeList) => {
 const todayRecipe = (recipe, user) => {
   recipe.forEach((recipeData) => {
     const parse = JSON.parse(recipeData.content);
-    const userStep = step.getStep(user);
-    TodayRecipeComponent(parse, recipeData, userStep);
+    TodayRecipeComponent(parse, recipeData, user);
   });
 };
 
@@ -65,7 +64,7 @@ const callRecipe = async (user_id) => {
   const getTodayRecipe = await $.post("/recipe/visited/today/get", {
     user_id: user_id,
   });
-  if (getRecipe.status == true && getTodayRecipe.status == true) {
+  if (getRecipe.status == true) {
     if (getRecipe.content[0] == null) {
       Swal.fire("오늘 확인하신 레시피가 없습니다.", "", "error");
       location.href = "/";
@@ -79,8 +78,10 @@ const callRecipe = async (user_id) => {
         );
       });
       // remove to overlep recipe
-      todayRecipe(getTodayRecipe.content, getTodayRecipe.user);
       parseRecipe(recipe);
+      if (getTodayRecipe.status == true) {
+        todayRecipe(getTodayRecipe.content, getTodayRecipe.user);
+      }
     }
   }
 };

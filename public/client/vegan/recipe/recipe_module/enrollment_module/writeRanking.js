@@ -39,7 +39,7 @@ const rankComponent = (title, url) => {
     </div>`);
 };
 
-const writeRankBtnEvent = () => {
+const writeRankBtnEvent = (url) => {
   document.getElementById("rank-radio").addEventListener("change", (e) => {
     changeRanking(e.target.id);
   });
@@ -59,6 +59,11 @@ const writeRankBtnEvent = () => {
         "success"
       );
     }
+    $.post("/rank/save", {
+      url: url,
+      rank: getRank,
+    });
+    location.reload();
   });
   // clean btn
   document.getElementById("clean_btn").addEventListener("click", (e) => {
@@ -70,9 +75,8 @@ const rankBtnEventCall = (recipe) => {
   document.getElementById(recipe.url).addEventListener("click", (e) => {
     const recipeTitle = e.path[2].children[0].innerHTML;
     const recipeUrl = e.target.id;
-
     rankComponent(recipeTitle, recipeUrl);
-    writeRankBtnEvent();
+    writeRankBtnEvent(recipeUrl);
   });
 };
 
