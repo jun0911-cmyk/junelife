@@ -40,7 +40,8 @@ const getUser = async (user_id) => {
 };
 
 const appendRecipeCom = (view_recipeArr, recipeData, id, point) => {
-  $(`#${id}`).append(`
+  if (point <= 5) {
+    $(`#${id}`).append(`
     <div class="recipe_content" id="recipe_content">
         <div class="image">
           <a href="#">
@@ -56,9 +57,11 @@ const appendRecipeCom = (view_recipeArr, recipeData, id, point) => {
             <h4 class="info_head">${view_recipeArr.title}</h4>
             <p class="info_sum">
               <span>레시피 사이트 : ${view_recipeArr.url}</span></br>
+              <span style="color: red; font-weight: bold;">추천단계 : ${
+                recipeData.step
+              } (낮은 단계)</span></br>
+              <span style="font-weight: bold;">포인트 : ${point}점</span></br>
               <span>${view_recipeArr.views}</span></br>
-              <span>추천단계 : ${recipeData.step}</span></br>
-              <span>포인트 : ${point}점</span></br>
               <span>분류 : ${
                 ingredientsParse[stepList.indexOf(recipeData.step)]
               }</span></br>
@@ -70,6 +73,40 @@ const appendRecipeCom = (view_recipeArr, recipeData, id, point) => {
       </div>
     </div>
   `);
+  } else if (point > 5) {
+    $(`#${id}`).append(`
+    <div class="recipe_content" id="recipe_content">
+        <div class="image">
+          <a href="#">
+            <img
+              src="${view_recipeArr.image_src}"
+              width="300px"
+              style="border-radius: 10px 10px 0 0"
+            />
+          </a>
+        </div>
+        <div class="info">
+          <a href="#">
+            <h4 class="info_head">${view_recipeArr.title}</h4>
+            <p class="info_sum">
+              <span>레시피 사이트 : ${view_recipeArr.url}</span></br>
+              <span style="color: blue; font-weight: bold;">추천단계 : ${
+                recipeData.step
+              } (높은 단계)</span></br>
+              <span style="font-weight: bold;">포인트 : ${point}점</span></br>
+              <span>${view_recipeArr.views}</span></br>
+              <span>분류 : ${
+                ingredientsParse[stepList.indexOf(recipeData.step)]
+              }</span></br>
+              <span>출처 : ${view_recipeArr.crawling}</span></br>
+              <span id="${view_recipeArr.url}#ranking">평점 불러오는중</span>
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  `);
+  }
 };
 
 const getRanking = async () => {

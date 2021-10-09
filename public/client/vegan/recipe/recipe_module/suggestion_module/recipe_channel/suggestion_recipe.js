@@ -15,7 +15,7 @@ const createComponent = (user) => {
     <div class="main_recipe">
         <div class="sugg">
             <div class="recipe_text">
-                <h2 class="recipe_title">${user.user.vegan_level} 단계를 위한 추천레시피!</h2>
+                <h2 class="recipe_title">${user.user.vegan_level} 단계를 위한 추천레시피</h2>
                 <hr />
             </div>
             <div class="recipe_container" id="sugg_content"></div>
