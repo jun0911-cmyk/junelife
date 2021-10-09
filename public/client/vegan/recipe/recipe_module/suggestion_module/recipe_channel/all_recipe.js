@@ -19,10 +19,8 @@ const idList = [
 ];
 
 const createComponent = () => {
-  new Vue({
-    el: "#all_recipe",
-    template: `
-    <div class="main_recipe">
+  document.getElementById("com_recipe").innerHTML = `
+        <div class="main_recipe">
           <div class="flex">
             <div class="recipe_text">
               <h2 class="recipe_title">플렉시테리언 레시피 목록</h2>
@@ -71,9 +69,7 @@ const createComponent = () => {
             <div class="recipe_container" id="vegan_content"></div>
             <hr />
           </div>
-        </div>
-    `,
-  });
+        </div>`;
 };
 
 const allRecipe = async (user_id, recipeList) => {

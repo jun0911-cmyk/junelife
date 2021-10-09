@@ -66,8 +66,9 @@ const callRecipe = async (user_id) => {
   });
   if (getRecipe.status == true) {
     if (getRecipe.content[0] == null) {
-      Swal.fire("오늘 확인하신 레시피가 없습니다.", "", "error");
-      location.href = "/";
+      Swal.fire("오늘 확인하신 레시피가 없습니다.", "", "error").then(() => {
+        location.href = "/";
+      });
     } else {
       // filter overlep recipe
       const recipe = getRecipe.content.filter((item, index) => {

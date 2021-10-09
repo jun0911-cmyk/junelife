@@ -11,9 +11,7 @@ const stepList = [
 ];
 
 const createComponent = (user) => {
-  new Vue({
-    el: "#sugg_recipe",
-    template: `
+  document.getElementById("com_recipe").innerHTML = `
     <div class="main_recipe">
         <div class="sugg">
             <div class="recipe_text">
@@ -23,16 +21,28 @@ const createComponent = (user) => {
             <div class="recipe_container" id="sugg_content"></div>
             <hr />
         </div>
-    </div>
-    `,
-  });
+    </div>`;
 };
 
 const suggRecipe = async (user_id) => {
   const userData = await setRecipe.getUser(user_id);
   const rankData = await setRecipe.getRanking();
-  await createComponent(userData);
-  suggAlgo(rankData, userData.user);
+  const rankListData = await suggAlgo(rankData, userData.user);
+  createComponent(userData);
+  rankListData.forEach((recipe) => {
+    const parse = JSON.parse(recipe.recipe.content);
+    const indexStep = stepList.indexOf(recipe.recipe.step);
+    if (indexStep != -1) {
+      const recipePoint = setRecipe.point(indexStep, userData.step);
+      setRecipe.appendRecipeCom(
+        parse,
+        recipe.recipe,
+        "sugg_content",
+        recipePoint
+      );
+      setRecipe.settingComponent(rankListData.length, rankData);
+    }
+  });
 };
 
 export default suggRecipe;

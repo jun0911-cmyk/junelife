@@ -10,9 +10,7 @@ const stepList = [
 ];
 
 const createComponent = () => {
-  new Vue({
-    el: "#now_recipe",
-    template: `
+  document.getElementById("com_recipe").innerHTML = `
     <div class="main_recipe">
         <div class="now">
             <div class="recipe_text">
@@ -30,9 +28,7 @@ const createComponent = () => {
             <div class="recipe_container" id="old_content"></div>
             <hr />
         </div>
-    </div>
-    `,
-  });
+    </div>`;
 };
 
 const resentRecipe = async (user_id) => {

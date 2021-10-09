@@ -1,25 +1,8 @@
 import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
-import recipeChannel from "../recipe_module/suggestion_module/recipe_channel/management/channel_manage.js";
+import recipeBtnLoad from "../recipe_module/suggestion_module/recipe_channel/recipe_component/recipeBtn_component.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
-
-const sendRecipe = (user_id) => {
-  document.getElementById("now").addEventListener("click", (e) => {
-    document.getElementById("all").disabled = false;
-    document.getElementById("now").disabled = true;
-    recipeChannel.resentRecipe(user_id);
-  });
-
-  document.getElementById("all").addEventListener("click", async (e) => {
-    const recipeList = await $.post("/recipe/crawling/data");
-    if (recipeList.status == true) {
-      document.getElementById("all").disabled = true;
-      document.getElementById("now").disabled = false;
-      recipeChannel.allRecipe(user_id, recipeList.data);
-    }
-  });
-};
 
 $(function () {
   $.ajax({
@@ -43,9 +26,11 @@ $(function () {
           localStorage.setItem("accessToken", accessToken);
         }
         // call function setting component
-        recipeChannel.suggRecipe(user_id);
         checkStep(user_id);
-        sendRecipe(user_id);
+        recipeBtnLoad.firstLoadRecipe(user_id);
+        recipeBtnLoad.sendRecipe(user_id);
+        // resent recipe check
+        $.post("/recipe/resent/check");
       }
     },
     error: function (request, status, error) {

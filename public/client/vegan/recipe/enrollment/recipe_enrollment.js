@@ -1,7 +1,6 @@
 import vegan_components from "../recipe_module/enrollment_module/components/recipe_components.js";
 import recipe_list from "../recipe_module/enrollment_module/components/call_visite_recipe.js";
 import check_recipe from "../recipe_module/enrollment_module/checkRecipe.js";
-import timer from "../recipe_module/enrollment_module/recipe_timer.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
@@ -58,7 +57,6 @@ $(function () {
         location.href = "/user/login";
       } else if (result.status == true) {
         user_id = result.user_id;
-        timer();
         checkBtn();
         vegan_components(user_id);
         recipe_list(user_id);

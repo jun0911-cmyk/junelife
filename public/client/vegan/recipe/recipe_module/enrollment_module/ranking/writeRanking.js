@@ -51,19 +51,28 @@ const writeRankBtnEvent = (url) => {
         "높게 평점을 남겨주셔서 감사합니다!",
         "이 결과는 다른 레시피 이용자분께 추천용도로 사용됩니다.",
         "success"
-      );
+      ).then(() => {
+        $.post("/rank/save", {
+          url: url,
+          rank: getRank,
+        }).then(() => {
+          location.reload();
+        });
+      });
     } else if (getRank <= 3) {
       Swal.fire(
         "평점을 남겨주셔서 감사합니다!",
         "이 결과는 다른 레시피 이용자분께 추천용도로 사용됩니다.",
         "success"
-      );
+      ).then(() => {
+        $.post("/rank/save", {
+          url: url,
+          rank: getRank,
+        }).then(() => {
+          location.reload();
+        });
+      });
     }
-    $.post("/rank/save", {
-      url: url,
-      rank: getRank,
-    });
-    location.reload();
   });
   // clean btn
   document.getElementById("clean_btn").addEventListener("click", (e) => {
