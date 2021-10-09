@@ -21,11 +21,37 @@ const recipeIngredient = {
   lactovegetarian: ["계란(유제품)"],
 };
 
+const ingredientsList = [
+  "채소",
+  "유제품류",
+  "가공식품류",
+  "해산물",
+  "가금류",
+  "육류",
+];
+
 function vegan_step_prototype() {}
 
 vegan_step_prototype.prototype.settingStep = (step_arr) => {
   const get_veganStep = veganStep[step_arr.length];
   return get_veganStep;
+};
+
+vegan_step_prototype.prototype.setIngredIents = (vegan_step, g_data) => {
+  let ingredients = ingredientsList[veganStep.indexOf(vegan_step)];
+  if (ingredients) {
+    if (ingredients == "육류") {
+      return g_data * 150;
+    } else if (ingredients == "가금류") {
+      return g_data * 700;
+    } else if (ingredients == "해산물") {
+      return g_data * 159;
+    } else if (ingredients == "가공식품류") {
+      return g_data * 5279;
+    } else if (ingredients == "유제품류") {
+      return g_data * 56;
+    }
+  }
 };
 
 vegan_step_prototype.prototype.save = async (vegan_step, g_data, user_id) => {
@@ -45,9 +71,10 @@ vegan_step_prototype.prototype.save = async (vegan_step, g_data, user_id) => {
 export const settingStep = async (step_arr, g_data, user_id) => {
   const recipePrototype = new vegan_step_prototype();
   const getVeganStep = recipePrototype.settingStep(step_arr);
+  const getGdata = recipePrototype.setIngredIents(getVeganStep, g_data);
   const save_veganData = await recipePrototype.save(
     getVeganStep,
-    g_data,
+    getGdata,
     user_id
   );
   // socket event call check

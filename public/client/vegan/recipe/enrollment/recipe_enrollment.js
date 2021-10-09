@@ -1,5 +1,5 @@
-import vegan_components from "../recipe_module/enrollment_module/recipe_components.js";
-import recipe_list from "../recipe_module/enrollment_module/call_visite_recipe.js";
+import vegan_components from "../recipe_module/enrollment_module/components/recipe_components.js";
+import recipe_list from "../recipe_module/enrollment_module/components/call_visite_recipe.js";
 import check_recipe from "../recipe_module/enrollment_module/checkRecipe.js";
 import timer from "../recipe_module/enrollment_module/recipe_timer.js";
 

@@ -43,6 +43,7 @@ $(function () {
           localStorage.setItem("accessToken", accessToken);
         }
         // call function setting component
+        recipeChannel.suggRecipe(user_id);
         checkStep(user_id);
         sendRecipe(user_id);
       }

@@ -12,7 +12,7 @@ $("#self_input").hide();
 
 // assignment variable
 let radio_change_status = false;
-let reference_change_status = 300;
+let reference_change_status = 3;
 let user_id = null;
 
 // constant variable
@@ -68,19 +68,19 @@ reference_input_event.addEventListener("change", (e) => {
   let target = e.target;
   switch (target.id) {
     case "vm":
-      reference_data(1000);
+      reference_data(10);
       break;
     case "ma":
-      reference_data(500);
+      reference_data(8);
       break;
     case "mi":
-      reference_data(300);
+      reference_data(6);
       break;
     case "sm":
-      reference_data(100);
+      reference_data(4);
       break;
     case "vm":
-      reference_data(100);
+      reference_data(4);
       break;
     case "self":
       $("#self_input").show();
@@ -90,7 +90,7 @@ reference_input_event.addEventListener("change", (e) => {
 
 input_val.addEventListener("input", (e) => {
   const getVal = $("#input_val").val();
-  document.getElementById("view_gData").innerText = `${getVal}G`;
+  document.getElementById("view_gData").innerText = `${getVal}번`;
 });
 
 next_btn.addEventListener("click", (e) => {

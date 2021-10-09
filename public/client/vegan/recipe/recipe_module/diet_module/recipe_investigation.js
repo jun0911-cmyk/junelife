@@ -83,7 +83,7 @@ const referenceInput_message = (step_arr) => {
   if (reference_hide_status == true && reference_show_status == true) {
     document.getElementById(
       "title"
-    ).innerText = `최근에 ${step_arr[0]}를(을) 얼마나 드셨나요?`;
+    ).innerText = `최근에 ${step_arr[0]}를(을) 몇번 드셨나요?`;
   } else {
     document.getElementById("title").innerText = `Error`;
   }

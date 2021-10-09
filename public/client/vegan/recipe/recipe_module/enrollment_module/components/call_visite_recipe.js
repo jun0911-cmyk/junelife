@@ -1,4 +1,4 @@
-import rankBtnEvent from "../writeRanking.js";
+import rankBtnEvent from "../ranking/writeRanking.js";
 import step from "../../defult_modules/step.js";
 
 const recipeComponent = (recipe) => {
