@@ -68,6 +68,7 @@ require("./vegan/recipe/visited/get_visite_recipe")(app);
 require("./vegan/recipe/visited/point/enrollment_recipe")(app);
 require("./vegan/recipe/recipe_step/channel_mods/rank")(app);
 require("./vegan/recipe/recipe_step/channel_mods/resent_recipe")(app);
+require("./vegan/recipe/recipe_step/channel_mods/sugg_recipe")(app);
 
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
