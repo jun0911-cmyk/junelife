@@ -83,7 +83,7 @@ $(document).on("click", "#recipe_content", async function () {
   const infoChildren = information.children();
   const changeAteg = infoChildren.children();
   const recipeTitleChild = changeAteg.eq(1).children();
-  const getPoints = recipeTitleChild.eq(6).text();
+  const getPoints = recipeTitleChild.eq(4).text();
   const getRecipeUrl = recipeTitleChild.eq(0).text();
   const splitURl = getRecipeUrl.split(":");
   // check mesasge (test)
