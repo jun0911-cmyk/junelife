@@ -36,6 +36,7 @@ const TodayRecipeComponent = (recipe, recipeData, userStep) => {
             <p class="info_sub">
               지급받은 포인트 : ${step.findIndex(userStep, recipeData)}점</br>
               레시피 단계 : ${recipeData.step}</br>
+              레시피 재료 g수 : ${recipeData.today_g}g</br>
               출처 : ${recipe.url}
             </p>
         </div>

@@ -13,6 +13,7 @@ const ingredientsParse = {
   2: "해산물류",
   3: "가공식품류",
   4: "유제품류",
+  5: "채소류",
 };
 
 const point = (step, myStep) => {

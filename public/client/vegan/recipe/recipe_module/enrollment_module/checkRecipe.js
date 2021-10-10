@@ -12,6 +12,7 @@ const veganStep_list = [
 
 let point = 0;
 let cnt = 0;
+let ingredient = 0;
 
 const recipePoint = (step, myStep) => {
   if (step > myStep) {
@@ -32,16 +33,26 @@ const findIndex = (user, recipe) => {
   }
 };
 
+const updateIngredIents = (ing) => {
+  $.post("/user/g/update", {
+    user_id: localStorage.getItem("accessToken"),
+    update_g: ing,
+  });
+};
+
 const getPoint = (recipe, user, len) => {
   const pointData = findIndex(user, recipe);
   if (pointData) {
+    if (recipe.step == user.vegan_level) {
+      ingredient = ingredient + recipe.today_g;
+    }
     urlList.push(recipe.recipe_url);
-    console.log(pointData);
     point = point + pointData;
     cnt++;
   }
   // add vegan point
   if (cnt >= len && urlList.length >= len) {
+    updateIngredIents(ingredient);
     const setVeganPoint = user.vegan_point + point;
     if (setVeganPoint >= 500) {
       alert(`축하합니다! ${step.upStep}단계로 올라가셨습니다!`);

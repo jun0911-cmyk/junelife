@@ -3,6 +3,13 @@ const models = require("../../../database/connect");
 
 const pageArray = [];
 const StepArray = [];
+const ingredientsObject = {
+  meat: 150,
+  poultry: 85,
+  fish: 85,
+  milk: 266.9,
+  egg: 56,
+};
 const stepObject = {
   meat: "플렉시테리언",
   poultry: "세미베지테리언",
@@ -13,10 +20,12 @@ const stepObject = {
 
 const checkStep = (recipe_object) => {
   const getStep = stepObject[recipe_object.keyword];
+  const setIngredients = ingredientsObject[recipe_object.keyword];
   return {
     recipe_id: recipe_object.recipe.path,
     keywords: recipe_object.keyword,
     step: getStep,
+    ingredient: setIngredients,
   };
 };
 
@@ -42,11 +51,26 @@ const getIngredientsList = (data) => {
     const result = getKeywordData(data[recipeIdx]);
     if (result) {
       const getStep = checkStep(result);
-      models.RecipeList.updateOne(
+      models.RecipeList.updateMany(
         { recipe_url: getStep.recipe_id },
-        { $set: { step: getStep.step } }
+        { $set: { today_g: getStep.ingredient, step: getStep.step } }
       ).then(() => {
-        console.log("done", getStep.recipe_id);
+        models.RecipeList.find().then((recipe) => {
+          recipe.forEach((recipeData) => {
+            if (recipeData.step == "") {
+              models.RecipeList.updateOne(
+                { recipe_url: recipeData.recipe_url },
+                {
+                  $set: { step: "비건" },
+                }
+              ).then((result) => {
+                console.log("done", getStep.recipe_id);
+              });
+            } else {
+              console.log("done", getStep.recipe_id);
+            }
+          });
+        });
       });
     }
   }
@@ -60,13 +84,20 @@ const getIngredients = (recipe_arr) => {
   }
 };
 
-const getReicpePage = (recipePage) => {
-  try {
+const getReicpePage = () => {
+  models.RecipePage.find().then((rows) => {
+    rows.forEach((recipe) => {
+      getIngredients(recipe);
+    });
+  });
+  /*try {
     getIngredients(recipePage);
     return StepArray;
   } catch (e) {
     console.log(e);
-  }
+  }*/
 };
 
-module.exports = getReicpePage;
+getReicpePage();
+
+// module.exports = getReicpePage;

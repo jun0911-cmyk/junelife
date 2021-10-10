@@ -13,6 +13,7 @@ const ingredientsParse = {
   2: "해산물류",
   3: "가공식품류",
   4: "유제품류",
+  5: "채소류",
 };
 
 const recipepageComponent = (user, recipe, point) => {
@@ -30,7 +31,7 @@ const recipepageComponent = (user, recipe, point) => {
             <p>연결사이트 : ${parseRecipe.url}</p>
             <p>주요재료 : ${
               ingredientsParse[veganStep_list.indexOf(recipe.step)]
-            } / ${600}g</p>
+            } / ${recipe.today_g}g</p>
             <p>레시피 단계 : ${recipe.step}</p>
             <p>레시피 방문횟수 : ${user.visite_recipe}회 + 1</p>
           </div>
@@ -48,7 +49,7 @@ const recipepageComponent = (user, recipe, point) => {
     el: "#sub_page",
   });
 
-  return true;
+  return recipe.today_g;
 };
 
 const getRecipeData = (recipeUrl) => {
@@ -58,7 +59,7 @@ const getRecipeData = (recipeUrl) => {
   });
 };
 // recipe clean btn
-const btnEvent = (recipe, reqUrl) => {
+const btnEvent = (recipe, reqUrl, recipeData) => {
   document.getElementById("recipe_rander").addEventListener("click", (e) => {
     $.post("/recipe/visited/update", {
       user_id: localStorage.getItem("accessToken"),
@@ -94,8 +95,12 @@ $(document).on("click", "#recipe_content", async function () {
       recipeData.recipe,
       getPoints.split(":")[1]
     );
-    if (status == true) {
-      btnEvent(JSON.parse(recipeData.recipe.content), splitURl[1]);
+    if (status != null) {
+      btnEvent(
+        JSON.parse(recipeData.recipe.content),
+        splitURl[1],
+        recipeData.recipe
+      );
     }
   }
 });

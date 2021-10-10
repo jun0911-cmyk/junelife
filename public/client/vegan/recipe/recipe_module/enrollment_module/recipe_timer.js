@@ -21,6 +21,9 @@ function showRemaining() {
       accessToken: localStorage.getItem("accessToken"),
       status: 0,
     });
+    $.post("/user/g/clean", {
+      accessToken: localStorage.getItem("accessToken"),
+    });
     return;
   }
 }

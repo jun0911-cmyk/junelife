@@ -8,7 +8,7 @@ module.exports = (app) => {
       recipeList.forEach((recipe) => {
         if (recipe.rank != 0 || recipe.rank != "") {
           const splitRank = recipe.rank.split(", ").map(Number);
-          if (splitRank.length > 1) {
+          if (splitRank.length >= 1) {
             const recipeRank =
               splitRank.reduce((p, c) => p + c) / splitRank.length;
             recipeRankList.push({
@@ -17,14 +17,18 @@ module.exports = (app) => {
               favorite: recipe.favorite_people,
             });
           } else {
-            if (recipe.rank == 0 || recipe.rank != "") {
-              recipeRankList.push({
-                recipe: recipe.recipe_url,
-                rank: null,
-                favorite: recipe.favorite_people,
-              });
-            }
+            recipeRankList.push({
+              recipe: recipe.recipe_url,
+              rank: null,
+              favorite: recipe.favorite_people,
+            });
           }
+        } else {
+          recipeRankList.push({
+            recipe: recipe.recipe_url,
+            rank: null,
+            favorite: recipe.favorite_people,
+          });
         }
         // arr push state
         if (recipeRankList.length == recipeList.length) {

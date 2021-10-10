@@ -12,6 +12,7 @@ module.exports = (app) => {
             vegan_level: req.body.vegan_step,
             vegan_point: 0,
             diet: req.body.g_data,
+            new_diet: 0,
             visite_recipe: 0,
             today_visite: "",
             register_today: 0,

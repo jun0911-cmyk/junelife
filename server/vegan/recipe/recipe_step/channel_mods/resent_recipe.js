@@ -20,7 +20,7 @@ module.exports = (app) => {
               {
                 recipe_url: recipe.recipe_url,
               },
-              { rank: "2, 2" }
+              { rank: "2" }
             ).then(() => {
               res.status(200);
             });

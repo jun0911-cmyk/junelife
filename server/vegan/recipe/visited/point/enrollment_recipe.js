@@ -84,4 +84,41 @@ module.exports = (app) => {
         console.log(err);
       });
   });
+
+  app.post("/user/g/update", (req, res) => {
+    const user_id = decodingToken(req.body.user_id);
+    const update_g = req.body.update_g;
+    models.Level.findOne({
+      user_id: user_id,
+    }).then((user) => {
+      models.Level.updateOne(
+        { user_id: user.user_id },
+        {
+          $set: {
+            new_diet: Number(user.new_diet) + Number(update_g),
+          },
+        }
+      ).then((result) => {
+        res
+          .json({
+            status: true,
+          })
+          .status(200);
+      });
+    });
+  });
+
+  app.post("/user/g/clean", (req, res) => {
+    const user_id = decodingToken(req.body.user_id);
+    models.Level.updateOne(
+      { user_id: user_id },
+      {
+        $set: {
+          new_diet: 0,
+        },
+      }
+    ).then((result) => {
+      res.status(200);
+    });
+  });
 };
