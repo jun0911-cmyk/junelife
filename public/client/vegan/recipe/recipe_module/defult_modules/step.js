@@ -7,6 +7,19 @@ const veganStep_list = [
   "비건",
 ];
 
+const ingredientsList = [
+  "육류",
+  "가금류",
+  "해산물",
+  "가공식품류",
+  "유제품류",
+  "채소류",
+];
+
+const getIngredients = (user) => {
+  return ingredientsList[veganStep_list.indexOf(user.vegan_level)];
+};
+
 const recipePoint = (step, myStep) => {
   if (step > myStep) {
     step = step + 1;
@@ -26,4 +39,4 @@ const findIndex = (user, recipe) => {
   }
 };
 
-export default { findIndex };
+export default { findIndex, getIngredients };

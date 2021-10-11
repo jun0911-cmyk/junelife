@@ -33,14 +33,17 @@ const findIndex = (user, recipe) => {
   }
 };
 
-const updateIngredIents = (ing) => {
-  $.post("/user/g/update", {
+const updateIngredIents = async (ing) => {
+  const response = await $.post("/user/g/update", {
     user_id: localStorage.getItem("accessToken"),
     update_g: ing,
   });
+  if (response.status == true) {
+    return response.result;
+  }
 };
 
-const getPoint = (recipe, user, len) => {
+const getPoint = async (recipe, user, len) => {
   const pointData = findIndex(user, recipe);
   if (pointData) {
     if (recipe.step == user.vegan_level) {
@@ -52,13 +55,15 @@ const getPoint = (recipe, user, len) => {
   }
   // add vegan point
   if (cnt >= len && urlList.length >= len) {
-    updateIngredIents(ingredient);
+    const getData = await updateIngredIents(ingredient);
     const setVeganPoint = user.vegan_point + point;
     if (setVeganPoint >= 500) {
-      alert(`축하합니다! ${step.upStep}단계로 올라가셨습니다!`);
+      alert(
+        `축하합니다! ${step.upStep}단계로 올라가셨습니다! 현재 ${getData}g 만큼 소비를 줄이셨습니다!`
+      );
       $.post("/recipe/step/update", {
         user_id: user.user_id,
-        step: step.upStep,
+        step: veganStep_list[veganStep_list.indexOf(user.vegan_level) + 1],
         recipe: urlList.join(", "),
       });
       $.post("/user/today", {
@@ -66,7 +71,9 @@ const getPoint = (recipe, user, len) => {
         status: 1,
       });
     } else if (setVeganPoint < 500) {
-      alert(`축하합니다! ${point}점이 추가로 지급되었습니다!`);
+      alert(
+        `축하합니다! ${point}점이 추가로 지급되었습니다! 현재 ${getData}g 만큼 소비를 줄이셨습니다!`
+      );
       $.post("/user/point", {
         user_id: user.user_id,
         point: setVeganPoint,

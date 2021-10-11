@@ -34,4 +34,8 @@ router.get("/enrollment", checkToken, function (req, res, next) {
   );
 });
 
+router.get("/graph", checkToken, function (req, res, next) {
+  res.sendFile(path.join(__dirname, "..", "..", "/public/views/graph.html"));
+});
+
 module.exports = router;

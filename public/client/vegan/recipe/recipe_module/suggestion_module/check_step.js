@@ -29,9 +29,15 @@ export const checkStep = async (user_id) => {
     new Vue({
       el: "#account",
     });
+  } else {
+    location.href = "/recipe/diet";
+  }
+};
 
-    Vue.component("vegan-information-component", {
-      template: `
+export const subChart = async (user_id) => {
+  const step = await $.post("/recipe/step/check", { user_id: user_id });
+  Vue.component("vegan-information-component", {
+    template: `
             <div class="vegan_information">
               <div class="content">
                 <span>나의 비건포인트 : ${step.rows.vegan_point}점</span>
@@ -45,12 +51,9 @@ export const checkStep = async (user_id) => {
               <p>더 많은 통계를 보실려면 <a href="/recipe/graph">여기</a>를 클릭해주세요.</p>
             </div>
           `,
-    });
+  });
 
-    new Vue({
-      el: "#sub_chart",
-    });
-  } else {
-    location.href = "/recipe/diet";
-  }
+  new Vue({
+    el: "#sub_chart",
+  });
 };

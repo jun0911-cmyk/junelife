@@ -1,16 +1,28 @@
-import {
-  checkStep,
-  subChart,
-} from "../recipe_module/suggestion_module/check_step.js";
-import recipeBtnLoad from "../recipe_module/suggestion_module/recipe_channel/recipe_component/recipeBtn_component.js";
+import { checkStep } from "../recipe_module/suggestion_module/check_step.js";
+import graph from "../recipe_module/graph_modules/chart/manage/graph_manage.js";
+import veganData from "../recipe_module/graph_modules/data/vegan_data.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
+const gram_Chart = document.getElementById("vegan_chart");
+
+const getUserData = async (user_id) => {
+  const user = await $.post("/recipe/step/check", { user_id: user_id });
+  if (user.status == true) {
+    return user.rows;
+  }
+};
+
+const sendMessage = (user) => {
+  document.getElementById(
+    "title_msg"
+  ).innerText = `${user.user_id}님의 현재 ${user.vegan_level} 그래프`;
+};
 
 $(function () {
   $.ajax({
     type: "GET",
-    url: "/recipe",
+    url: "/recipe/graph",
     beforeSend: function (xhr) {
       xhr.setRequestHeader("Content-type", "application/json");
       xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
@@ -28,13 +40,16 @@ $(function () {
         if (accessToken) {
           localStorage.setItem("accessToken", accessToken);
         }
-        // call function setting component
-        checkStep(user_id);
-        subChart(user_id);
-        recipeBtnLoad.firstLoadRecipe(user_id);
-        recipeBtnLoad.sendRecipe(user_id);
-        // resent recipe check
-        $.post("/recipe/resent/check");
+        getUserData(user_id)
+          .then((user) => {
+            checkStep(user_id);
+            sendMessage(user);
+            veganData(user);
+            graph.gramGraph(gram_Chart, user);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     },
     error: function (request, status, error) {

@@ -6,6 +6,15 @@ const decodingToken = (accessToken) => {
   return decodingToken.payload.id;
 };
 
+const setDietData = (update_g, user) => {
+  const setDiet = user.diet / 7;
+  if (update_g > 0) {
+    return setDiet - update_g;
+  } else {
+    return 0;
+  }
+};
+
 module.exports = (app) => {
   app.post("/user/cleaned", (req, res) => {
     const user_id = decodingToken(req.body.accessToken);
@@ -91,34 +100,52 @@ module.exports = (app) => {
     models.Level.findOne({
       user_id: user_id,
     }).then((user) => {
-      models.Level.updateOne(
-        { user_id: user.user_id },
-        {
-          $set: {
-            new_diet: Number(user.new_diet) + Number(update_g),
+      const getDiet = setDietData(update_g, user);
+      if (user.graph_diet == "") {
+        models.Level.updateOne(
+          {
+            user_id: user.user_id,
           },
-        }
-      ).then((result) => {
-        res
-          .json({
-            status: true,
-          })
-          .status(200);
-      });
-    });
-  });
-
-  app.post("/user/g/clean", (req, res) => {
-    const user_id = decodingToken(req.body.user_id);
-    models.Level.updateOne(
-      { user_id: user_id },
-      {
-        $set: {
-          new_diet: 0,
-        },
+          {
+            $set: {
+              graph_diet: getDiet,
+            },
+          }
+        ).then((result) => {
+          res
+            .json({
+              status: true,
+              result: getDiet,
+            })
+            .status(200);
+        });
+      } else {
+        models.Level.aggregate([
+          {
+            $project: {
+              graph_diet: {
+                $concat: [`${user.graph_diet}`, ", ", `${getDiet}`],
+              },
+            },
+          },
+        ]).then((result) => {
+          models.Level.updateMany(
+            { user_id: user.user_id },
+            {
+              $set: {
+                graph_diet: result[0].graph_diet,
+              },
+            }
+          ).then((end) => {
+            res
+              .json({
+                status: true,
+                result: getDiet,
+              })
+              .status(200);
+          });
+        });
       }
-    ).then((result) => {
-      res.status(200);
     });
   });
 };
