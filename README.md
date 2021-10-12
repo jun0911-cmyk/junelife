@@ -1,4 +1,4 @@
-# JUNELIFE Project
+# JUNELIFE Project (Competition project. No refactoring)
 
 ### server require modules install
 
