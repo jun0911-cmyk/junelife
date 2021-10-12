@@ -8,10 +8,8 @@ const decodingToken = (accessToken) => {
 
 const setDietData = (update_g, user) => {
   const setDiet = user.diet / 7;
-  if (update_g > 0) {
+  if (update_g) {
     return setDiet - update_g;
-  } else {
-    return 0;
   }
 };
 
