@@ -76,7 +76,7 @@ const getPoint = async (recipe, user, len) => {
       alert(
         `축하합니다! ${point}점이 추가로 지급되었습니다! 현재 ${Math.round(
           getData
-        )}g 만큼 소비하셨습니다`
+        )}g 만큼 소비를 줄이셨습니다`
       );
       $.post("/user/point", {
         user_id: user.user_id,

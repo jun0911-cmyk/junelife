@@ -7,13 +7,14 @@ let cnt = 1;
 
 const showChart = (data) => {
   new Chart(document.getElementById("vegan_chart").getContext("2d"), {
-    type: "line",
+    type: "bar",
     data: data,
     options: {
       animation: true,
       layout: {
         padding: {
           top: 30,
+          right: 900,
         },
       },
     },
@@ -26,8 +27,8 @@ const setChart = (dataset, labels, ing) => {
     datasets: [
       {
         label: `하루 ${ing}섭취 g수`,
-        backgroundColor: "greenyellow",
-        borderColor: "green",
+        backgroundColor: "green",
+        borderColor: "greenyellow",
         data: dataset,
       },
     ],
