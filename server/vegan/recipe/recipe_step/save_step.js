@@ -45,4 +45,19 @@ module.exports = (app) => {
           .status(500);
       });
   });
+
+  app.post("/recipe/gram/save", (req, res) => {
+    models.Level.updateOne(
+      {
+        user_id: req.body.user_id,
+      },
+      {
+        $set: {
+          diet: req.body.diet,
+        },
+      }
+    ).then(() => {
+      res.status(200);
+    });
+  });
 };

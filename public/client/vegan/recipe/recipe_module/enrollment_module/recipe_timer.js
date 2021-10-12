@@ -14,11 +14,7 @@ function showRemaining() {
   let distance = end_time - now_time;
   if (distance < 0) {
     clearInterval(timer);
-    $.post("/user/cleaned", {
-      accessToken: localStorage.getItem("accessToken"),
-    });
-    $.post("/user/today", {
-      accessToken: localStorage.getItem("accessToken"),
+    $.post("/user/today/cleaned", {
       status: 0,
     });
     return;

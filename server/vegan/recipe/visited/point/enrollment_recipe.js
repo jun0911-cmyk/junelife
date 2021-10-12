@@ -24,6 +24,8 @@ module.exports = (app) => {
         $set: {
           today_visite: "",
           register_recipe: "",
+          register_today: 0,
+          graph_diet: "",
         },
       }
     )
@@ -45,6 +47,21 @@ module.exports = (app) => {
         },
       }
     )
+      .then((result) => {
+        res.status(200);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  app.post("/user/today/cleaned", (req, res) => {
+    models.Level.updateOne({
+      $set: {
+        register_today: req.body.status,
+        register_recipe: "",
+      },
+    })
       .then((result) => {
         res.status(200);
       })
@@ -108,14 +125,14 @@ module.exports = (app) => {
           },
           {
             $set: {
-              graph_diet: getDiet,
+              graph_diet: Math.round(getDiet),
             },
           }
         ).then((result) => {
           res
             .json({
               status: true,
-              result: getDiet,
+              result: Math.round(getDiet),
             })
             .status(200);
         });
@@ -124,7 +141,7 @@ module.exports = (app) => {
           {
             $project: {
               graph_diet: {
-                $concat: [`${user.graph_diet}`, ", ", `${getDiet}`],
+                $concat: [`${user.graph_diet}`, ", ", `${Math.round(getDiet)}`],
               },
             },
           },
@@ -140,7 +157,7 @@ module.exports = (app) => {
             res
               .json({
                 status: true,
-                result: getDiet,
+                result: Math.round(getDiet),
               })
               .status(200);
           });

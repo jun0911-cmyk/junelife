@@ -85,6 +85,15 @@ export const settingStep = async (step_arr, g_data, user_id) => {
   }
 };
 
+export const exitSettingGram = async (g_data, step, user_id) => {
+  const prototype = new vegan_step_prototype();
+  const gramData = prototype.setIngredIents(step, g_data);
+  $.post("/recipe/gram/save", {
+    user_id: user_id,
+    diet: gramData,
+  });
+};
+
 export const getVeganList = () => {
   return recipeIngredient["flexitarian"];
 };

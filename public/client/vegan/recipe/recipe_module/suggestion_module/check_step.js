@@ -29,6 +29,8 @@ export const checkStep = async (user_id) => {
     new Vue({
       el: "#account",
     });
+  } else if (step.diet == 0) {
+    location.href = "/recipe/diet";
   } else {
     location.href = "/recipe/diet";
   }

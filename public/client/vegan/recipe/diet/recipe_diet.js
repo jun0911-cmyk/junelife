@@ -3,7 +3,9 @@ import {
   investigation_message,
   yes_recipe_step,
   no_reicpe_step,
+  existing_recipe_step,
 } from "../recipe_module/diet_module/recipe_investigation.js";
+import { existing_message } from "../recipe_module/diet_module/recipe_existing.js";
 
 // hide show options
 $("#reference_input").hide();
@@ -46,7 +48,10 @@ const check_vegan = async (user_id) => {
   const checkStep = await $.post("/recipe/step/check", {
     user_id: user_id,
   });
-  if (checkStep.status == true) {
+  if (checkStep.status == -1) {
+    console.log(checkStep.rows);
+    existing_message(checkStep.rows);
+  } else if (checkStep.status == true) {
     location.href = `/recipe/graph`;
   }
 };
@@ -99,13 +104,21 @@ next_btn.addEventListener("click", (e) => {
 });
 
 success_btn.addEventListener("click", (e) => {
-  const data = reference_data();
-  const selfG = $("#input_val").val();
-  if (selfG == 0) {
-    yes_recipe_step(data, user_id);
-  } else {
-    yes_recipe_step(selfG, user_id);
-  }
+  $.post("/recipe/step/check", {
+    user_id: user_id,
+  }).then((res) => {
+    const data = reference_data();
+    const selfG = $("#input_val").val();
+    if (res.status == -1) {
+      existing_recipe_step(data, res.rows, user_id);
+    } else {
+      if (selfG == 0) {
+        yes_recipe_step(data, user_id);
+      } else {
+        yes_recipe_step(selfG, user_id);
+      }
+    }
+  });
 });
 
 clean_btn.addEventListener("click", (e) => {

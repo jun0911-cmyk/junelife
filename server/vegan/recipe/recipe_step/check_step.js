@@ -18,6 +18,13 @@ module.exports = (app) => {
             rows: null,
           })
           .status(403);
+      } else if (rows.diet == 0) {
+        res
+          .json({
+            status: -1,
+            rows: rows.vegan_level,
+          })
+          .status(200);
       } else {
         res
           .json({
@@ -38,6 +45,8 @@ module.exports = (app) => {
         $set: {
           vegan_level: step,
           vegan_point: 0,
+          diet: 0,
+          graph_diet: "",
           register_recipe: req.body.recipe,
         },
       }

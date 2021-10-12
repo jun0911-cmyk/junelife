@@ -9,7 +9,7 @@ const veganStepList = [
   "비건",
 ];
 
-const animalList = ["돼지", "닭", "생선", "암소", "병아리", "보존성공"];
+const animalList = ["고기 1인분", "닭", "생선", "암소", "병아리", "보존성공"];
 
 const getUser = (user) => {
   const graphData = user.graph_diet.split(", ");

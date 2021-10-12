@@ -183,7 +183,8 @@ div {
   border-bottom: 0.1px solid #d2d7dd;
 }
 
-.graph_title h1 {
+.graph_title h1,
+.graph_sub h1 {
   padding-left: 3%;
   padding-top: 1%;
   font-weight: 900;

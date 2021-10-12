@@ -6,7 +6,7 @@ const chartLabels = [];
 let cnt = 1;
 
 const showChart = (data) => {
-  new Chart(document.getElementById("vegan_chart"), {
+  new Chart(document.getElementById("vegan_chart").getContext("2d"), {
     type: "line",
     data: data,
     options: {
@@ -54,11 +54,21 @@ const createDataSet = (graphData, defaultData, user) => {
   });
 };
 
+const firstGraph = () => {
+  Swal.fire(
+    "그래프를 불러올수 없습니다.",
+    "아직 설정해진 데이터가 없으므로 그래프를 그릴수 없습니다. 레시피 페이지로 이동됩니다.",
+    "error"
+  ).then(() => {
+    location.href = "/recipe";
+  });
+};
+
 const getChartEL = (elem, user) => {
   const getData = user.graph_diet;
   const getDefaultDiet = user.diet;
   if (getData == "") {
-    firstGraph(elem, getDefaultDiet, user);
+    firstGraph();
   } else {
     const splitData = getData.split(", ");
     createDataSet(splitData, getDefaultDiet, user);

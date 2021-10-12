@@ -1,6 +1,7 @@
 import {
   settingStep,
   getVeganList,
+  exitSettingGram,
 } from "./diet_algorithm/recipe_step_algo.js";
 
 const elHide = () => {
@@ -53,27 +54,8 @@ const success_message = (veganStep) => {
   }, 3000);
 };
 
-const failure_message = () => {
-  document.getElementById(
-    "title"
-  ).innerText = `단계 설정을 실패하였습니다. 다음에 다시 시도해주세요.`;
-  // 3 secound after hyper link
-  setTimeout(() => {
-    location.href = `/`;
-  }, 1000);
-};
-
-const error_message = () => {
-  // Error message template
-  Vue.component("error-component", {
-    template: `
-      <div style="color: red; font-size: 23px; margin-top: 3%">데이터를 입력받을 수 없습니다. 페이지의 오류가 발생하였습니다.</div>
-    `,
-  });
-  // render to error component template
-  new Vue({
-    el: "#error",
-  });
+const success_exit_message = () => {
+  location.href = `/recipe`;
 };
 
 const referenceInput_message = (step_arr) => {
@@ -102,6 +84,11 @@ export const yes_recipe_step = (g_data, user_id) => {
   const getStep = settingStep(checkList, g_data, user_id);
   result_message();
   checkSave(getStep);
+};
+
+export const existing_recipe_step = (g_data, step, user_id) => {
+  exitSettingGram(g_data, step, user_id);
+  success_exit_message();
 };
 
 export const investigation_message = (user_id) => {

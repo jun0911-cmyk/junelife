@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
@@ -50,6 +51,11 @@
         </div>
         <div class="graph_line">
             <canvas id="vegan_chart" height="100" width="500"></canvas>
+        </div>
+        <div class="graph_sub">
+            <h1 class="chart_msg">현재 지구 온난화 온도 그래프</h1>
+            <canvas id="temperature_chart" height="100" width="500"></canvas>
+            <canvas id="visited_chart" height="100" width="500"></canvas>
         </div>
         <div class="contention">
           <script src="./vegan/recipe/graph/recipe_graph.js" type="module"></script>
