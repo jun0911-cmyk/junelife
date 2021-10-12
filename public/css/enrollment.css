@@ -338,6 +338,29 @@ div {
   color: red;
 }
 
+#progressLabel {
+  margin-left: 26px;
+  padding-top: 1%;
+  font-weight: 900;
+}
+
+progress {
+  margin-left: 20px;
+  height: 50px;
+  border: 2px solid greenyellow;
+  border-radius: 30px;
+  width: 70%;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 30px;
+  background-color: greenyellow;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: 30px;
+}
+
 .footer {
   text-align: center;
   margin: 0 auto;

@@ -5,6 +5,8 @@ import check_recipe from "../recipe_module/enrollment_module/checkRecipe.js";
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
 const enrollment = document.getElementById("enrollment");
+const getProgress = document.getElementById("pointProgressBar");
+const progressLabel = document.getElementById("progressLabel");
 
 let user_id = null;
 
@@ -25,6 +27,23 @@ const checkBtn = async () => {
         "레시피를 등록할 수 있습니다!";
       document.getElementById("message").style.color = "blue";
       document.getElementById("enrollment").disabled = false;
+    }
+  }
+};
+
+const progressBar = (user) => {
+  let value = (user.vegan_point / 500) * 100;
+  let checkValue = 0;
+  const id = setInterval(frame, 10);
+  function frame() {
+    if (checkValue >= value) {
+      clearInterval(id);
+    } else {
+      checkValue++;
+      progressLabel.innerHTML = `비건 단계 레벨업까지 남은 포인트 : ${
+        500 - user.vegan_point
+      }점, 현재 ${checkValue}%`;
+      getProgress.value = checkValue;
     }
   }
 };
@@ -57,9 +76,14 @@ $(function () {
         location.href = "/user/login";
       } else if (result.status == true) {
         user_id = result.user_id;
-        checkBtn();
-        vegan_components(user_id);
-        recipe_list(user_id);
+        $.post("/recipe/step/check", { user_id: user_id }).then((user) => {
+          if (user.status == true) {
+            checkBtn();
+            progressBar(user.rows);
+            vegan_components(user_id);
+            recipe_list(user_id);
+          }
+        });
       }
     },
     error: function (request, status, error) {

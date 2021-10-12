@@ -1,4 +1,7 @@
 const gramList = [];
+const animalName = document.getElementById("animal_name");
+const animalData = document.getElementById("animal_data");
+const animalToday = document.getElementById("animal_today");
 
 const veganStepList = [
   "플렉시테리언",
@@ -9,16 +12,48 @@ const veganStepList = [
   "비건",
 ];
 
-const animalList = ["고기 1인분", "닭", "생선", "암소", "병아리", "보존성공"];
+const ingredientList = [
+  "육류",
+  "가금류",
+  "해산물",
+  "가공식품류",
+  "유제품류",
+  "채소류",
+];
+
+const animalList = ["고기 1인분", "닭", "생선", "가공육", "병아리", "보존성공"];
+const animalDataList = [150, 85, 159, 226.9, 56, 0];
+
+let gramData = 0;
+
+const getData = (user) => {
+  const defaultData = user.diet / 7;
+  const getAnimal = animalList[veganStepList.indexOf(user.vegan_level)];
+  const getIngredients =
+    ingredientList[veganStepList.indexOf(user.vegan_level)];
+  const getData = animalDataList[veganStepList.indexOf(user.vegan_level)];
+  return {
+    default: defaultData,
+    animalName: getAnimal,
+    animalData: getData,
+    ingredient: getIngredients,
+  };
+};
 
 const getUser = (user) => {
   const graphData = user.graph_diet.split(", ");
-  const defaultData = user.diet / 7;
-  const getAnimal = animalList[veganStepList.indexOf(user.vegan_level)];
+  const datas = getData(user);
   graphData.forEach((data, index) => {
-    gramList.push(defaultData - data);
-    if (gramList.length >= graphData.length) {
-      console.log(gramList);
+    gramData = Number(gramData) + Number(data);
+    gramList.push(true);
+    if (gramList.length == graphData.length) {
+      animalName.innerHTML = `보존한 동물 분류 : ${datas.animalName}`;
+      animalData.innerHTML = `보존한 마리수 : ${
+        datas.animalName
+      } 약 ${Math.round(
+        gramData / datas.animalData
+      )}마리를 환경파괴에서 구출하셨습니다!`;
+      animalToday.innerHTML = `1일부터 ${gramList.length}일까지 ${datas.ingredient}을 총 ${gramData}g 만큼 줄이셨습니다!`;
     }
   });
 };

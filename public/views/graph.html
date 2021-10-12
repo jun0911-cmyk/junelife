@@ -51,14 +51,19 @@
         </div>
         <div class="graph_line">
             <canvas id="vegan_chart" height="100" width="500"></canvas>
-            <div class="image">
-              <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcH96t7%2FbtqBlzTYYeT%2FVkk1SLLS0js7WXQjjc17Uk%2Fimg.jpg" class="tree_img">
-            </div>
+            <canvas id="consumption_chart" height="100" width="500"></canvas>
         </div>
         <div class="graph_sub">
-            <h1 class="chart_msg">현재 지구 온난화 온도 그래프</h1>
-            <canvas id="temperature_chart" height="100" width="500"></canvas>
-            <canvas id="visited_chart" height="100" width="500"></canvas>
+            <h1 class="chart_msg">레시피 관련 통계</h1>
+            <div class="w3-light-grey">
+              <progress value="0" max="100" id="progressbar"></progress>
+              <p id="progresslabel"></p>
+            </div>
+            <div class="vegan_animal_data">
+              <span id="animal_name"></span></br></br>
+              <span id="animal_data">보존한 마리수 : 1마리</span></br></br>
+              <span id="animal_today"></span>
+            </div>
         </div>
         <div class="contention">
           <script src="./vegan/recipe/graph/recipe_graph.js" type="module"></script>

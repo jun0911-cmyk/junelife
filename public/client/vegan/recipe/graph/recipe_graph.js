@@ -46,6 +46,9 @@ $(function () {
             sendMessage(user);
             veganData(user);
             graph.gramGraph(gram_Chart, user);
+            graph.consumptionGraph(user);
+            graph.progressBar(user);
+            graph.veganData(user)
           })
           .catch((err) => {
             console.log(err);

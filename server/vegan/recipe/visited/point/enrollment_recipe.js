@@ -57,6 +57,7 @@ module.exports = (app) => {
     models.Level.updateOne({
       $set: {
         register_today: req.body.status,
+        today_visite: "",
         register_recipe: "",
       },
     })

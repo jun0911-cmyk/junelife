@@ -190,22 +190,36 @@ div {
   font-weight: 900;
 }
 
-.image {
-  display: flex;
-  margin-left: 55%;
-  margin-top: -17%;
-  width: 44%;
-  height: 300px;
-  border: 3px solid black;
+#progresslabel {
+  margin-left: 40px;
+  padding-top: 1%;
+  font-weight: 900;
 }
 
-img {
-  width: 1000px;
-  height: 294px;
+#consumption_chart {
+  margin-top: -20%;
 }
 
-.tree_image {
-  object-fit: fill;
+progress {
+  margin-left: 20px;
+  margin-top: 2%;
+  height: 50px;
+  border-radius: 30px;
+  width: 50%;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 30px;
+  background-color: greenyellow;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: 30px;
+}
+
+.vegan_animal_data {
+  margin-left: 40px;
+  font-weight: 900;
 }
 
 .title {

@@ -1,3 +1,6 @@
-import gramGraph from "../g_line_chart.js";
+import gramGraph from "../intake_line_chart.js";
+import consumptionGraph from "../consumption_chart.js";
+import progressBar from "../../progress/progress.js";
+import veganData from "../../data/vegan_data.js";
 
-export default { gramGraph };
+export default { gramGraph, consumptionGraph, progressBar, veganData };
