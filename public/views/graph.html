@@ -50,8 +50,12 @@
           <h1 id="title_msg"></h1>
         </div>
         <div class="graph_line">
-            <canvas id="vegan_chart" height="100" width="500"></canvas>
-            <canvas id="consumption_chart" height="100" width="500"></canvas>
+            <div class="intake">
+              <canvas id="vegan_chart" height="100" width="500"></canvas>
+            </div>
+            <div class="consumption">
+              <canvas id="consumption_chart" height="100" width="500"></canvas>
+            </div>
         </div>
         <div class="graph_sub">
             <h1 class="chart_msg">레시피 관련 통계</h1>
@@ -61,8 +65,12 @@
             </div>
             <div class="vegan_animal_data">
               <span id="animal_name"></span></br></br>
-              <span id="animal_data">보존한 마리수 : 1마리</span></br></br>
-              <span id="animal_today"></span>
+              <span id="animal_data">보존한 마리수 : 아직 환경파괴에서 구출한 마리가 없습니다.</span></br></br>
+              <span id="animal_today"></span></br></br>
+              <span id="data_intake"></span>
+            </div>
+            <div class="visited">
+              <canvas id="visite_chart" height="450vw" width="1000vh"></canvas>
             </div>
         </div>
         <div class="contention">

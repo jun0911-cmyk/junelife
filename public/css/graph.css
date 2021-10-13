@@ -96,7 +96,13 @@ body {
   -moz-user-select: -moz-none;
   -khtml-user-select: none;
   -webkit-user-select: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
   background-color: #f8f9fa;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .navigator a {
@@ -197,6 +203,11 @@ div {
 }
 
 #consumption_chart {
+  margin-top: -20%;
+}
+
+#visite_chart {
+  margin-left: 50%;
   margin-top: -20%;
 }
 

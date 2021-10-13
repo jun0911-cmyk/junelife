@@ -20,7 +20,6 @@ module.exports = (app) => {
             { user_id: user_id },
             {
               $set: {
-                visite_recipe: rows.visite_recipe + 1,
                 today_visite: req.body.choose_url,
               },
             }
@@ -50,7 +49,6 @@ module.exports = (app) => {
                 { user_id: user_id },
                 {
                   $set: {
-                    visite_recipe: rows.visite_recipe + 1,
                     today_visite: result[0].today_visite,
                   },
                 }

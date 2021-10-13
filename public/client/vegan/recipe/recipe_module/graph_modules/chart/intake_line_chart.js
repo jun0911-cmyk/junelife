@@ -30,6 +30,8 @@ const setChart = (dataset, labels, ing) => {
         backgroundColor: "greenyellow",
         borderColor: "green",
         data: dataset,
+        fill: true,
+        tension: 0.2,
       },
     ],
   };

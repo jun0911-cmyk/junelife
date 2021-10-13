@@ -13,7 +13,7 @@ module.exports = (app) => {
             vegan_point: 0,
             diet: req.body.g_data,
             graph_diet: "",
-            visite_recipe: 0,
+            visite_recipe: "",
             today_visite: "",
             register_today: 0,
             register_recipe: "",

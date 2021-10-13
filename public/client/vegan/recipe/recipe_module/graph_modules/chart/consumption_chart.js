@@ -29,6 +29,8 @@ const createChart = (data, user) => {
             backgroundColor: "green",
             borderColor: "blue",
             data: data,
+            fill: true,
+            tension: 0.2,
           },
         ],
       };

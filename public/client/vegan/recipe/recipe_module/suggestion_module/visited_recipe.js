@@ -33,7 +33,9 @@ const recipepageComponent = (user, recipe, point) => {
               ingredientsParse[veganStep_list.indexOf(recipe.step)]
             } / ${recipe.today_g}g</p>
             <p>레시피 단계 : ${recipe.step}</p>
-            <p>레시피 방문횟수 : ${user.visite_recipe}회 + 1</p>
+            <p>레시피 방문횟수 : ${
+              user.today_visite.trim().split(",  ").length
+            }회 + 1</p>
           </div>
           <div class="btn">
             <button type="button" class="btn btn-primary btn-sm" id="recipe_rander">이동하기</button>

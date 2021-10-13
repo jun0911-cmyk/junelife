@@ -38,13 +38,16 @@ export const checkStep = async (user_id) => {
 
 export const subChart = async (user_id) => {
   const step = await $.post("/recipe/step/check", { user_id: user_id });
+  const getTodayVisite = step.rows.visite_recipe.split(", ");
   Vue.component("vegan-information-component", {
     template: `
             <div class="vegan_information">
               <div class="content">
                 <span>나의 비건포인트 : ${step.rows.vegan_point}점</span>
                 <span>나의 비건레벨 : ${step.rows.vegan_level}</span>
-                <span>추천레시피 방문횟수 : ${step.rows.visite_recipe}회</span>
+                <span>어제 레시피 방문횟수 : ${
+                  getTodayVisite[getTodayVisite.length - 1]
+                }회</span>
               </div>
               <div class="sub_content">
                 <span id="cnt_recipe">레시피추천횟수 : 불러오는중</span>
