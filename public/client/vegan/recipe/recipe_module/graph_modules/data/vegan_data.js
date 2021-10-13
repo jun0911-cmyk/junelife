@@ -70,7 +70,7 @@ const getUser = (user) => {
         )}마리를 환경파괴에서 구출하셨습니다!`;
       }
       animalName.innerHTML = `보존한 동물 분류 : ${datas.animalName}`;
-      animalToday.innerHTML = `1일부터 ${gramList.length}일까지 ${datas.ingredient}을 총 ${gramData}g 만큼 줄이셨습니다!`;
+      animalToday.innerHTML = `1일부터 ${gramList.length}일까지 ${datas.ingredient} 섭취를 총 ${gramData}g 만큼 줄이셨습니다!`;
       setIntakeData(user, graphData, datas);
     }
   });

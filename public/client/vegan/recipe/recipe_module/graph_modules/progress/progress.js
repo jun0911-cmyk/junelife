@@ -12,10 +12,17 @@ const progressBar = (user) => {
       clearInterval(id);
     } else {
       checkValue++;
-      progressLabel.innerHTML = `평균 227g 소비중 ${checkValue}%를 줄이셨습니다.`;
+      progressLabel.innerHTML = `평균
+        ${Math.round(user.diet / 7)}g 소비중 ${checkValue}%를 줄이셨습니다.`;
       getProgress.value = checkValue;
       if (checkValue >= 100) {
-        progressLabel.innerHTML = `평균 227g 소비중 ${checkValue}%를 줄이셨습니다.</br>축하합니다! 0g을 소비하셨으므로 특별포인트가 지급됩니다!`;
+        progressLabel.innerHTML = `평균 ${Math.round(
+          user.diet / 7
+        )}g 소비중 ${checkValue}%를 줄이셨습니다.</br>축하합니다! 하루 평균 ${Math.round(
+          user.diet / 7
+        )}g 소비중 총 ${
+          graph_diet[graph_diet.length - 1]
+        }g의 소비를 줄이셨습니다!`;
       }
     }
   }
