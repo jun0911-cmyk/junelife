@@ -1,21 +1,11 @@
 const chartLabels = [];
 const colorLabels = [];
+const dataSets = [];
 const cxt = document.getElementById("visite_chart");
 
-const settingDateLabels = (user, index, visite) => {
-  const date = new Date();
-  const startDate = new Date(
-    `${date.getFullYear()}/${Number(date.getMonth() + 1)}/${Number(
-      date.getDate() - visite.length
-    )}`
-  );
-  chartLabels.push(
-    startDate.getFullYear() +
-      "/" +
-      Number(startDate.getMonth() + 1) +
-      "/" +
-      Number(startDate.getDate() + 1 + index)
-  );
+const settingDateLabels = (data, visite) => {
+  chartLabels.push(data.split(":")[0]);
+  dataSets.push(data.split(":")[1]);
 };
 
 const settingColorLabels = (index) => {
@@ -42,7 +32,7 @@ const showChart = (data) => {
 
 const createDataSet = (visite, user) => {
   visite.forEach((data, index) => {
-    settingDateLabels(user, index, visite);
+    settingDateLabels(data, visite);
     settingColorLabels(index);
     if (chartLabels.length >= visite.length) {
       const dataset = {
@@ -51,7 +41,7 @@ const createDataSet = (visite, user) => {
           {
             label: `하루 평균 레시피 방문율`,
             backgroundColor: colorLabels,
-            data: visite,
+            data: dataSets,
           },
         ],
       };

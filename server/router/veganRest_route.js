@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const requestIp = require("request-ip");
+const checkToken = require("../middleware/oauth_token/checkTokens");
 const router = express.Router();
 
 router.use(express.static("../public/css"));
@@ -15,7 +16,7 @@ router.use(function timeLog(req, res, next) {
   next();
 });
 
-router.get("/", function (req, res, next) {
+router.get("/", checkToken, function (req, res, next) {
   res.sendFile(
     path.join(__dirname, "..", "..", "/public/views/restaurant.html")
   );

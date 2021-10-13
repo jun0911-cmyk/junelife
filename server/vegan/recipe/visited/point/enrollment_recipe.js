@@ -13,6 +13,11 @@ const setDietData = (update_g, user) => {
   }
 };
 
+const getDate = () => {
+  const date = new Date();
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+};
+
 module.exports = (app) => {
   app.post("/user/cleaned", (req, res) => {
     const user_id = decodingToken(req.body.accessToken);
@@ -55,6 +60,7 @@ module.exports = (app) => {
 
   app.post("/user/today/cleaned", (req, res) => {
     let getTodayRecipe = 0;
+    let date = getDate();
     models.Level.find().then((levelList) => {
       levelList.forEach((rows) => {
         if (rows.today_visite != "") {
@@ -67,7 +73,7 @@ module.exports = (app) => {
             {
               $set: {
                 register_today: req.body.status,
-                visite_recipe: getTodayRecipe.length,
+                visite_recipe: date + ":" + getTodayRecipe.length,
                 today_visite: "",
                 register_recipe: "",
               },
@@ -87,7 +93,7 @@ module.exports = (app) => {
                   $concat: [
                     `${rows.visite_recipe}`,
                     ", ",
-                    `${getTodayRecipe.length}`,
+                    `${date + ":" + getTodayRecipe.length}`,
                   ],
                 },
               },

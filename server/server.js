@@ -53,7 +53,7 @@ app.use(function (req, res, next) {
 app.use("/", Router.mainRouter);
 app.use("/user", Router.accountRouter);
 app.use("/recipe", Router.veganRecipeRouter);
-app.use("/rest", Router.veganRestRouter);
+app.use("/restaurant", Router.veganRestRouter);
 
 // account Server
 require("./account/login/login_server")(app, passport);

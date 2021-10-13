@@ -46,12 +46,14 @@ export const subChart = async (user_id) => {
                 <span>나의 비건포인트 : ${step.rows.vegan_point}점</span>
                 <span>나의 비건레벨 : ${step.rows.vegan_level}</span>
                 <span>어제 레시피 방문횟수 : ${
-                  getTodayVisite[getTodayVisite.length - 1]
+                  getTodayVisite[getTodayVisite.length - 1].split(":")[1]
                 }회</span>
               </div>
               <div class="sub_content">
                 <span id="cnt_recipe">레시피추천횟수 : 불러오는중</span>
-                <span>내 온도 : 표시불가</span>
+                <span>마지막 접속날짜 : ${
+                  getTodayVisite[getTodayVisite.length - 1].split(":")[0]
+                }</span>
               </div>
               <p>더 많은 통계를 보실려면 <a href="/recipe/graph">여기</a>를 클릭해주세요.</p>
             </div>
