@@ -1,5 +1,5 @@
 import api_key from "./api_key.js";
-import setMarker from "./setMarker.js";
+import findLength from "./find_rest.js";
 
 const showMap = (lat, lon) => {
   const mapElement = document.getElementById("map");
@@ -8,7 +8,7 @@ const showMap = (lat, lon) => {
     level: 3,
   };
   const map = new kakao.maps.Map(mapElement, mapOption);
-  setMarker(map, lat, lon);
+  findLength(map, new kakao.maps.LatLng(lat, lon));
 };
 
 const getGps = () => {
