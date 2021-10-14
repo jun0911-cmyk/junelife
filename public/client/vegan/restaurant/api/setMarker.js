@@ -1,5 +1,4 @@
-const showMarker = (map, coords, rows) => {
-  glo_map = map;
+const showMarker = (map, coords, rows, centerLatLng) => {
   const marker = new kakao.maps.Marker({
     map: map,
     position: coords,
@@ -8,6 +7,7 @@ const showMarker = (map, coords, rows) => {
     content: `<div style="width:150px;text-align:center;padding:6px 0;">${rows.restaurant_name}</div>`,
   });
   infowindow.open(map, marker);
+  map.setCenter(centerLatLng);
 };
 
 const showListMarker = (coords, image, rows) => {

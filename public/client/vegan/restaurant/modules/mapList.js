@@ -13,13 +13,4 @@ const component = (recipe) => {
     `);
 };
 
-const getMapData = async () => {
-  const getRecipe = await $.post("/rest/get");
-  if (getRecipe.status == true) {
-    getRecipe.data.forEach((recipe) => {
-      component(recipe);
-    });
-  }
-};
-
-export default getMapData;
+export default component;

@@ -39,9 +39,23 @@
             </div>
         </div>
     </div>
+    <div class="enroll_map" id="enroll_map">
+        <h2>음식점 등록</h2>
+        <h4>음식점 상호명을 입력해주세요.</h4>
+        <input id="rest_name" size="30" type="text" placeholder="여기에 상호명을 입력해주세요.">
+        <h4>음식점 영업 연락처를 입력해주세요</h4>
+        <input id="phone" size="30" type="tel" placeholder="여기에 연락처를 입력해주세요.">
+        <h4>음식점 주소를 상세히 입력해주세요.</h4>
+        <input id="address" size="30" type="text" placeholder="여기에 주소를 입력해주세요."><br>
+        <div class="btn">
+            <button type="button" id="ok_btn" class="btn btn-primary btn-sm">등록하기</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="clean_btn">취소하기</button>
+        </div>
+    </div>
     <div class="mapList">
         <h3>비건 관련 음식점 찾기</h3>
         <div class="overlay" id="overlay"></div>
+        <button class="enroll_btn" id="enroll_btn">음식점 등록하기</button>
         <div class="data" id="data">
         </div>
     </div>

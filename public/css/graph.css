@@ -233,6 +233,43 @@ progress::-webkit-progress-bar {
   font-weight: 900;
 }
 
+.image {
+  position: absolute;
+  padding-left: 45%;
+  margin-top: -12%;
+}
+
+.image_sub .fa-arrow-down {
+  position: absolute;
+  margin-left: 43%;
+  margin-top: -7%;
+  color: red;
+  font-size: 30px;
+}
+
+.image_sub .fa-arrow-up {
+  position: absolute;
+  margin-left: 43%;
+  margin-top: -7%;
+  color: blue;
+  font-size: 30px;
+}
+
+.image_sub p {
+  position: absolute;
+  margin-left: 39.5%;
+  font-weight: bold;
+  margin-top: -8%;
+  color: red;
+}
+
+.count {
+  position: absolute;
+  padding-left: 46%;
+  margin-top: 0.5%;
+  font-weight: bold;
+}
+
 .title {
   float: right;
   padding: 10px;

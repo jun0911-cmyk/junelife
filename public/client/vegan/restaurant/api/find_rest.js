@@ -1,4 +1,5 @@
 import marker from "./setMarker.js";
+import component from "../modules/mapList.js";
 
 let distanceOverlay = 0;
 let defaultLength = 500;
@@ -45,7 +46,8 @@ const getLength = (map, centerLatLng) => {
             const minDistance = polyline.getLength();
             distanceOverlay = Math.round(minDistance);
             if (distanceOverlay <= defaultLength) {
-              marker.showMarker(map, restLatLng, rows);
+              component(rows);
+              marker.showMarker(map, restLatLng, rows, centerLatLng);
             }
           }
         });

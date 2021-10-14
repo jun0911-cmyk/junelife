@@ -4,7 +4,7 @@ let restData = {};
 
 const setMarker = (latlng) => {
   const src =
-    "https://lh3.googleusercontent.com/proxy/Hk0bwXDdIkFj-vLLlqWSxVzDC5bqkBPQ4b6DYtZEpF1jdKaJ91ERU9tAy-o-sbBIPvh2pbn5qT9ynokjlyB0bkI_c1zBoLnv-2QioJLzyDx3yAS_WG8C";
+    "https://i.pinimg.com/originals/71/c8/06/71c806428f9d8c76f8dd491ee177382c.png";
   const size = new kakao.maps.Size(64, 69);
   const imageOption = { offset: new kakao.maps.Point(27, 69) };
   const markerImage = new kakao.maps.MarkerImage(src, size, imageOption);

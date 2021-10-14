@@ -72,6 +72,7 @@ require("./vegan/recipe/recipe_step/channel_mods/sugg_recipe")(app);
 
 // vegan Rest Server
 require("./vegan/restaurant/getRest")(app);
+require("./vegan/restaurant/saveRest")(app);
 
 // recipe timer
 const timer = require("./vegan/recipe/recipe_step/recipe_timer");

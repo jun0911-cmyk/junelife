@@ -1,9 +1,26 @@
 import { checkStep } from "../recipe/recipe_module/suggestion_module/check_step.js";
 import Mapapi from "../restaurant/api/create_map.js";
-import getMapList from "../restaurant/modules/mapList.js";
+import saveRest from "../restaurant/modules/save_rest.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
+const enroll_btn = document.getElementById("enroll_btn");
+const cleaned_btn = document.getElementById("clean_btn");
+const ok_btn = document.getElementById("ok_btn");
+
+$("#enroll_map").hide();
+
+enroll_btn.addEventListener("click", (e) => {
+  $("#enroll_map").show();
+});
+
+ok_btn.addEventListener("click", (e) => {
+  saveRest();
+});
+
+cleaned_btn.addEventListener("click", (e) => {
+  $("#enroll_map").hide();
+});
 
 $(function () {
   $.ajax({
@@ -29,7 +46,6 @@ $(function () {
         // call function setting component
         checkStep(user_id);
         Mapapi();
-        getMapList();
       }
     },
     error: function (request, status, error) {

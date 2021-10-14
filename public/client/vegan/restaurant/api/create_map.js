@@ -8,6 +8,7 @@ const showMap = (lat, lon) => {
     level: 3,
   };
   const map = new kakao.maps.Map(mapElement, mapOption);
+  window.LatLng = new kakao.maps.LatLng(lat, lon);
   findLength(map, new kakao.maps.LatLng(lat, lon));
 };
 
