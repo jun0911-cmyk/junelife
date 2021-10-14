@@ -194,6 +194,53 @@ div {
   display: flex;
 }
 
+.mapList {
+  position: absolute;
+  margin-left: 2%;
+  margin-top: 3%;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 30.2vh;
+  height: 40vw;
+  z-index: 99;
+  overflow: scroll;
+}
+
+.mapList a {
+  outline: none;
+  text-decoration: none;
+  color: black;
+}
+
+.mapList h3 {
+  text-align: center;
+  padding-top: 2%;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.list {
+  width: 29.1vh;
+  height: 5vw;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 10%;
+  padding-right: 1%;
+}
+
+#name {
+  font-weight: 900;
+}
+
+.rest {
+  float: right;
+  z-index: 1;
+}
+
+.map {
+  width: 204vh;
+  height: 46.4vw;
+}
+
 .title {
   float: right;
   padding: 10px;

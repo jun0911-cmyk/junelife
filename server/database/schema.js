@@ -44,9 +44,9 @@ const recipePageSchema = new mongoose.Schema({
 const RestaurantSchema = new mongoose.Schema({
   restaurant_name: { type: String },
   restaurant_id: { type: Number },
-  latitude: { type: Number },
-  grade: { type: Number },
-  owner: { type: String },
+  phone: { type: String },
+  address: { type: String },
+  menu: { type: String },
   created: { type: Date, default: Date.now },
 });
 

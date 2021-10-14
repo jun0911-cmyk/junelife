@@ -1,5 +1,6 @@
 import { checkStep } from "../recipe/recipe_module/suggestion_module/check_step.js";
 import Mapapi from "../restaurant/api/create_map.js";
+import getMapList from "../restaurant/modules/mapList.js";
 
 const accessToken = localStorage.getItem("accessToken");
 const accessUser = localStorage.getItem("accessUser");
@@ -28,6 +29,7 @@ $(function () {
         // call function setting component
         checkStep(user_id);
         Mapapi();
+        getMapList();
       }
     },
     error: function (request, status, error) {

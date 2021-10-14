@@ -70,6 +70,9 @@ require("./vegan/recipe/recipe_step/channel_mods/rank")(app);
 require("./vegan/recipe/recipe_step/channel_mods/resent_recipe")(app);
 require("./vegan/recipe/recipe_step/channel_mods/sugg_recipe")(app);
 
+// vegan Rest Server
+require("./vegan/restaurant/getRest")(app);
+
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
   var err = new Error("Page Not Found");

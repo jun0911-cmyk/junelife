@@ -1,4 +1,5 @@
 import api_key from "./api_key.js";
+import setMarker from "./setMarker.js";
 
 const showMap = (lat, lon) => {
   const mapElement = document.getElementById("map");
@@ -6,7 +7,8 @@ const showMap = (lat, lon) => {
     center: new kakao.maps.LatLng(lat, lon),
     level: 3,
   };
-  new kakao.maps.Map(mapElement, mapOption);
+  const map = new kakao.maps.Map(mapElement, mapOption);
+  setMarker(map, lat, lon);
 };
 
 const getGps = () => {
@@ -29,7 +31,7 @@ const createMap = () => {
 const loadApi = () => {
   const key = api_key.key;
   const script = document.getElementById("api");
-  script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${key}`;
+  script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${key}&libraries=services,clusterer,drawing`;
   script.onload = () => {
     createMap();
   };
