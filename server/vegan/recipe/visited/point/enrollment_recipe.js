@@ -13,11 +13,6 @@ const setDietData = (update_g, user) => {
   }
 };
 
-const getDate = () => {
-  const date = new Date();
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-};
-
 module.exports = (app) => {
   app.post("/user/cleaned", (req, res) => {
     const user_id = decodingToken(req.body.accessToken);
@@ -56,70 +51,6 @@ module.exports = (app) => {
       .catch((err) => {
         console.log(err);
       });
-  });
-
-  app.post("/user/today/cleaned", (req, res) => {
-    let getTodayRecipe = 0;
-    let date = getDate();
-    models.Level.find().then((levelList) => {
-      levelList.forEach((rows) => {
-        if (rows.today_visite != "") {
-          getTodayRecipe = rows.today_visite.trim().split(",  ");
-        }
-        // check
-        if (rows.visite_recipe == "") {
-          models.Level.updateOne(
-            { user_id: rows.user_id },
-            {
-              $set: {
-                register_today: req.body.status,
-                visite_recipe: date + ":" + getTodayRecipe.length,
-                today_visite: "",
-                register_recipe: "",
-              },
-            }
-          )
-            .then((result) => {
-              res.status(200);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        } else {
-          models.Level.aggregate([
-            {
-              $project: {
-                visite_recipe: {
-                  $concat: [
-                    `${rows.visite_recipe}`,
-                    ", ",
-                    `${date + ":" + getTodayRecipe.length}`,
-                  ],
-                },
-              },
-            },
-          ]).then((result) => {
-            models.Level.updateOne(
-              { user_id: rows.user_id },
-              {
-                $set: {
-                  register_today: req.body.status,
-                  visite_recipe: result[0].visite_recipe,
-                  today_visite: "",
-                  register_recipe: "",
-                },
-              }
-            )
-              .then((result) => {
-                res.status(200);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          });
-        }
-      });
-    });
   });
 
   app.post("/user/today/get", (req, res) => {
