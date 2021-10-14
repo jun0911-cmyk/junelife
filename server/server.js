@@ -73,6 +73,12 @@ require("./vegan/recipe/recipe_step/channel_mods/sugg_recipe")(app);
 // vegan Rest Server
 require("./vegan/restaurant/getRest")(app);
 
+// recipe timer
+const timer = require("./vegan/recipe/recipe_step/recipe_timer");
+
+// start timer
+timer();
+
 // 404 (Not found), 500 (ISE) Error handling
 app.use(function (req, res, next) {
   var err = new Error("Page Not Found");
