@@ -7,6 +7,12 @@ const accessUser = localStorage.getItem("accessUser");
 const enroll_btn = document.getElementById("enroll_btn");
 const cleaned_btn = document.getElementById("clean_btn");
 const ok_btn = document.getElementById("ok_btn");
+const checkLocalStorage = () => {
+  const search_length = localStorage.getItem("search");
+  if (search_length == null || search_length == undefined) {
+    localStorage.setItem("search", 500);
+  }
+};
 
 $("#enroll_map").hide();
 
@@ -44,6 +50,7 @@ $(function () {
           localStorage.setItem("accessToken", accessToken);
         }
         // call function setting component
+        checkLocalStorage();
         checkStep(user_id);
         Mapapi();
       }

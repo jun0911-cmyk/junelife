@@ -289,6 +289,27 @@ div {
   font-size: 15px;
 }
 
+.search_btn {
+  outline: none;
+  border-radius: 20px;
+  font-weight: 900;
+  border: 2px solid greenyellow;
+  background-color: greenyellow;
+  font-size: 15px;
+  color: black;
+}
+
+.found {
+  margin-top: 100%;
+}
+
+.notFound {
+  font-weight: bold;
+  color: red;
+  padding-left: 15%;
+  padding-top: 30%;
+}
+
 .map {
   width: 204vh;
   height: 46.4vw;

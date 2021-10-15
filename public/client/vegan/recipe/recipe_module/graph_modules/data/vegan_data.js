@@ -35,6 +35,9 @@ const co2List = [2100, 1016];
 
 let gramData = 0;
 
+$("#down").show();
+$("#up").hide();
+
 const getData = (user) => {
   const defaultData = user.diet / 7;
   const getAnimal = animalList[veganStepList.indexOf(user.vegan_level)];
@@ -56,20 +59,24 @@ const setIntakeData = (user, data, datas) => {
   intakteData.innerHTML = `${user.user_id}님의 하루 평균 감소한 ${datas.ingredient} 소비량은 ${convertFloat}g 입니다.`;
 };
 
-const convertFarm = (notGram) => {
+const convertFarm = (datas, notGram) => {
+  $("#down").hide();
+  $("#up").show();
   const farm = notGram / 20;
+  console.log(notGram);
   const newImage = document.getElementById("image");
   const cnt = document.getElementById("count");
   const co2 = document.getElementById("co2");
-  document.getElementById("icons").className = "fas fa-arrow-up";
-  newImage.innerHTML = `<img src=${animalImage[2]} width="320px" />`;
-  cnt.innerHTML = `농장 ${farm}개를 제거하셨습니다! 나무 ${farm + 5}ha(${
+  newImage.innerHTML = `<img src=${animalImage[2]} width="320px" height="240px" />`;
+  cnt.innerHTML = `농장 ${farm}개를 제거하셨습니다!<br>나무 ${farm + 5}ha(${
     farm * 15000
   }그루)를 보호하셨습니다.`;
   co2.style.color = "blue";
-  co2.innerHTML = `탄산가스 ${farm * 80}획득! 이산화탄소 ${
+  co2.style.marginLeft = "35%";
+  co2.style.marginTop = "-10%";
+  co2.innerHTML = `탄산가스 ${farm * 80}톤획득!<br>이산화탄소 ${
     farm * 15000 * 2.5
-  }톤 획득`;
+  }톤 획득!`;
 };
 
 const convertData = (datas, gramData) => {

@@ -2,11 +2,21 @@ import marker from "./setMarker.js";
 import component from "../modules/mapList.js";
 
 let distanceOverlay = 0;
-let defaultLength = 500;
+let defaultLength = 0;
 
 var drawingCircle;
 
 const overlay = document.getElementById("overlay");
+const lengthOverlay = document.getElementById("search_btn");
+
+lengthOverlay.addEventListener("click", (e) => {
+  if (Number(defaultLength) + 500 >= 3000) {
+    alert("검색반경은 최대 3000m까지만 늘릴수 있습니다");
+  } else {
+    localStorage.setItem("search", Number(defaultLength) + 500);
+    location.reload();
+  }
+});
 
 const mapCircle = () => {
   drawingCircle = new kakao.maps.Circle({
@@ -31,6 +41,7 @@ const setCircle = (map, centerLatLng) => {
 
 const getLength = (map, centerLatLng) => {
   window.map = map;
+  defaultLength = localStorage.getItem("search");
   $.post("/rest/get").then((rowsList) => {
     if (rowsList.status == true) {
       mapCircle();
@@ -46,6 +57,7 @@ const getLength = (map, centerLatLng) => {
             const minDistance = polyline.getLength();
             distanceOverlay = Math.round(minDistance);
             if (distanceOverlay <= defaultLength) {
+              $("#notfound").hide();
               component(rows);
               marker.showMarker(map, restLatLng, rows, centerLatLng);
             }
