@@ -68,14 +68,14 @@ const convertFarm = (datas, notGram) => {
   const cnt = document.getElementById("count");
   const co2 = document.getElementById("co2");
   newImage.innerHTML = `<img src=${animalImage[2]} width="320px" height="240px" />`;
-  cnt.innerHTML = `농장 ${farm}개를 제거하셨습니다!<br>나무 ${farm + 5}ha(${
-    farm * 15000
-  }그루)를 보호하셨습니다.`;
+  cnt.innerHTML = `농장 ${Math.floor(farm)}개를 제거하셨습니다!<br>나무 ${
+    Math.floor(farm) + 5
+  }ha(${Math.floor(farm) * 15000}그루)를 보호하셨습니다.`;
   co2.style.color = "blue";
   co2.style.marginLeft = "35%";
   co2.style.marginTop = "-10%";
-  co2.innerHTML = `탄산가스 ${farm * 80}톤획득!<br>이산화탄소 ${
-    farm * 15000 * 2.5
+  co2.innerHTML = `탄산가스 ${Math.floor(farm) * 80}톤획득!<br>이산화탄소 ${
+    Math.floor(farm) * 15000 * 2.5
   }톤 획득!`;
 };
 

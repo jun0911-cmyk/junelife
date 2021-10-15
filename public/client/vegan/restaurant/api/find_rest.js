@@ -10,7 +10,7 @@ const overlay = document.getElementById("overlay");
 const lengthOverlay = document.getElementById("search_btn");
 
 lengthOverlay.addEventListener("click", (e) => {
-  if (Number(defaultLength) + 500 >= 3000) {
+  if (Number(defaultLength) >= 3000) {
     alert("검색반경은 최대 3000m까지만 늘릴수 있습니다");
   } else {
     localStorage.setItem("search", Number(defaultLength) + 500);
