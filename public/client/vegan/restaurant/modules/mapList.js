@@ -1,6 +1,7 @@
 const component = (recipe) => {
   $("#data").append(`
-    <hr>
+    <div id="mainList">
+      <hr>
         <a href="#" id="btn">
             <div class="list" id="list">
                 <span id="name">${recipe.restaurant_name}</span><br>
@@ -9,7 +10,8 @@ const component = (recipe) => {
                 <span>연락처 : ${recipe.phone}</span>
             </div>
         </a>
-    <hr>
+      <hr>
+    </div>
     `);
 };
 

@@ -14,15 +14,12 @@ const progressBar = (user) => {
       checkValue++;
       progressLabel.innerHTML = `평균
         ${Math.round(user.diet / 7)}g 소비중 ${checkValue}%를 줄이셨습니다.`;
-      getProgress.value = checkValue;
       if (checkValue >= 100) {
         progressLabel.innerHTML = `평균 ${Math.round(
           user.diet / 7
-        )}g 소비중 ${checkValue}%를 줄이셨습니다.</br>축하합니다! 하루 평균 ${Math.round(
+        )}g 소비중 ${checkValue}%를 줄이셨습니다.</br> 평균 ${Math.round(
           user.diet / 7
-        )}g 소비중 총 ${
-          graph_diet[graph_diet.length - 1]
-        }g의 소비를 줄이셨습니다!`;
+        )}g 소비중 총 ${graph_diet[graph_diet.length - 1]}g을 줄이셨습니다!`;
       }
     }
   }

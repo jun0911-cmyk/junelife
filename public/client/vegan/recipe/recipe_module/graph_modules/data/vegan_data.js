@@ -1,8 +1,16 @@
+import graph from "../chart/manage/graph_manage.js";
+
 const gramList = [];
 const animalName = document.getElementById("animal_name");
 const animalData = document.getElementById("animal_data");
 const animalToday = document.getElementById("animal_today");
 const intakteData = document.getElementById("data_intake");
+const newImage = document.getElementById("image");
+const cnt = document.getElementById("count");
+const co2 = document.getElementById("co2");
+const label = document.getElementById("progresslabel");
+const visiteChart = document.getElementById("visite_chart");
+const imageSub = document.getElementById("imageSub");
 
 const veganStepList = [
   "플렉시테리언",
@@ -59,39 +67,49 @@ const setIntakeData = (user, data, datas) => {
   intakteData.innerHTML = `${user.user_id}님의 하루 평균 감소한 ${datas.ingredient} 소비량은 ${convertFloat}g 입니다.`;
 };
 
-const convertFarm = (datas, notGram) => {
+const convertFarm = (datas, notGram, user) => {
   $("#down").hide();
   $("#up").show();
+  graph.progressBar(user);
   const farm = notGram / 20;
-  console.log(notGram);
   const newImage = document.getElementById("image");
   const cnt = document.getElementById("count");
   const co2 = document.getElementById("co2");
-  newImage.innerHTML = `<img src=${animalImage[2]} width="320px" height="240px" />`;
-  cnt.innerHTML = `농장 ${Math.floor(farm)}개를 제거하셨습니다!<br>나무 ${
-    Math.floor(farm) + 5
-  }ha(${Math.floor(farm) * 15000}그루)를 보호하셨습니다.`;
+  imageSub.style.marginTop = "-10%";
+  label.style.fontSize = "20px";
+  label.style.color = "black";
   co2.style.color = "blue";
-  co2.style.marginLeft = "35%";
-  co2.style.marginTop = "-10%";
-  co2.innerHTML = `탄산가스 ${Math.floor(farm) * 80}톤획득!<br>이산화탄소 ${
-    Math.floor(farm) * 15000 * 2.5
-  }톤 획득!`;
+  newImage.style.marginLeft = "12%";
+  newImage.style.marginTop = "-10%";
+  newImage.innerHTML = `<img src=${animalImage[2]} width="340px" height="260px" />`;
+  cnt.innerHTML = `통계 : 농장 ${Math.floor(farm)}개를 제거하셨습니다! 나무 ${
+    Math.floor(farm) + 5
+  }ha(${Math.floor(farm + 5) * 400}그루)를 보호했습니다!`;
+  co2.innerHTML = `탄산가스 감소량 : 탄산가스 ${
+    Math.floor(farm) * 16
+  }톤을 줄이셨습니다</br>이산화탄소 감소량 : ${
+    Math.floor(farm) + 5 * 400 * 2.5
+  }톤을 줄이셨습니다! (년기준) <i class="fas fa-arrow-up" id="up"></i>`;
 };
 
-const convertData = (datas, gramData) => {
+const convertData = (datas, gramData, user) => {
   const src = animalImage[animalList.indexOf(datas.animalName)];
   const co2Data = co2List[animalList.indexOf(datas.animalName)];
   const notGram = Math.round(gramData / datas.animalData);
   if (notGram >= 20) {
-    convertFarm(datas, notGram);
+    convertFarm(datas, notGram, user);
   } else {
-    const newImage = document.getElementById("image");
-    const cnt = document.getElementById("count");
-    const co2 = document.getElementById("co2");
-    newImage.innerHTML = `<img src=${src} width="320px" height="240px" />`;
-    cnt.innerHTML = `${datas.animalName} ${notGram}마리를 보호하셨습니다.`;
-    co2.innerHTML = `${co2Data * notGram}Co2 감소`;
+    graph.progressBar(user);
+    visiteChart.style.marginTop = "-14%";
+    imageSub.style.marginTop = "-10%";
+    label.style.fontSize = "20px";
+    label.style.color = "black";
+    newImage.style.marginTop = "-10%";
+    newImage.innerHTML = `<img src=${src} width="320px" height="260px" />`;
+    cnt.innerHTML = `동물 보호마리 : ${datas.animalName} ${notGram}마리를 보호하셨습니다.`;
+    co2.innerHTML = `Co2 감소량 : ${
+      co2Data * notGram
+    }Co2가 감소하였습니다. <i class="fas fa-arrow-down" id="down"></i>`;
   }
 };
 
@@ -104,17 +122,19 @@ const getUser = (user) => {
     if (gramList.length == graphData.length) {
       if (datas.animalData <= gramData) {
         if (datas.animalName == "돼지" || datas.animalName == "닭") {
-          convertData(datas, gramData);
+          convertData(datas, gramData, user);
+        } else {
+          visiteChart.style.marginTop = "-16%";
+          animalData.innerHTML = `보존한 마리수 : ${
+            datas.animalName
+          } 약 ${Math.round(
+            gramData / datas.animalData
+          )}마리를 환경파괴에서 구출하셨습니다!`;
+          animalName.innerHTML = `보존한 동물 분류 : ${datas.animalName}`;
+          animalToday.innerHTML = `1일부터 ${gramList.length}일까지 ${datas.ingredient} 섭취를 총 ${gramData}g 만큼 줄이셨습니다!`;
+          setIntakeData(user, graphData, datas);
         }
-        animalData.innerHTML = `보존한 마리수 : ${
-          datas.animalName
-        } 약 ${Math.round(
-          gramData / datas.animalData
-        )}마리를 환경파괴에서 구출하셨습니다!`;
       }
-      animalName.innerHTML = `보존한 동물 분류 : ${datas.animalName}`;
-      animalToday.innerHTML = `1일부터 ${gramList.length}일까지 ${datas.ingredient} 섭취를 총 ${gramData}g 만큼 줄이셨습니다!`;
-      setIntakeData(user, graphData, datas);
     }
   });
 };

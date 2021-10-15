@@ -197,7 +197,7 @@ div {
 }
 
 #progresslabel {
-  margin-left: 40px;
+  margin-left: 60px;
   padding-top: 1%;
   font-weight: 900;
 }
@@ -208,65 +208,47 @@ div {
 
 #visite_chart {
   margin-left: 50%;
-  margin-top: -20%;
-}
-
-progress {
-  margin-left: 20px;
-  margin-top: 2%;
-  height: 50px;
-  border-radius: 30px;
-  width: 50%;
-}
-
-progress::-webkit-progress-value {
-  border-radius: 30px;
-  background-color: greenyellow;
-}
-
-progress::-webkit-progress-bar {
-  border-radius: 30px;
+  margin-top: -15%;
 }
 
 .vegan_animal_data {
-  margin-left: 40px;
+  font-size: 20px;
+  margin-top: 3%;
+  margin-left: 60px;
   font-weight: 900;
 }
 
 .image {
   position: absolute;
-  padding-left: 45%;
-  margin-top: -12%;
+  padding-left: 25%;
+  margin-top: -7%;
+}
+
+.image_sub {
+  margin-top: -5%;
 }
 
 .image_sub .fa-arrow-down {
-  position: absolute;
-  margin-left: 43%;
-  margin-top: -7%;
   color: red;
   font-size: 30px;
 }
 
 .image_sub .fa-arrow-up {
-  position: absolute;
-  margin-left: 43%;
-  margin-top: -7%;
   color: blue;
   font-size: 30px;
 }
 
 .image_sub p {
-  position: absolute;
-  margin-left: 39.5%;
   font-weight: bold;
-  margin-top: -8%;
+  font-size: 21px;
+  margin-left: 60px;
   color: red;
 }
 
 .count {
-  position: absolute;
-  padding-left: 46%;
   margin-top: 0.5%;
+  font-size: 22px;
+  margin-left: 60px;
   font-weight: bold;
 }
 

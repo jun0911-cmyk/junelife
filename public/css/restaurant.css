@@ -299,6 +299,17 @@ div {
   color: black;
 }
 
+.keyword_btn {
+  outline: none;
+  border-radius: 20px;
+  font-weight: 900;
+  margin-top: 2%;
+  border: 2px solid rgb(201, 101, 101);
+  background-color: rgb(201, 101, 101);
+  font-size: 15px;
+  color: black;
+}
+
 .found {
   margin-top: 100%;
 }

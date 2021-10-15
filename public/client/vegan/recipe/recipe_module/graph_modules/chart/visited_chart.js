@@ -15,15 +15,17 @@ const settingColorLabels = (index) => {
 
 const showChart = (data) => {
   new Chart(cxt, {
-    type: "pie",
+    type: "bar",
     data: data,
     options: {
       responsive: false,
       animation: true,
-      plugins: {
-        title: {
-          display: true,
-          text: "하루 평균 레시피 방문율",
+      layout: {
+        padding: {
+          top: 10,
+          left: 110,
+          right: 50,
+          bottom: 30,
         },
       },
     },

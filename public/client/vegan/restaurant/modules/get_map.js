@@ -5,8 +5,8 @@ let restData = {};
 const setMarker = (latlng) => {
   const src =
     "https://i.pinimg.com/originals/71/c8/06/71c806428f9d8c76f8dd491ee177382c.png";
-  const size = new kakao.maps.Size(64, 69);
-  const imageOption = { offset: new kakao.maps.Point(27, 69) };
+  const size = new kakao.maps.Size(36, 37);
+  const imageOption = { offset: new kakao.maps.Point(13, 37) };
   const markerImage = new kakao.maps.MarkerImage(src, size, imageOption);
   marker.showListMarker(latlng, markerImage, restData);
 };

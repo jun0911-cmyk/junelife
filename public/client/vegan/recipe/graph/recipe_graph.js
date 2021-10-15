@@ -47,7 +47,6 @@ $(function () {
             veganData(user);
             graph.gramGraph(gram_Chart, user);
             graph.consumptionGraph(user);
-            graph.progressBar(user);
             graph.veganData(user);
             graph.visiteGraph(user);
           })

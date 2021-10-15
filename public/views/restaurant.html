@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./restaurant.css">
     <link rel="stylesheet" type="text/css" href="./scrollbar.css">
@@ -55,11 +56,12 @@
     <div class="mapList">
         <h3>비건 관련 음식점 찾기</h3>
         <div class="overlay" id="overlay"></div>
-        <button class="enroll_btn" id="enroll_btn">음식점 등록하기</button>
-        <button class="search_btn" id="search_btn">검색반경 늘리기</button>
+        <button class="enroll_btn" id="enroll_btn">식당등록</button>
+        <button class="search_btn" id="search_btn">반경늘리기</button>
+        <button class="keyword_btn" id="keyword_btn">키워드검색</button>
         <div class="data" id="data">
             <div class="found" id="notfound">
-                <span class="notFound">반경내의 검색결과가 없습니다.</span>
+                <span class="notFound" id="message">반경내의 검색결과가 없습니다.</span>
             </div>
         </div>
     </div>

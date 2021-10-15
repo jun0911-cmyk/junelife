@@ -1,5 +1,6 @@
 import api_key from "./api_key.js";
 import findLength from "./find_rest.js";
+import search from "./keywordSearch.js";
 
 const showMap = (lat, lon) => {
   const mapElement = document.getElementById("map");
@@ -9,6 +10,7 @@ const showMap = (lat, lon) => {
   };
   const map = new kakao.maps.Map(mapElement, mapOption);
   window.LatLng = new kakao.maps.LatLng(lat, lon);
+  search(map);
   findLength(map, new kakao.maps.LatLng(lat, lon));
 };
 
