@@ -7,6 +7,7 @@ let defaultLength = 0;
 var drawingCircle;
 
 const overlay = document.getElementById("overlay");
+const minoverlay = document.getElementById("minus_btn");
 const lengthOverlay = document.getElementById("search_btn");
 
 lengthOverlay.addEventListener("click", (e) => {
@@ -14,6 +15,15 @@ lengthOverlay.addEventListener("click", (e) => {
     alert("검색반경은 최대 3000m까지만 늘릴수 있습니다");
   } else {
     localStorage.setItem("search", Number(defaultLength) + 500);
+    location.reload();
+  }
+});
+
+minoverlay.addEventListener("click", (e) => {
+  if (Number(defaultLength) == 500) {
+    alert("검색반경은 최대 500m까지만 줄일수 있습니다");
+  } else {
+    localStorage.setItem("search", Number(defaultLength) - 500);
     location.reload();
   }
 });

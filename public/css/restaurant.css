@@ -194,40 +194,6 @@ div {
   display: flex;
 }
 
-.enroll_map {
-  text-align: center;
-  margin-left: 50rem;
-  margin-top: 10rem;
-  position: absolute;
-  z-index: 99;
-  width: 50vh;
-  height: 17vw;
-  padding-top: 1%;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.enroll_map h2 {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.enroll_map h4 {
-  padding-top: 1%;
-  font-size: 20px;
-}
-
-.enroll_map input {
-  outline: none;
-  border: 1px solid black;
-  height: 30px;
-  border-radius: 10px;
-  text-indent: 10px;
-}
-
-.enroll_map .btn {
-  margin-top: 3%;
-}
-
 .mapList {
   position: absolute;
   margin-left: 2%;

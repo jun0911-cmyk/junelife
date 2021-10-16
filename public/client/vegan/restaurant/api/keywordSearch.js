@@ -2,7 +2,10 @@ import component from "../modules/mapList.js";
 
 const keywordSearch = document.getElementById("keyword_btn");
 const message = document.getElementById("message");
+
 let markers = [];
+let distanceOverlay = 0;
+let defaultLength = 0;
 
 const addMarker = (idx, poistion) => {
   const src =
@@ -38,22 +41,39 @@ const removeMarker = () => {
   markers = [];
 };
 
+const convert = (place) => {
+  return {
+    restaurant_name: place.place_name,
+    restaurant_id: place.id,
+    address: place.address_name,
+    phone: place.phone,
+  };
+};
+
+const checkLength = (place, position, bounds, index) => {
+  const polyline = new kakao.maps.Polyline({
+    path: [window.LatLng, position],
+  });
+  const minDistance = polyline.getLength();
+  distanceOverlay = Math.round(minDistance);
+  if (distanceOverlay <= defaultLength) {
+    component(place);
+    addMarker(index, position);
+    bounds.extend(position);
+  }
+};
+
 const displayPlaces = (places) => {
   $("#notfound").hide();
   removeMarker();
   removeList();
+  defaultLength = localStorage.getItem("search");
   const bounds = new kakao.maps.LatLngBounds();
   places.forEach((place, index) => {
+    console.log(place);
     const position = new kakao.maps.LatLng(place.y, place.x);
-    const convertPlace = {
-      restaurant_name: place.place_name,
-      restaurant_id: place.id,
-      address: place.address_name,
-      phone: place.phone,
-    };
-    component(convertPlace);
-    addMarker(index, position);
-    bounds.extend(position);
+    const convertPlace = convert(place);
+    checkLength(convertPlace, position, bounds, index);
   });
 };
 
@@ -71,7 +91,9 @@ const successKeyword = (data, status, pagination) => {
 
 const searchKeyword = (value) => {
   const ps = new kakao.maps.services.Places();
-  ps.keywordSearch(value, successKeyword);
+  ps.keywordSearch(value, successKeyword, {
+    location: window.LatLng,
+  });
 };
 
 const keywordInput = (map) => {
