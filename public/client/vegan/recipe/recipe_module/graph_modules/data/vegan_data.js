@@ -38,7 +38,7 @@ const animalImage = [
   "https://www.newsjeju.net/news/photo/202010/352162_435491_5127.jpg",
 ];
 
-const animalDataList = [1500, 900, 159, 226.9, 56, 0];
+const animalDataList = [1500, 800, 159, 226.9, 56, 0];
 const co2List = [2100, 1016];
 
 let gramData = 0;

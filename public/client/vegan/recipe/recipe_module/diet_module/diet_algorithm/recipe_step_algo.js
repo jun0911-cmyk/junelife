@@ -43,7 +43,7 @@ vegan_step_prototype.prototype.setIngredIents = (vegan_step, g_data) => {
     if (ingredients == "육류") {
       return g_data * 150;
     } else if (ingredients == "가금류") {
-      return g_data * 700;
+      return g_data * 800;
     } else if (ingredients == "해산물") {
       return g_data * 159;
     } else if (ingredients == "가공식품류") {
